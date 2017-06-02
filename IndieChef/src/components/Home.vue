@@ -117,6 +117,8 @@
                     </div>
             </section>
 
+            <main-tail></main-tail>
+
         </body>
 
     </div>
@@ -155,7 +157,7 @@ export default {
     background-color: #EDEDED;
     -moz-box-shadow: 0 0 3px #000;
     -webkit-box-shadow: 0 0 3px #000;
-    box-shadow: 0px 0px 75px #000;
+    box-shadow: 0px 45px 75px #000;
     margin-top: -15px;
 }
 

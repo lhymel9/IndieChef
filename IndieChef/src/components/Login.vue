@@ -7,9 +7,7 @@
     </head>
 
     <body>
-      <div class="w3-container w3-blue w3-border" style="margin-bottom: 85px">
-        <h1 id="logo-text">Indie Chef</h1>
-      </div>
+      <main-head></main-head>
       <div class="w3-col l4 md2 s1 w3-center"></br></div>
       <div class="w3-col l4 md8 s10 w3-center">
         <div class="w3-card-4 w3-padding">
@@ -26,6 +24,8 @@
         </div>
       </div>
       <div class="w3-col l4 md2 s1 w3-center"></br></div>
+      </br>
+      <main-tail></main-tail>
     </body>
 
   </div>
@@ -41,11 +41,6 @@ export default {
 </script>
 
 <style scoped>
-  #logo-text {
-    padding: 10px;
-    font-size: 35px;
-    font-family: Verdana;
-  }
 
   #s-header {
     margin: 22px;
