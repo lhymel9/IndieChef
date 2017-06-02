@@ -13,6 +13,7 @@ import './assets/css/w3.css';
 //App Components
 import Login from './components/Login.vue'
 import Home from './components/Home.vue'
+import Register from './components/Register.vue'
 
 
 Vue.use(VueResource)
@@ -22,7 +23,9 @@ const routers = [
   { path: '/login', 
     component: Login },
   { path: '/',
-    component: Home }
+    component: Home },
+  { path: '/register', 
+    component: Register }
 ]
 
 const router = new VueRouter({

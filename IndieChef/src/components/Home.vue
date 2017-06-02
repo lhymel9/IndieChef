@@ -33,9 +33,9 @@
 
                             <div id="overlay">
 
-                                <button id="overlay-button1" href="#login">Login</button>
+                                <a href="#login" id="overlay-button1">Login</a>
                                 <a class="div-pipe">|</a>
-                                <button id="overlay-button2" href="#about">About</button>
+                                <a href="#about" id="overlay-button2">About</a>
 
                             </div>
 
@@ -53,7 +53,7 @@
                         <div class="w3-col l10 m10 s10 w3-center w3-mobile">
                             <div class="w3-bar w3-light-grey w3-large">
                                 <input type="text" class="w3-bar-item w3-input w3-mobile" placeholder="Enter Zipcode..">
-                                <a href="#" class="w3-bar-item w3-button w3-blue w3-border w3-mobile"><a class="button-text">Search</a></a>
+                                <a href="#login" class="w3-bar-item w3-button w3-blue w3-border w3-mobile"><a class="button-text">Search</a></a>
                                 <div class="w3-dropdown-hover w3-mobile">
                                     <button class="w3-button w3-green w3-border w3-mobile"><a class="button-text">Food Type</a></button>
                                     <div class="w3-dropdown-content w3-bar-block w3-card-4">
@@ -209,7 +209,8 @@ export default {
     border: none;
     color: white;
     font-size: 15px;
-    font-family: Verdana, Geneva, sans-serif;
+    font-family: Verdana, sans-serif;
+    padding:5px;
 }
 
 .div-pipe {
@@ -226,17 +227,20 @@ export default {
     border: none;
     color: white;
     font-size: 15px;
-    font-family: Verdana, Geneva, sans-serif;
+    padding:5px;
+    font-family: Verdana, sans-serif;
 }
 
 #overlay-button1:hover {
     color: #A9A9A9;
     text-shadow: 2px 2px 4px #000000;
+    text-decoration: none;
 }
 
 #overlay-button2:hover {
     color: #A9A9A9;
     text-shadow: 2px 2px 4px #000000;
+    text-decoration: none;
 }
 
 .button-text {
