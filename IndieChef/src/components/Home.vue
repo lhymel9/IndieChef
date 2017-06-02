@@ -1,41 +1,128 @@
 <template>
-  <div class="home">
 
-    <head>
-      <meta charset="utf-8">
-      <meta name="viewport" content="width=device-width, initial-scale=1">
-      <link rel="stylesheet" href="https://www.w3schools.com/lib/w3.css">
-    </head>
+    <div class="home">
 
-    <body>
+        <head>
+            <meta charset="utf-8">
+            <meta name="viewport" content="width=device-width, initial-scale=1">
+            <link rel="stylesheet" href="https://www.w3schools.com/lib/w3.css">
+        </head>
 
-      <div class="w3-bar w3-black">
-        <span class="w3-bar-item w3-mobile" style="font: 20px Courier">Indie Chef</span>
-        <span class="w3-right w3-mobile">
-          <a href="#" class="w3-bar-item w3-button">Home</a>
-          <a href="#login" class="w3-bar-item w3-button">Login</a>
-          <a href="#about" class="w3-bar-item w3-button">About</a>
-          <a href="#terms" class="w3-bar-item w3-button">Terms of Service</a>
-        </span>
-      </div>
+        <body>
 
-      <div class="cooking-banner">
-        <div class="w3-container w3-center w3-mobile">
-          <h1>Welcome to Indie Chef</h1>
-          <button class="first-button">Search Food</button>
-          <br>
-          <button class="first-button">Vendor Login</button>
-        </div>
-      </div>
+            <section id="cooking-banner">
 
-      <div class="w3-panel w3-border w3-light-gray w3-xxxlarge w3-mobile">
-        <img src="../assets/tos.png" class="tos-book">
-        <a class="tip">Don't Forget to Read Our General Rules and Terms of Service.</a>
-        <button class="ToS-Arrow-Button"><span>Read</span></button>
-      </div> 
+                <section class="banner-subsect">
 
-    </body>
-  </div>
+                    <div class="w3-row">
+
+                        <div class="w3-col m3 w3-center ">
+
+                            <div id="logo-text">Indie Chef</div>
+
+                        </div>
+                        <div class="w3-col m6  w3-center ">
+
+                            <button id="home-button" href="#">
+
+                                <img src="../assets/logo.png" id="logo-img">
+
+                            </button>
+
+                        </div>
+                        <div class="w3-col m3  w3-center">
+
+                            <div id="overlay">
+
+                                <button id="overlay-button1" href="#login">Login</button>
+                                <a class="div-pipe">|</a>
+                                <button id="overlay-button2" href="#about">About</button>
+
+                            </div>
+
+                        </div>
+
+                    </div>
+
+                </section>
+
+                <section class="banner-subsect">
+                    <div class="w3-row w3-mobile">
+
+                        <div class="w3-col l1 m1 s1 w3-center w3-mobile"></br></div>
+
+                        <div class="w3-col l10 m10 s10 w3-center w3-mobile">
+                            <div class="w3-bar w3-light-grey w3-large">
+                                <input type="text" class="w3-bar-item w3-input w3-mobile" placeholder="Enter Zipcode..">
+                                <a href="#" class="w3-bar-item w3-button w3-blue w3-border w3-mobile"><a class="button-text">Search</a></a>
+                                <div class="w3-dropdown-hover w3-mobile">
+                                    <button class="w3-button w3-green w3-border w3-mobile"><a class="button-text">Food Type</a></button>
+                                    <div class="w3-dropdown-content w3-bar-block w3-card-4">
+                                        <a href="#" class="w3-bar-item w3-button">Link 1</a>
+                                        <a href="#" class="w3-bar-item w3-button">Link 2</a>
+                                        <a href="#" class="w3-bar-item w3-button">Link 3</a>
+                                    </div>
+                                </div>
+                                <template v-if="searchType === 'byFood'">
+                                    <button class="w3-button w3-green w3-border w3-mobile"><a class="button-text">By Chef</a></button>
+                                </template>
+                                <template v-else>
+                                    <button class="w3-button w3-green w3-border w3-mobile"><a class="button-text">By Food</a></button>
+                                </template>
+                            </div>
+                        </div>
+
+                        <div class="w3-col l1 m1 s1 w3-center"></br></div>
+
+                    </div>
+                </section>
+
+                <section class="banner-subsect">
+                    <div class="w3-row w3-mobile">
+
+                        <div class="w3-col l1 m1 s1 w3-center w3-mobile"></br></div>
+
+                        <div class="w3-col l10 m10 s10 w3-center w3-mobile">
+                            <div class="w3-bar w3-center w3-large w3-mobile">
+                                <a href="#" class="w3-bar-item w3-button w3-blue w3-border w3-mobile"><a class="button-text2">Customer Login</a></a>
+                                <a href="#" class="w3-bar-item w3-button w3-blue w3-border w3-mobile"><a class="button-text2">Vendor Login</a></a>
+                            </div>
+                        </div>
+
+                        <div class="w3-col l1 m1 s1 w3-center w3-mobile"></br></div>
+
+                    </div>
+                </section>
+
+            </section>
+
+            <section class="hover-sect">
+                    <div class="w3-row w3-mobile">
+
+                        <div class="w3-col l1 m1 w3-center "></br></div>
+
+                        <div class="w3-col l3 m12 w3-center">
+                            <img src="../assets/tos.png" class="tos-book">
+                        </div>
+
+                        <div class="w3-col l4 m12 w3-center">
+                            </br>
+                            <p class="tip-text">Don't forget to read our general rules and terms of service.</p>
+                        </div>
+
+                        <div class="w3-col l3 m12 w3-center">
+                            </br>
+                            <button class="tip-button">>></button>
+                        </div>
+
+                        <div class="w3-col l1 m1 w3-center"></br></div>
+                    </div>
+            </section>
+
+        </body>
+
+    </div>
+
 </template>
 
 <script>
@@ -49,92 +136,118 @@ export default {
 
 <style scoped>
 
-  a {
-      font: 20px Courier;
-  }
+#cooking-banner {
+    background: url("../assets/cooking.png") no-repeat;
+    background-position: center;
 
-  a.tip {
-      font: 25px Courier;
-  }
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover;
 
-  h1 {
-      font: 50px Courier;
-      margin: 62px 10px;
-  }
+    height: 1150px;
+    color: #fff;
+}
 
-  .tos-book {
-      margin: 25px 55px 25px 185px;
-      box-shadow: 0 6px 10px 0 #202020;
-  }
+.banner-subsect {
+    margin-bottom: 150px;
+}
 
-  .cooking-banner {
-      background: url('../assets/cooking.png') no-repeat;
-      background-position: center;
-      height: 800px;
-      background-size: cover;
-      color: #fff;
-      box-shadow: 0 6px 10px 0 #202020;
-  }
+.hover-sect {
+    background-color: #EDEDED;
+    -moz-box-shadow: 0 0 3px #000;
+    -webkit-box-shadow: 0 0 3px #000;
+    box-shadow: 0px 0px 75px #000;
+    margin-top: -15px;
+}
 
-  .first-button {
-      background-color: #4487b0;
-      border: 4px solid #4487b0;
-      color: white;
-      border-radius: 8px;
-      padding: 15px 32px;
-      text-align: center;
-      text-decoration: none;
-      font: 30px Courier;
-      margin: 55px 10px;
-      cursor: pointer;
-      width: 40%;
-      box-shadow: 0 6px 10px 0 #202020;
-  }
+.tos-book {
+    margin: 45px;
+    background-color: #B8B8B8;
+    box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2), 0 6px 20px 0 rgba(0,0,0,0.19);
+    border-radius:8px;
+}
 
-  .first-button:hover {
-      background-color: #4468b0;
-      border: 4px solid #1d3963;
-  }
+.tip-text {
+    margin: 45px;
+    font-size:35px;
+    font-family: Verdana;
+}
 
-  .ToS-Arrow-Button {
-      display: inline-block;
-      border-radius: 4px;
-      background-color: #4487b0;
-      border: none;
-      color: #FFFFFF;
-      text-align: center;
-      font-size: 28px;
-      padding: 20px;
-      width: 200px;
-      height: 150px;
-      transition: all 0.5s;
-      cursor: pointer;
-      margin: 0px 0px 0px 0px;
-  }
+.tip-button {
+    margin: 45px;
+    font-size:35px;
+    font-family: Verdana;
+    background-color: #008CBA;
+    height:150px;
+    width:200px;
+    border-radius:8px;
+    box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2), 0 6px 20px 0 rgba(0,0,0,0.19);
+}
 
-  .ToS-Arrow-Button span {
-      cursor: pointer;
-      display: inline-block;
-      position: relative;
-      transition: 0.5s;
-  }
+.tip-button:hover {
+    background-color: #B8B8B8;
+    box-shadow: 0 10px 18px 0 rgba(0,0,0,0.5), 0 8px 22px 0 rgba(0,0,0,0.25);
+}
 
-  .ToS-Arrow-Button span:after {
-      content: '\00bb';
-      position: absolute;
-      opacity: 0;
-      top: 0;
-      right: -20px;
-      transition: 0.5s;
-  }
+#logo-img {
+    margin-top: 10px;
+}
 
-  .ToS-Arrow-Button:hover span {
-      padding-right: 25px;
-  }
+#logo-text {
+    font-size:35px;
+    font-family: Verdana;
+    text-shadow: 4px 4px 6px #000000;
+    margin-top: 20px;
+}
 
-  .ToS-Arrow-Button:hover span:after {
-      opacity: 1;
-      right: 0;
-  }
+#overlay {
+    margin-top: 20px;
+}
+
+#overlay-button1 {
+    background-color: Transparent;
+    border: none;
+    color: white;
+    font-size: 15px;
+    font-family: Verdana, Geneva, sans-serif;
+}
+
+.div-pipe {
+    font-size: 25px;
+}
+
+#home-button {
+    background-color: Transparent;
+    border: none;
+}
+
+#overlay-button2 {
+    background-color: Transparent;
+    border: none;
+    color: white;
+    font-size: 15px;
+    font-family: Verdana, Geneva, sans-serif;
+}
+
+#overlay-button1:hover {
+    color: #A9A9A9;
+    text-shadow: 2px 2px 4px #000000;
+}
+
+#overlay-button2:hover {
+    color: #A9A9A9;
+    text-shadow: 2px 2px 4px #000000;
+}
+
+.button-text {
+    font-size: 17px;
+    font-family: Verdana, Geneva, sans-serif;
+}
+
+.button-text2 {
+    font-size: 35px;
+    font-family: Verdana, Geneva, sans-serif;
+}
 
 </style>
