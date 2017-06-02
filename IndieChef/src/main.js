@@ -8,6 +8,7 @@ import VueResource from 'vue-resource'
 
 //Bootstrap Styles
 import 'bootstrap/dist/css/bootstrap.css'
+import './assets/css/w3.css';
 
 //App Components
 import Login from './components/Login.vue'

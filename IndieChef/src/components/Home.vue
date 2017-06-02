@@ -5,7 +5,6 @@
         <head>
             <meta charset="utf-8">
             <meta name="viewport" content="width=device-width, initial-scale=1">
-            <link rel="stylesheet" href="https://www.w3schools.com/lib/w3.css">
         </head>
 
         <body>
@@ -84,8 +83,7 @@
 
                         <div class="w3-col l10 m10 s10 w3-center w3-mobile">
                             <div class="w3-bar w3-center w3-large w3-mobile">
-                                <a href="#" class="w3-bar-item w3-button w3-blue w3-border w3-mobile"><a class="button-text2">Customer Login</a></a>
-                                <a href="#" class="w3-bar-item w3-button w3-blue w3-border w3-mobile"><a class="button-text2">Vendor Login</a></a>
+                                <a href="#login" class="w3-bar-item w3-button w3-blue w3-border w3-mobile"><a class="button-text2">Click Here to Login</a></a>
                             </div>
                         </div>
 
@@ -145,7 +143,7 @@ export default {
     -o-background-size: cover;
     background-size: cover;
 
-    height: 1150px;
+    height: 1100px;
     color: #fff;
 }
 
@@ -163,9 +161,7 @@ export default {
 
 .tos-book {
     margin: 45px;
-    background-color: #B8B8B8;
-    box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2), 0 6px 20px 0 rgba(0,0,0,0.19);
-    border-radius:8px;
+    margin-right: 15px;
 }
 
 .tip-text {
@@ -176,9 +172,11 @@ export default {
 
 .tip-button {
     margin: 45px;
+    margin-left:15px;
     font-size:35px;
     font-family: Verdana;
-    background-color: #008CBA;
+    background-color: #2196F3;
+    color: white;
     height:150px;
     width:200px;
     border-radius:8px;
@@ -186,7 +184,8 @@ export default {
 }
 
 .tip-button:hover {
-    background-color: #B8B8B8;
+    background-color: #CCC;
+    color: black;
     box-shadow: 0 10px 18px 0 rgba(0,0,0,0.5), 0 8px 22px 0 rgba(0,0,0,0.25);
 }
 
