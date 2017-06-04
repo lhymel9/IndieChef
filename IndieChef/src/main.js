@@ -14,9 +14,12 @@ import './assets/css/w3.css';
 import Login from './components/Login.vue'
 import Home from './components/Home.vue'
 import Register from './components/Register.vue'
+import Browser from './components/Browser.vue'
 
 Vue.use(VueResource)
 Vue.use(VueRouter)
+
+Vue.http.options.crossOrigin = true
 
 const routers = [
   { path: '/login', 
@@ -24,7 +27,9 @@ const routers = [
   { path: '/',
     component: Home },
   { path: '/register', 
-    component: Register }
+    component: Register },
+  { path: '/browser', 
+    component: Browser }
 ]
 
 const router = new VueRouter({
@@ -36,13 +41,13 @@ Vue.component('main-head', {
 })
 
 Vue.component('main-tail', {
-  template: '<div class="w3-container w3-white w3-center"><h1 id="logo-text" style="padding: 15px;font-size: 15px;font-family: Verdana;">Copyright © 2017 by Indie Chef.</h1></div>"'
+  template: '<div class="w3-container w3-white w3-center"><h1 id="logo-text" style="padding: 15px;font-size: 15px;font-family: Verdana;">Copyright © 2017 by Indie Chef.</h1></div>'
 })
 
 new Vue({
   el: '#app', 
   router: router,
   render: h => h(App)
-})
+}).$mount('#app')
 
 

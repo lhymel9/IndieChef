@@ -33,9 +33,7 @@
 <script>
 export default {
   name: 'register',
-  data () {
-      
-  }
+  data () {return {}}
 }
 </script>
 
