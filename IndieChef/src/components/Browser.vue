@@ -45,13 +45,24 @@
         </div>
         <div class="w3-col l1 m1 s1"></br></div>
         <div class="w3-col l7 m6 s12">
-          <div class="w3-card-4 w3-padding">
-            <div v-for="item in vendors.content" class="w3-panel">
-              <h3 class="vendor-content">{{item.nameV}}</h3>
-              <span>Location: {{item.latV}}, {{item.lonV}} | Rating: {{item.rating}} | Phone: {{item.phone}}  | Email: {{item.emailV}}</span>
-              <div style="text-align: right"><img src="../assets/logo.png" width="100" /></div>
-            </div>
-          </div>
+          <ul class="w3-ul w3-card-4">
+            <li v-for="item in vendors.content" class="w3-padding-16">
+              <div class="w3-row">
+                <div class="w3-col l3 m12 s12 w3-center">
+                  <img src="../assets/logo.png" class="vendor-image w3-border">
+                </div>
+                <div class="w3-col l1 m12 s12 w3-center w3-hide-small w3-hide-medium"></br></div>
+                <div class="w3-col l8 m12 s12" style="padding-left:20px;">
+                  <h3 class="vendor-header">{{item.nameV}} - {{item.rating}}/5</h3><hr>
+                  <p><label class="vendor-subtext-label w3-round w3-blue">Email:</label> <span class="vendor-subtext">{{item.emailV}}</span></br> <label class="w3-round w3-blue">Phone:</label> <span class="vendor-subtext">{{item.phone}}</span></br> <label class="w3-round w3-blue">Food Type:</label> <span class="vendor-subtext">Chicken, Beef, Salad</span>
+                          <button class="w3-button w3-green w3-large w3-hide-medium w3-hide-small w3-right" style="margin-right:50px;">See Menu</button></p>
+                </div>
+                <div class="w3-col l3 m12 s12 w3-center">
+                  <button class="w3-button w3-green w3-large w3-round-large w3-hide-large">See Menu</button>
+                </div>
+              </div>
+            </li>
+          </ul>
         </div>
         <div class="w3-col l1 m1 s1"></br></div>
       </div>
@@ -116,4 +127,29 @@ export default {
     font-family: Verdana;
   }
 
+  .vendor-image {
+    width: 200px;
+    height: 220px;
+  }
+
+  hr {
+    width: 80%;
+    border: none;
+    height: 1px;
+    color: #333; 
+    background-color: #333; 
+  }
+
+  .vendor-header {
+    font-family: Verdana;
+  }
+
+  .vendor-subtext {
+    font-family: Verdana;
+    font-size: 12px;
+  }
+
+  .vendor-subtext:hover {
+    color: #A9A9A9;
+  }
 </style>
