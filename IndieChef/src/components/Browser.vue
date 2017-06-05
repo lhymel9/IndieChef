@@ -23,6 +23,13 @@
         <div class="w3-col l2 m3 s12">
           <div class="w3-card-4 w3-padding">
             <label class="box-label w3-center" style="margin-bottom: 25px">Filter:</label></br>
+            <label class="box-label" style="margin-bottom: 15px">Search Type:</label></br>
+            <template v-if="searchType === 'byFood'">
+              <button class="w3-button w3-green">By Chef</button>
+            </template>
+            <template v-else>
+              <button class="w3-button w3-green">By Food</button>
+            </template></br></br>
             <label class="box-label" style="margin-bottom: 15px">Distance:</label></br>
             <input type="text" class="w3-input w3-border" placeholder="Enter Address"></br>
             <a class="w3-button w3-green" style="margin-top: -8px; margin-bottom: 15px;">Submit</a>
