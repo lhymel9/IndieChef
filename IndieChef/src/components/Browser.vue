@@ -4,7 +4,8 @@
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
     </head>
-
+    
+    <!-- Header zone -->
     <body>
       <main-head></main-head>
       <div class="w3-container w3-border" style="margin-top: -85px; margin-bottom: 35px; 	background-color: #DCDCDC;"><h1 id="logo-text">The Browser</h1></div>
@@ -18,42 +19,51 @@
         <div class="w3-col l3 m3 s1 w3-center"></br></div>
       </div>
 
+      <!-- Filter Sidebar -->
       <div class="w3-row">
         <div class="w3-col l1 m1 s1"></br></div>
         <div class="w3-col l2 m3 s12">
           <div class="w3-card-4 w3-padding">
             <label class="box-label w3-center" style="margin-bottom: 25px">Filter:</label></br>
+
+            <!-- Search type button -->
             <label class="box-label" style="margin-bottom: 15px">Search Type:</label></br>
-            <template v-if="searchType === 'byFood'">
-              <button class="w3-button w3-green">By Chef</button>
+            <template v-if="searchType == true">
+              <a v-on:click="changeSearchType" class="w3-button w3-green">By Chef</a>
             </template>
             <template v-else>
-              <button class="w3-button w3-green">By Food</button>
+              <a v-on:click="changeSearchType" class="w3-button w3-green">By Food</a>
             </template></br></br>
+
+            <!-- Distance search filter -->
             <label class="box-label" style="margin-bottom: 15px">Distance:</label></br>
             <input type="text" class="w3-input w3-border" placeholder="Enter Address"></br>
             <a class="w3-button w3-green" style="margin-top: -8px; margin-bottom: 15px;">Submit</a>
             <a class="w3-button w3-green" style="margin-top: -8px; margin-bottom: 15px;">Find Me</a>
             <div v-for="distance in distances">
-              <input class="w3-radio" type="radio" name="distance" checked>
-              <label>{{distance.miles}}</label>
+              <input class="w3-radio" :id="distance" :value="distance" v-model="options.maxDistance" type="radio" name="distance" checked>
+              <label :for="distance">{{distance}}</label>
             </div></br>
+
+            <!-- Rating search filter -->
             <label class="box-label">Rating:</label></br>
             <div v-for="rating in ratings">
-              <input class="w3-check" type="checkbox">
-              <label class="check-word">{{rating.number}}</label>
+              <input class="w3-radio" :id="rating" :value="rating" v-model="options.leastRating" type="radio" name="rating" checked>
+              <label :for="rating">{{rating}}</label>
             </div></br>
             <label class="box-label">Food:</label></br>
+
+            <!-- Food search filter -->
             <div v-for="food in foods">
-              <input class="w3-check" type="checkbox">
-              <label class="check-word">{{food.type}}</label>
+              <input :value=food v-model="options.checkedFoods" :id="food" class="w3-check" type="checkbox">
+              <label :for="food" class="check-word">{{food}}</label>
             </div></br>
           </div>
         </div>
         <div class="w3-col l1 m1 s1"></br></div>
         <div class="w3-col l7 m6 s12">
           <ul class="w3-ul w3-card-4">
-            <li v-for="item in vendors.content" class="w3-padding-16">
+            <li v-for="item in vendors" class="w3-padding-16">
               <div class="w3-row">
                 <div class="w3-col l3 m12 s12 w3-center">
                   <img src="../assets/logo.png" class="vendor-image w3-border">
@@ -80,43 +90,59 @@
 </template>
 
 <script>
+
+import vendorSearch from '../mixins/vendorSearchMixin'
+
 export default {
   name: 'browser',
 
+  mixins: [vendorSearch],
+  
   data () {
+
       return { 
-        vendors:  {},
 
-        distances: [{miles: '<15 Miles'},
-                   {miles: '<10 Miles'},
-                   {miles: '<7 Miles'},
-                   {miles: '<5 Miles'}],
+        searchType: true,
 
-        ratings: [{number: '>4.5'},
-                  {number: '>3.5'},
-                  {number: '>2.5'},
-                  {number: '>2.0'} ],
+        options: {
+          maxDistance: null,
+          checkedFoods: [],
+          leastRating: null
+        },
 
-        foods: [{type: 'Chicken', checked: false},
-                {type: 'Beef', checked: false},
-                {type: 'Seafood', checked: false},
-                {type: 'Sandwich', checked: false},
-                {type: 'Dessert', checked: false},
-                {type: 'Healthy', checked: false},
-                {type: 'Vegan', checked: false},
-                {type: 'Snacks', checked: false} ]
+        vendors:  [],
+
+        distances: ['Any',
+                   '<15 Miles',
+                   '<10 Miles',
+                   '<7 Miles',
+                   '<5 Miles'],
+
+        ratings: ['>4.5',
+                  '>3.5',
+                  '>2.5',
+                  '>2.0'],
+
+        foods: ['Chicken',
+                'Beef',
+                'Seafood',
+                'Sandwich',
+                'Dessert',
+                'Healthy',
+                'Vegan',
+                'Snacks']
+
       }
+
   },
 
-  created: function () {
-
-    this.$http.get('http://env2.zs6znymmyc.us-east-1.elasticbeanstalk.com/api/vendors/')
-      .then(response => {
-        this.vendors.content = response.data;
-      }, response => {
-
-      });
-
+  methods: {
+    changeSearchType: function(event) {
+      if(this.searchType)
+        this.searchType = false;
+      else
+        this.searchType = true;
+    }
   }
 
 }

@@ -1,5 +1,4 @@
 <template>
-
     <div class="home">
 
         <head>
@@ -8,48 +7,29 @@
         </head>
 
         <body>
-
             <section id="cooking-banner">
-
                 <section class="banner-subsect">
-
                     <div class="w3-row">
-
                         <div class="w3-col m3 w3-center ">
-
                             <div id="logo-text">Indie Chef</div>
-
                         </div>
                         <div class="w3-col m6  w3-center ">
-
                             <button id="home-button" href="#">
-
                                 <img src="../assets/logo.png" id="logo-img">
-
                             </button>
-
                         </div>
                         <div class="w3-col m3  w3-center">
-
                             <div id="overlay">
-
                                 <a href="#login" id="overlay-button1">Login</a>
                                 <a class="div-pipe">|</a>
                                 <a href="#about" id="overlay-button2">About</a>
-
                             </div>
-
                         </div>
-
                     </div>
-
                 </section>
-
                 <section class="banner-subsect">
                     <div class="w3-row w3-mobile">
-
                         <div class="w3-col l1 m1 s1 w3-center w3-mobile"></br></div>
-
                         <div class="w3-col l10 m10 s10 w3-center w3-mobile">
                             <div class="w3-bar w3-light-grey w3-large">
                                 <input type="text" class="w3-bar-item w3-input w3-mobile" placeholder="Enter Zipcode..">
@@ -70,59 +50,42 @@
                                 </template>
                             </div>
                         </div>
-
                         <div class="w3-col l1 m1 s1 w3-center"></br></div>
-
                     </div>
                 </section>
-
                 <section class="banner-subsect">
                     <div class="w3-row w3-mobile">
-
                         <div class="w3-col l1 m1 s1 w3-center w3-mobile"></br></div>
-
                         <div class="w3-col l10 m10 s10 w3-center w3-mobile">
                             <div class="w3-bar w3-center w3-large w3-mobile">
                                 <a href="#login" class="w3-bar-item w3-button w3-blue w3-border w3-mobile"><a class="button-text2">Click Here to Login</a></a>
                             </div>
                         </div>
-
                         <div class="w3-col l1 m1 s1 w3-center w3-mobile"></br></div>
-
                     </div>
                 </section>
-
             </section>
-
             <section class="hover-sect">
                     <div class="w3-row w3-mobile">
-
                         <div class="w3-col l1 m1 w3-center "></br></div>
-
                         <div class="w3-col l3 m12 w3-center">
                             <img src="../assets/tos.png" class="tos-book">
                         </div>
-
                         <div class="w3-col l4 m12 w3-center">
                             </br>
                             <p class="tip-text">Don't forget to read our general rules and terms of service.</p>
                         </div>
-
                         <div class="w3-col l3 m12 w3-center">
                             </br>
                             <button class="tip-button">>></button>
                         </div>
-
                         <div class="w3-col l1 m1 w3-center"></br></div>
                     </div>
             </section>
-
             <main-tail></main-tail>
-
         </body>
 
     </div>
-
 </template>
 
 <script>
