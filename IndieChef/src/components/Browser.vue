@@ -12,9 +12,9 @@
       <div class="w3-row">
         <div class="w3-col l3 m3 s1 w3-center"></br></div>
         <div class="w3-col l6 m6 s10 w3-center" style="margin-bottom: 40px;">
-          <input type="text" class="w3-bar-item w3-input w3-border w3-round-xlarge" placeholder="Search...">
+          <div id="search-header">Search:</div>
           </br>
-          <a class="w3-button w3-green w3-round-xlarge" style="width:30%">Go</a>
+          <input v-model="options.searchCriteria" type="text" class="w3-bar-item w3-input w3-border w3-round-xlarge" placeholder="Enter a name...">
         </div>
         <div class="w3-col l3 m3 s1 w3-center"></br></div>
       </div>
@@ -28,7 +28,7 @@
 
             <!-- Search type button -->
             <label class="box-label" style="margin-bottom: 15px">Search Type:</label></br>
-            <template v-if="searchType == true">
+            <template v-if="options.searchType == true">
               <a v-on:click="changeSearchType" class="w3-button w3-green">By Chef</a>
             </template>
             <template v-else>
@@ -37,9 +37,6 @@
 
             <!-- Distance search filter -->
             <label class="box-label" style="margin-bottom: 15px">Distance:</label></br>
-            <input v-model="options.currAddress" class="w3-input w3-border" placeholder="Ex: 555 Place Dr, City, MA"></br>
-            <a v-on:click="pingForVendors" class="w3-button w3-green" style="margin-top: -8px; margin-bottom: 15px;">Submit</a>
-            <a v-on:click="getVendors(options.url)" class="w3-button w3-green" style="margin-top: -8px; margin-bottom: 15px;">Find Me</a>
             <div v-for="distance in distances">
               <input class="w3-radio" :id="distance" :value="distance" v-model="options.maxDistance" type="radio" name="distance" checked>
               <label :for="distance">{{distance}}</label>
@@ -72,8 +69,8 @@
                   <div class="w3-col l1 m12 s12 w3-center w3-hide-small w3-hide-medium"></br></div>
                   <div class="w3-col l8 m12 s12" style="padding-left:20px;">
                     <h3 class="vendor-header">{{item.obj.name}} - {{item.obj.rating}}/5</h3><hr>
-                    <p><label class="vendor-subtext-label w3-round w3-blue">Email:</label> <span class="vendor-subtext">{{item.obj.email}}</span></br> <label class="w3-round w3-blue">Phone:</label> <span class="vendor-subtext">{{item.obj.phone}}</span></br> <label class="w3-round w3-blue">Food Type:</label> <span class="vendor-subtext">Chicken, Beef, Salad</span>
-                            <button class="w3-button w3-green w3-large w3-hide-medium w3-hide-small w3-right" style="margin-right:50px;">See Menu</button></p>
+                    <p><label class="vendor-subtext-label w3-round w3-blue">Email:</label> <span class="vendor-subtext">{{item.obj.email}}</span></br> <label class="w3-round w3-blue">Phone:</label> <span class="vendor-subtext">{{item.obj.phone}}</span></br> <label class="w3-round w3-blue">Food Type:</label> <span class="vendor-subtext">{{item.obj.foodTypes.toString()}}</span></br>
+                            <label class="w3-round w3-blue">Distance:</label> <span class="vendor-subtext">{{(item.dis*0.000621371).toFixed(2)}} miles</span><button class="w3-button w3-green w3-large w3-hide-medium w3-hide-small w3-right" style="margin-right:50px;">See Menu</button></p>
                   </div>
                   <div class="w3-col l3 m12 s12 w3-center">
                     <button class="w3-button w3-green w3-large w3-round-large w3-hide-large">See Menu</button>
@@ -82,7 +79,8 @@
               </li>
             </template>
             <template v-else>
-              <span id="enter-address-banner">Please enter your address or press "Find Me"...</span>
+              <p id="enter-address-banner">Indie Chef needs your location to get the list of vendors in your area, please allow geolocating in your browser and press "Find Me"...</p>
+              <div v-on:click="getVendors(options.url)" class="w3-button w3-green w3-round-xlarge w3-xlarge" style="margin: 30px; padding:30px;">Find Me</div>
             </template>
           </ul>
         </div>
@@ -96,7 +94,7 @@
 
 <script>
 
-import pingForVendors from '../mixins/specifyVendorsMixin'
+import getVendors from '../mixins/specifyVendorsMixin'
 
 export default {
   name: 'browser',
@@ -104,16 +102,13 @@ export default {
   data () {
 
       return { 
-       
-       location: ['', '0.000', '0.000'],
-
-       searchType: true,
 
        vendors: [],
 
        options: {
+         searchCriteria: '',
+         searchType: true,
          url: null,
-         currAddress: '',
          maxDistance: 'Any',
          checkedFoods: ['Chicken', 'Beef', 'Seafood'],
          leastRating: '>2.0'
@@ -145,14 +140,14 @@ export default {
 
   methods: {
     changeSearchType: function(event) {
-      if(this.searchType)
-        this.searchType = false;
+      if(this.options.searchType)
+        this.options.searchType = false;
       else
-        this.searchType = true;
+        this.options.searchType = true;
     },
   },
 
-  mixins: [pingForVendors]
+  mixins: [getVendors]
 
 }
 </script>
@@ -197,6 +192,11 @@ export default {
 
   #enter-address-banner {
     padding: 10px;
+    font-size: 25px;
+    font-family: Verdana;
+  }
+
+  #search-header {
     font-size: 25px;
     font-family: Verdana;
   }
