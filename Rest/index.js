@@ -3,6 +3,7 @@ const express = require('express');
 const routes = require('./routes/api.js');
 const bodyParser = require('body-parser');
 const mongoose = require('mongoose');
+const cors = require('cors');
 
 //establish express app
 const app = express();
@@ -11,6 +12,8 @@ mongoose.connect('mongodb://localhost/ninjago');
 mongoose.Promise = global.Promise;
 
 app.use(express.static('../IndieChef/src/main'));
+
+app.use(cors());
 
 app.use(bodyParser.json());
 

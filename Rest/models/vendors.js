@@ -28,12 +28,6 @@ const VendorSchema = new Schema({
     phone: {
         type: String
     },
-    lat: {
-        type: String
-    },
-    lon: {
-        type: String
-    },
     approved: {
         type: Boolean,
         default: false
