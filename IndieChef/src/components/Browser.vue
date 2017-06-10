@@ -28,11 +28,11 @@
 
             <!-- Search type button -->
             <label class="box-label" style="margin-bottom: 15px">Search Type:</label></br>
-            <template v-if="options.searchType == true">
-              <a v-on:click="changeSearchType" class="w3-button w3-green">By Chef</a>
+            <template v-if="searchType == true">
+              <a v-on:click="changeSearchType" class="w3-button w3-green">By Food</a>
             </template>
             <template v-else>
-              <a v-on:click="changeSearchType" class="w3-button w3-green">By Food</a>
+              <a v-on:click="changeSearchType" class="w3-button w3-green">By Chef</a>
             </template></br></br>
 
             <!-- Distance search filter -->
@@ -67,7 +67,7 @@
             <template v-if="vendors[0] !== undefined">
 
             <!-- If searching by chef -->
-              <template v-if="options.searchType == true">
+              <template v-if="searchType == true">
                 <li v-for="item in filteredVendors" class="w3-padding-16">
                   <div class="w3-row">
                     <div class="w3-col l3 m12 s12 w3-center">
@@ -137,11 +137,12 @@ export default {
 
        vendors: [],
 
-       filteredItems: [],
+       items: [],
+
+       searchType: true,
 
        options: {
          searchCriteria: '',
-         searchType: true,
          url: '',
          maxDistance: 'Any',
          checkedFoods: ['Chicken', 'Beef', 'Seafood'],
@@ -174,11 +175,10 @@ export default {
 
   methods: {
     changeSearchType: function(event) {
-      if(this.options.searchType)
-        this.options.searchType = false;
+      if(this.searchType)
+        this.searchType = false;
       else
-        this.options.searchType = true;
-      this.getItems();
+        this.searchType = true;
     },
   },
 

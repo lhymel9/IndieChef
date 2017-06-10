@@ -14,6 +14,7 @@ export default {
       this.$http.get(url)
         .then(response => {
           this.vendors = response.data;
+          this.getItems();
         }, response => {
 
         });
