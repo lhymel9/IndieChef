@@ -14,7 +14,7 @@
         <div class="w3-col l6 m6 s10 w3-center" style="margin-bottom: 40px;">
           <div id="search-header">Search:</div>
           </br>
-          <input v-model="options.searchCriteria" type="text" class="w3-bar-item w3-input w3-border w3-round-xlarge" placeholder="Enter a name...">
+          <input v-model="options.searchCriteria" type="text" class="w3-bar-item w3-input w3-border w3-round-xlarge" placeholder="Enter a vendor's name...">
         </div>
         <div class="w3-col l3 m3 s1 w3-center"></br></div>
       </div>
@@ -58,30 +58,61 @@
           </div>
         </div>
         <div class="w3-col l1 m1 s1"></br></div>
+
+        <!-- Browser search results -->
         <div class="w3-col l7 m6 s12">
           <ul class="w3-ul w3-card-4">
+
+          <!-- If vendors were found -->
             <template v-if="vendors[0] !== undefined">
-              <li v-for="item in filteredVendors" class="w3-padding-16">
-                <div class="w3-row">
-                  <div class="w3-col l3 m12 s12 w3-center">
-                    <img src="../assets/logo.png" class="vendor-image w3-border">
+
+            <!-- If searching by chef -->
+              <template v-if="options.searchType == true">
+                <li v-for="item in filteredVendors" class="w3-padding-16">
+                  <div class="w3-row">
+                    <div class="w3-col l3 m12 s12 w3-center">
+                      <img src="../assets/logo.png" class="vendor-image w3-border">
+                    </div>
+                    <div class="w3-col l1 m12 s12 w3-center w3-hide-small w3-hide-medium"></br></div>
+                    <div class="w3-col l8 m12 s12" style="padding-left:20px;">
+                      <h3 class="vendor-header">{{item.obj.name}} - {{item.obj.rating}}/5</h3><hr>
+                      <p><label class="vendor-subtext-label w3-round w3-blue">Email:</label> <span class="vendor-subtext">{{item.obj.email}}</span></br> <label class="w3-round w3-blue">Phone:</label> <span class="vendor-subtext">{{item.obj.phone}}</span></br> <label class="w3-round w3-blue">Food Type:</label> <span class="vendor-subtext">{{item.obj.foodTypes.toString()}}</span></br>
+                              <label class="w3-round w3-blue">Distance:</label> <span class="vendor-subtext">{{(item.dis*0.000621371).toFixed(2)}} miles</span><button class="w3-button w3-green w3-large w3-hide-medium w3-hide-small w3-right" style="margin-right:50px;">See Menu</button></p>
+                    </div>
+                    <div class="w3-col l3 m12 s12 w3-center">
+                      <button class="w3-button w3-green w3-large w3-round-large w3-hide-large">See Menu</button>
+                    </div>
                   </div>
-                  <div class="w3-col l1 m12 s12 w3-center w3-hide-small w3-hide-medium"></br></div>
-                  <div class="w3-col l8 m12 s12" style="padding-left:20px;">
-                    <h3 class="vendor-header">{{item.obj.name}} - {{item.obj.rating}}/5</h3><hr>
-                    <p><label class="vendor-subtext-label w3-round w3-blue">Email:</label> <span class="vendor-subtext">{{item.obj.email}}</span></br> <label class="w3-round w3-blue">Phone:</label> <span class="vendor-subtext">{{item.obj.phone}}</span></br> <label class="w3-round w3-blue">Food Type:</label> <span class="vendor-subtext">{{item.obj.foodTypes.toString()}}</span></br>
-                            <label class="w3-round w3-blue">Distance:</label> <span class="vendor-subtext">{{(item.dis*0.000621371).toFixed(2)}} miles</span><button class="w3-button w3-green w3-large w3-hide-medium w3-hide-small w3-right" style="margin-right:50px;">See Menu</button></p>
+                </li>
+              </template>
+
+              <!-- If searching by food item -->
+              <template v-else>
+                <li v-for="item in filteredItems" class="w3-padding-16">
+                  <div class="w3-row">
+                    <div class="w3-col l3 m12 s12 w3-center">
+                      <img src="../assets/logo.png" class="vendor-image w3-border">
+                    </div>
+                    <div class="w3-col l1 m12 s12 w3-center w3-hide-small w3-hide-medium"></br></div>
+                    <div class="w3-col l8 m12 s12" style="padding-left:20px;">
+                      <h3 class="vendor-header">{{item.name}} by {{item.creatorName}}</h3><hr>
+                      <p><label class="vendor-subtext-label w3-round w3-blue">Cost:</label> <span class="vendor-subtext">{{item.cost}}</span></br> <label class="w3-round w3-blue">Tags:</label> <span class="vendor-subtext">{{item.itemTypes.toString()}}</span></br> <label class="w3-round w3-blue">Description:</label> <span class="vendor-subtext">{{item.description}}</span></br>
+                              <label class="w3-round w3-blue">Distance:</label> <span class="vendor-subtext">{{(item.distance*0.000621371).toFixed(2)}} miles</span><button class="w3-button w3-green w3-large w3-hide-medium w3-hide-small w3-right" style="margin-right:50px;">Purchase</button></p>
+                    </div>
+                    <div class="w3-col l3 m12 s12 w3-center">
+                      <button class="w3-button w3-green w3-large w3-round-large w3-hide-large">Purchase</button>
+                    </div>
                   </div>
-                  <div class="w3-col l3 m12 s12 w3-center">
-                    <button class="w3-button w3-green w3-large w3-round-large w3-hide-large">See Menu</button>
-                  </div>
-                </div>
-              </li>
+                </li>
+              </template>
             </template>
+
+            <!-- No results/no search made -->
             <template v-else>
               <p id="enter-address-banner">Indie Chef needs your location to get the list of vendors in your area, please allow geolocating in your browser and press "Find Me"...</p>
               <div v-on:click="getVendors(options.url)" class="w3-button w3-green w3-round-xlarge w3-xlarge" style="margin: 30px; padding:30px;">Find Me</div>
             </template>
+            
           </ul>
         </div>
         <div class="w3-col l1 m1 s1"></br></div>
@@ -94,7 +125,8 @@
 
 <script>
 
-import getVendors from '../mixins/specifyVendorsMixin'
+import getVendors from '../mixins/getVendorsMixin'
+import getItems from '../mixins/getItemsMixin'
 
 export default {
   name: 'browser',
@@ -105,10 +137,12 @@ export default {
 
        vendors: [],
 
+       filteredItems: [],
+
        options: {
          searchCriteria: '',
          searchType: true,
-         url: null,
+         url: '',
          maxDistance: 'Any',
          checkedFoods: ['Chicken', 'Beef', 'Seafood'],
          leastRating: '>2.0'
@@ -144,10 +178,11 @@ export default {
         this.options.searchType = false;
       else
         this.options.searchType = true;
+      this.getItems();
     },
   },
 
-  mixins: [getVendors]
+  mixins: [getVendors, getItems]
 
 }
 </script>
@@ -200,4 +235,5 @@ export default {
     font-size: 25px;
     font-family: Verdana;
   }
+
 </style>

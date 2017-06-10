@@ -30,9 +30,8 @@ export default {
       return this.vendors.filter(function(vendor){
         var dist;
 
-        if (myOptions.maxDistance === 'Any') {
+        if (myOptions.maxDistance === 'Any')
           dist = 24145;
-        }
         else
           dist = parseFloat(myOptions.maxDistance.substring(1,3))/.00062137;
 
