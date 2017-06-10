@@ -40,7 +40,8 @@ export default {
                 
                 return (item.name.toLowerCase().includes(myOptions.searchCriteria.toLowerCase()) || item.creatorName.toLowerCase().includes(myOptions.searchCriteria.toLowerCase())) &&
                        item.itemTypes.some(r=> myOptions.checkedFoods.includes(r)) &&
-                       item.distance <= dist;
+                       item.distance <= dist &&
+                       parseFloat(item.cost) <= parseFloat(myOptions.highestPrice.substring(2,5));
             });
         }
     }

@@ -35,6 +35,13 @@
               <a v-on:click="changeSearchType" class="w3-button w3-green">By Chef</a>
             </template></br></br>
 
+            <!-- Price search filter -->
+            <label class="box-label" style="margin-bottom: 15px">Price:</label></br>
+            <div v-for="price in prices">
+              <input class="w3-radio" :id="price" :value="price" v-model="options.highestPrice" type="radio" name="price" checked>
+              <label :for="price">{{price}}</label>
+            </div></br>
+
             <!-- Distance search filter -->
             <label class="box-label" style="margin-bottom: 15px">Distance:</label></br>
             <div v-for="distance in distances">
@@ -146,8 +153,13 @@ export default {
          url: '',
          maxDistance: 'Any',
          checkedFoods: ['Chicken', 'Beef', 'Seafood'],
-         leastRating: '>2.0'
+         leastRating: '>2.0',
+         highestPrice: "<$20.00"
        },
+        prices: ["<$20.00",
+                 "<$15.00",
+                 "<$10.00",
+                 "<$5.00"],
 
         distances: ["Any",
                    "<15 Miles",
