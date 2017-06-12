@@ -14,7 +14,7 @@
         <div class="w3-col l6 m6 s10 w3-center" style="margin-bottom: 40px;">
           <div id="search-header">Search:</div>
           </br>
-          <input v-model="options.searchCriteria" type="text" class="w3-bar-item w3-input w3-border w3-round-xlarge" placeholder="Enter a vendor's name...">
+          <input v-model="options.searchCriteria" type="text" class="w3-bar-item w3-input w3-border w3-round-xlarge" placeholder="Enter a vendor or item name...">
         </div>
         <div class="w3-col l3 m3 s1 w3-center"></br></div>
       </div>

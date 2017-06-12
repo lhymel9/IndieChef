@@ -1,6 +1,8 @@
 const express = require('express');
 const Vendor = require('../models/vendors');
 const Item = require('../models/items');
+const Customer = require('../models/customers');
+const Geo = require('../models/geoSchema');
 
 const router = express.Router();
 
@@ -14,6 +16,15 @@ router.get('/vendors', function(request, response, next) {
     ).then(function(vendor) {
         response.send(vendor)
     });
+});
+
+router.get('/exists/vendor/:creatorId', function(request, response, next) {
+    Vendor.findOne({_creatorId:request.params.creatorId}).then(function(vendor) {
+        if (vendor != null)
+            response.send({"answer": true});
+        else
+            response.send({"answer": false});
+    }).catch(next);
 });
 
 router.post('/vendors', function(request, response, next) {
@@ -68,6 +79,13 @@ router.put('/items/:id', function(request, response, next) {
             response.send(item);
         });
     });
+});
+
+//for customers
+router.post('/customers', function(request, response, next) {
+    Customer.create(request.body).then(function(customer) {
+        response.send(customer);
+    }).catch(next);
 });
 
 module.exports = router;
