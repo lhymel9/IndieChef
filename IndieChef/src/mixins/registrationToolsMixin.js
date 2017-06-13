@@ -91,6 +91,12 @@ export default {
               }, response => {
                 console.log("Failure: \n" + response.data)
               });
+        },
+
+        trimInputs: function(inputs) {
+            inputs = inputs.map(function(input) {
+                return input.trim();
+            });
         }
     }
 }

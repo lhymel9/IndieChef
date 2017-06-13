@@ -102,6 +102,7 @@ export default {
 
     postAccount: function() {
 
+      this.trimInputs(this.account);
       var joinedAddress = this.account[4].replace(/ /g,'+') + ',' + '+' + this.account[6].replace(/ /g,'+') + ',' + '+' + this.account[7];
       var apiKey = 'AIzaSyD7bfC_a_1IZa-ujwvD6mxJT6TSR4Fsxe8';
 
