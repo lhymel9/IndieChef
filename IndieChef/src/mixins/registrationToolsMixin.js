@@ -1,5 +1,6 @@
 export default {
     methods: {
+
         generatedAndChecked: function() {
 
             var gen = Math.floor((Math.random() * 100000000) + 1).toString();
@@ -49,6 +50,47 @@ export default {
                 if(item.test)
                     self.errorArr.push(item.message)
             });
+
+        },
+
+        generateVendor: function(account, geo) {
+            var newAccount = {
+              "_creatorId":this.generatedAndChecked(),
+              "email":account[1],
+              "password":account[2],
+              "name":account[0],
+              "rating":null,
+              "foodTypes":[],
+              "address":account[4] + ", " + account[6] + ", " + account[7] + ", " + account[5],
+              "phone":account[8],
+              "approved":false,
+              "items":null,
+              "geometry":geo
+            }
+
+            this.$http.post('http://localhost:4000/api/vendors/', newAccount)
+              .then(response => {
+                console.log("Success: \nVendor with creator id: " + response.data._creatorId + " saved.");
+              }, response => {
+                console.log("Failure: \n" + response.data)
+              });
+        },
+
+        generateCustomer: function(account, geo) {
+            var newAccount = {
+              "email":account[1],
+              "password":account[2],
+              "name":account[0],
+              "address":account[4] + ", " + account[6] + ", " + account[7] + ", " + account[5],
+              "geometry":geo
+            }
+
+            this.$http.post('http://localhost:4000/api/customers/', newAccount)
+              .then(response => {
+                console.log("Success: \nCustomer with id: " + response.data._id + " saved.");
+              }, response => {
+                console.log("Failure: \n" + response.data)
+              });
         }
     }
 }
