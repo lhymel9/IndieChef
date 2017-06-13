@@ -17,8 +17,8 @@
             <input class="w3-check" type="checkbox">
             <label id="rmb">Rembember Me</label>
             </br>
-            <a href="/#/" class="w3-bar-item w3-button w3-green" style="margin: 5px; margin-bottom: 15px;">Login</a>
-            <a href="/#/register" target="_blank" class="w3-bar-item w3-button w3-green" style="margin: 5px; margin-bottom: 15px;">Register</a>
+            <a href="#" class="w3-bar-item w3-button w3-green" style="margin: 5px; margin-bottom: 15px;">Login</a>
+            <a href="#register" class="w3-bar-item w3-button w3-green" style="margin: 5px; margin-bottom: 15px;">Register</a>
             </br>
             <a class="w3-button w3-white w3-hover-white" href="#forgot"><div class="flink" >Forgot my Password</div></a>
         </div>
@@ -35,7 +35,7 @@
 export default {
   name: 'login',
   data () {
-      
+    return {}
   }
 }
 </script>

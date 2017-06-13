@@ -92,7 +92,9 @@
 export default {
   name: 'home',
   data () {
-      
+    return {
+        searchType: 'byChef'
+    }
   }
 }
 </script>

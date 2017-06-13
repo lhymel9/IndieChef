@@ -16,18 +16,23 @@
           <template v-if="isNext == false">
             <div class="w3-container w3-left-align "><div id="s-header">Create Account.</div></div>
 
-              <!-- Personal information inputs -->
-              <input v-model="account[0]" type="text" class="w3-bar-item w3-input w3-border w3-round-xlarge" placeholder="Name" style="margin-bottom:25px;">
-              <input v-model="account[1]" type="text" class="w3-bar-item w3-input w3-border w3-round-xlarge" placeholder="Email" style="margin-bottom:25px;">
-              <input v-model="account[2]" type="text" class="w3-bar-item w3-input w3-border w3-round-xlarge" placeholder="Password" style="margin-bottom:25px;">
-              <input v-model="account[3]" type="text" class="w3-bar-item w3-input w3-border w3-round-xlarge" placeholder="Confirm Password" style="margin-bottom:25px;">
-              <input v-model="account[4]" type="text" class="w3-bar-item w3-input w3-border w3-round-xlarge" placeholder="Address" style="margin-bottom:25px;">
-              <div class="w3-bar w3-left" style="margin-bottom: 25px;">
-                  <input v-model="account[5]" type="text" class="w3-bar-item w3-input w3-border w3-round-xlarge" placeholder="Zipcode">
-                  <input v-model="account[6]" type="text" class="w3-bar-item w3-input w3-border w3-round-xlarge" placeholder="City">
-                  <input v-model="account[7]" type="text" class="w3-bar-item w3-input w3-border w3-round-xlarge" placeholder="State (AR, CA, etc)">
-              </div>
-              <input v-model="account[8]" type="text" class="w3-bar-item w3-input w3-border w3-round-xlarge" placeholder="Phone" style="margin-bottom:25px;">
+            <!-- Form error generation -->
+            <div v-for="error in errorArr">
+              <div class="error-message">{{error}}</div>
+            </div></br>
+
+            <!-- Personal information inputs -->
+            <input v-model="account[0]" type="text" class="w3-bar-item w3-input w3-border w3-round-xlarge" placeholder="Name" style="margin-bottom:25px;">
+            <input v-model="account[1]" type="text" class="w3-bar-item w3-input w3-border w3-round-xlarge" placeholder="Email" style="margin-bottom:25px;">
+            <input v-model="account[2]" type="text" class="w3-bar-item w3-input w3-border w3-round-xlarge" placeholder="Password" style="margin-bottom:25px;">
+            <input v-model="account[3]" type="text" class="w3-bar-item w3-input w3-border w3-round-xlarge" placeholder="Confirm Password" style="margin-bottom:25px;">
+            <input v-model="account[4]" type="text" class="w3-bar-item w3-input w3-border w3-round-xlarge" placeholder="Address" style="margin-bottom:25px;">
+            <div class="w3-bar w3-left" style="margin-bottom: 25px;">
+              <input v-model="account[5]" type="text" class="w3-bar-item w3-input w3-border w3-round-xlarge" placeholder="Zipcode">
+              <input v-model="account[6]" type="text" class="w3-bar-item w3-input w3-border w3-round-xlarge" placeholder="City">
+              <input v-model="account[7]" type="text" class="w3-bar-item w3-input w3-border w3-round-xlarge" placeholder="State (AR, CA, etc)">
+            </div>
+            <input v-model="account[8]" type="text" class="w3-bar-item w3-input w3-border w3-round-xlarge" placeholder="Phone" style="margin-bottom:25px;">
 
             <!-- Submit Button -->
             <div class="w3-container">
@@ -56,17 +61,22 @@
 <script>
 
 import getGeo from '../mixins/getGeoMixin'
+import regTools from '../mixins/registrationToolsMixin'
 
 export default {
   name: 'register',
+
   data () {
+
     return {
 
       vendorReg: false,
 
       isNext: false,
       
-      account: ['', '', '', '', '', '', '', '']
+      account: ['', '', '', '', '', '', '', ''],
+
+      errorArr: []
 
     }
 
@@ -81,7 +91,8 @@ export default {
           return false;
       }
 
-      return true;
+      this.generateList();
+      return this.errorArr[0] == null;
 
     }
 
@@ -90,6 +101,7 @@ export default {
   methods: {
 
     postAccount: function() {
+
       var joinedAddress = this.account[4].replace(/ /g,'+') + ',' + '+' + this.account[6].replace(/ /g,'+') + ',' + '+' + this.account[7];
       var apiKey = 'AIzaSyD7bfC_a_1IZa-ujwvD6mxJT6TSR4Fsxe8';
 
@@ -144,36 +156,13 @@ export default {
 
           });
 
-    },
-
-    generatedAndChecked: function() {
-
-      var gen = Math.floor((Math.random() * 100000000) + 1).toString();
-      var url = 'http://localhost:4000/api/exists/vendor/' + gen;
-      var exists = this.vendorExists(url);
-      if(exists)
-        return generatedAndChecked();
-      else
-        return gen;
-
-    },
-
-    vendorExists: function(url) {
-
-      this.$http.get(url)
-        .then(response => {
-          return response.data.answer;
-        }, response => {
-
-        });
-
     }
-
   },
 
-  mixins: [getGeo]
-
+  mixins: [getGeo, regTools]
+  
 }
+
 </script>
 
 <style scoped>
@@ -211,7 +200,10 @@ export default {
     margin-left:-20px;
   }
 
-  #vendorReg {
-    
+  .error-message {
+    font-size: 15px;
+    font-family: Verdana;
+    color: red;
   }
+
 </style>
