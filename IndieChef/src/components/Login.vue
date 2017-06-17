@@ -9,22 +9,27 @@
     <body>
       <main-head></main-head>
       <div class="w3-col l4 md2 s1 w3-center"></br></div>
-      <div class="w3-col l4 md8 s10 w3-center">
-        <div class="w3-card-4 w3-padding">
+      <template v-if="">
+        <div class="w3-col l4 md8 s10 w3-center">
+          <div class="w3-card-4 w3-padding">
             <div class="w3-container w3-left-align "><div id="s-header">Sign In.</div></div>
-            <input type="text" class="w3-bar-item w3-input w3-border w3-round-xlarge" placeholder="Email" style="margin-bottom:25px;">
-            <input type="text" class="w3-bar-item w3-input w3-border w3-round-xlarge" placeholder="Password" style="margin-bottom:25px;">
-            <input class="w3-check" type="checkbox">
-            <label id="rmb">Rembember Me</label>
-            </br>
-            <a href="#" class="w3-bar-item w3-button w3-green" style="margin: 5px; margin-bottom: 15px;">Login</a>
-            <a href="#register" class="w3-bar-item w3-button w3-green" style="margin: 5px; margin-bottom: 15px;">Register</a>
-            </br>
+            <input v-model="entry[0]" type="text" class="w3-bar-item w3-input w3-border w3-round-xlarge" placeholder="Email" style="margin-bottom:25px;">
+            <input v-model="entry[1]" type="password" class="w3-bar-item w3-input w3-border w3-round-xlarge" placeholder="Password" style="margin-bottom:25px;">
+            <template v-if="isFilled">
+              <a v-on:click="verifyLogin" class="w3-bar-item w3-button w3-green" style="margin: 5px; margin-bottom: 15px;">Login</a>
+            </template>
+            <template v-else>
+              <a class="w3-bar-item w3-button w3-green" style="margin: 5px; margin-bottom: 15px;" disabled>Login</a>
+            </template>
+            <a href="#register" class="w3-bar-item w3-button w3-green" style="margin: 5px; margin-bottom: 15px;">Register</a></br>
             <a class="w3-button w3-white w3-hover-white" href="#forgot"><div class="flink" >Forgot my Password</div></a>
+          </div>
         </div>
-      </div>
-      <div class="w3-col l4 md2 s1 w3-center"></br></div>
-      </br>
+      </template>
+      <template v-else>
+        
+      </template>
+      <div class="w3-col l4 md2 s1 w3-center"></br></div></br>
       <main-tail></main-tail>
     </body>
 
@@ -34,9 +39,47 @@
 <script>
 export default {
   name: 'login',
+
   data () {
-    return {}
+    return {
+      entry: ['', '']
+    }
+  },
+
+  computed: {
+
+    isFilled: function() {
+      return this.entry[0] != '' && this.entry[1] != '' && this.entry[0] != ' ' && this.entry[1] != ' '
+    }
+
+  },
+
+  methods: {
+    verifyLogin: function() {
+
+      var credentials = {
+        email: this.entry[0],
+        password: this.entry[1]
+      }
+
+      this.$http.post('http://localhost:4000/api/login', credentials)
+        .then(response => {
+          if(response.data.token === 'null')
+            console.log("invalid login");
+          else {
+            this.$store.dispatch("login", response.data.token)
+              .then(() => {
+                this.$router.push('#success');
+              });
+          }
+
+        }, response => {
+          console.log("Login Server Failure: \n" + response.data)
+        });
+
+    }
   }
+
 }
 </script>
 
@@ -65,4 +108,5 @@ export default {
   .flink:hover {
     color: #D9D9D9;
   }
+  
 </style>

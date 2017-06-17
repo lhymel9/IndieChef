@@ -8,6 +8,7 @@
 
     <body>
       <main-head></main-head>
+      <div class="w3-container w3-border" style="margin-top: -85px; margin-bottom: 35px; 	background-color: #DCDCDC;"><h1 id="logo-text">Registration</h1></div>
       <div class="w3-col l4 md2 s1 w3-center"></br></div>
       <div class="w3-col l4 md8 s10 w3-center">
         <div class="w3-card-4 w3-padding">
@@ -91,7 +92,7 @@ export default {
           return false;
       }
 
-      this.generateList();
+      this.generateErrorList(this.formErrorChecks.array);
       return this.errorArr[0] == null;
 
     }
@@ -135,6 +136,12 @@ export default {
 </script>
 
 <style scoped>
+
+  #logo-text {
+    padding: 10px;
+    font-size: 15px;
+    font-family: Verdana;
+  }
 
   #s-header {
     margin: 22px;

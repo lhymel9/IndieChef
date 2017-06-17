@@ -156,6 +156,7 @@ export default {
          leastRating: '>2.0',
          highestPrice: "<$20.00"
        },
+       
         prices: ["<$20.00",
                  "<$15.00",
                  "<$10.00",
