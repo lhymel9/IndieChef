@@ -15,7 +15,7 @@
                         </div>
                         <div class="w3-col m6  w3-center ">
                             <button id="home-button" href="#">
-                                <img src="../assets/logo.png" id="logo-img">
+                                <img src="../../assets/logo.png" id="logo-img">
                             </button>
                         </div>
                         <div class="w3-col m3  w3-center">
@@ -69,7 +69,7 @@
                     <div class="w3-row w3-mobile">
                         <div class="w3-col l1 m1 w3-center "></br></div>
                         <div class="w3-col l3 m12 w3-center">
-                            <img src="../assets/tos.png" class="tos-book">
+                            <img src="../../assets/tos.png" class="tos-book">
                         </div>
                         <div class="w3-col l4 m12 w3-center">
                             </br>
@@ -102,7 +102,7 @@ export default {
 <style scoped>
 
 #cooking-banner {
-    background: url("../assets/cooking.png") no-repeat;
+    background: url("../../assets/cooking.png") no-repeat;
     background-position: center;
 
     -webkit-background-size: cover;

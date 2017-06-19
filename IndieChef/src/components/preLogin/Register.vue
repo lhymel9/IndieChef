@@ -61,8 +61,8 @@
 
 <script>
 
-import getGeo from '../mixins/getGeoMixin'
-import regTools from '../mixins/registrationToolsMixin'
+import getGeo from '../../mixins/getGeoMixin'
+import regTools from '../../mixins/registrationToolsMixin'
 
 export default {
   name: 'register',
