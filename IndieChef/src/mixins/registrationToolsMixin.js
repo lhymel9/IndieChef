@@ -49,7 +49,7 @@ export default {
               "address":account[4] + ", " + account[6] + ", " + account[7] + ", " + account[5],
               "phone":account[8],
               "approved":false,
-              "items":null,
+              "items":[],
               "geometry":geo
             }
 

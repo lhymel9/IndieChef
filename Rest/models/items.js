@@ -10,7 +10,7 @@ const ItemSchema = new Schema({
     },
     name: {
         type: String,
-        required: [true, 'Email field is required']
+        required: [true, 'Name field is required']
     },
     itemTypes: {
         type: [String],

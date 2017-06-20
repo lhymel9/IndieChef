@@ -95,18 +95,18 @@ export default {
     cursor:pointer;
     overflow: hidden;
     outline:none;
-    color: #b5b5b7;
+    color: #252839;
 }
 
 .btn-txt {
-    font-size: 20px;
+    font-size: 22px;
     font-family: Verdana;
 }
 
 .welcome-text {
     font-size: 60px;
     font-family: Verdana;
-    color: #b5b5b7;
+    color: #252839;
 }
 
 .yellow-text {
@@ -116,11 +116,11 @@ export default {
 .welcome-subtext {
     font-size: 32px;
     font-family: Verdana;
-    color: #b5b5b7;
+    color: #252839;
 }
 
 .c-button {
-    background-color: #4CAF50; /* Green */
+    background-color: #4CAF50;
     border: none;
     color: white;
     padding: 16px 32px;
@@ -129,7 +129,7 @@ export default {
     display: inline-block;
     font-size: 20px;
     margin: 4px 2px;
-    -webkit-transition-duration: 0.4s; /* Safari */
+    -webkit-transition-duration: 0.4s;
     transition-duration: 0.4s;
     cursor: pointer;
     font-family: Verdana;

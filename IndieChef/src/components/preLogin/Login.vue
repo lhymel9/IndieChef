@@ -4,28 +4,31 @@
     <head>
       <meta charset="utf-8">
       <meta name="viewport" content="width=device-width, initial-scale=1">
+      <link rel='stylesheet' href='https://fonts.googleapis.com/icon?family=Material+Icons'>
     </head>
 
     <body>
       <main-head></main-head>
-      <div class="w3-col l4 md2 s1 w3-center"></br></div>
-      <div class="w3-col l4 md8 s10 w3-center">
-        <div class="w3-card-4 w3-padding">
-          <div class="w3-container w3-left-align "><div id="s-header">Sign In.</div></div></br>
-          <div id="error-message">{{failureMessage}}</div></br>
-          <input v-model="entry[0]" type="text" class="w3-bar-item w3-input w3-border w3-round-xlarge" placeholder="Email" style="margin-bottom:25px;">
-          <input v-model="entry[1]" type="password" class="w3-bar-item w3-input w3-border w3-round-xlarge" placeholder="Password" style="margin-bottom:25px;">
-          <template v-if="isFilled">
-            <a v-on:click="verifyLogin" class="w3-bar-item w3-button w3-green" style="margin: 5px; margin-bottom: 15px;">Login</a>
-          </template>
-          <template v-else>
-            <a class="w3-bar-item w3-button w3-green" style="margin: 5px; margin-bottom: 15px;" disabled>Login</a>
-          </template>
-          <a href="#register" class="w3-bar-item w3-button w3-green" style="margin: 5px; margin-bottom: 15px;">Register</a></br>
-          <a class="w3-button w3-white w3-hover-white" href="#forgot"><div class="flink" >Forgot my Password</div></a>
+      <div class="w3-row" style="background-color:#b5b5b7; height:1000px; padding-top:125px">
+        <div class="w3-col l4 md2 s1 w3-center"></br></div>
+        <div class="w3-col l4 md8 s10 w3-center">
+          <div class="w3-card-4 w3-padding w3-round" style="background-color:#062F4F">
+            <div class="w3-container w3-left-align"><div id="s-header">Sign In.</div></div></br>
+            <div id="error-message">{{failureMessage}}</div></br>
+            <input v-model="entry[0]" type="text" class="w3-bar-item w3-input w3-border w3-round-xlarge" placeholder="Email" style="margin-bottom:25px; background-color: #D3D3D3">
+            <input v-model="entry[1]" type="password" class="w3-bar-item w3-input w3-border w3-round-xlarge" placeholder="Password" style="margin-bottom:25px; background-color: #D3D3D3">
+            <template v-if="isFilled">
+              <button v-on:click="verifyLogin" class="c-button" style="margin: 5px; margin-bottom: 15px;">Login</button>
+            </template>
+            <template v-else>
+              <button class="c-button" style="margin: 5px; margin-bottom: 15px;" disabled>Login</button>
+            </template>
+            <button href="#register" class="c-button" style="margin: 5px; margin-bottom: 15px;">Register</button></br>
+            <a id="h-button" class="c-button" href="#forgot"><div class="flink">Forgot my Password</div></a>
+          </div>
         </div>
+        <div class="w3-col l4 md2 s1 w3-center"></br></div></br>
       </div>
-      <div class="w3-col l4 md2 s1 w3-center"></br></div></br>
       <main-tail></main-tail>
     </body>
 
@@ -98,12 +101,13 @@ export default {
 
   #s-header {
     margin: 22px;
-    color: #2196F3;
+    color: #f2b632;
     font-size: 25px;
     font-family: Verdana;
   }
 
   #rmb {
+    background-color: Transparent;
     padding: 5px;
     margin-bottom: 25px;
     font-size: 15px;
@@ -126,4 +130,34 @@ export default {
     color: red;
   }
   
+  .c-button {
+    background-color: Transparent;
+    border: 2px solid #f2b632;
+    color: #f2b632;
+    padding: 10px 15px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 18px;
+    margin: 4px 2px;
+    -webkit-transition-duration: 0.4s;
+    transition-duration: 0.4s;
+    cursor: pointer;
+    font-family: Verdana;
+  }
+
+  .c-button:hover {
+    background-color: #f2b632;
+    color: black;
+  }
+
+  #h-button {
+    border: none;
+    color: #D3D3D3;
+  }
+
+  #h-button:hover {
+    background-color: Transparent;
+    color: black;
+  }
 </style>

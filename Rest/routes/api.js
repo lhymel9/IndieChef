@@ -124,6 +124,7 @@ router.get('/items/:id', function(request, response, next) {
 router.post('/items', function(request, response, next) {
     Vendor.findOne({_creatorId:request.body._creator}).then(function(vendor) {
         Item.create(request.body).then(function(item) {
+            console.log(vendor);
             vendor.items.push(item);
             vendor.save(function() {
                 response.send(item);
