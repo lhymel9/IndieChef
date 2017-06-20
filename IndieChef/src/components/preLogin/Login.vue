@@ -17,13 +17,8 @@
             <div id="error-message">{{failureMessage}}</div></br>
             <input v-model="entry[0]" type="text" class="w3-bar-item w3-input w3-border w3-round-xlarge" placeholder="Email" style="margin-bottom:25px; background-color: #D3D3D3">
             <input v-model="entry[1]" type="password" class="w3-bar-item w3-input w3-border w3-round-xlarge" placeholder="Password" style="margin-bottom:25px; background-color: #D3D3D3">
-            <template v-if="isFilled">
-              <button v-on:click="verifyLogin" class="c-button" style="margin: 5px; margin-bottom: 15px;">Login</button>
-            </template>
-            <template v-else>
-              <button class="c-button" style="margin: 5px; margin-bottom: 15px;" disabled>Login</button>
-            </template>
-            <button href="#register" class="c-button" style="margin: 5px; margin-bottom: 15px;">Register</button></br>
+            <button v-on:click="verifyLogin" class="c-button" style="margin: 5px; margin-bottom: 15px;">Login</button>
+            <a href="#register" class="c-button" style="margin: 5px; margin-bottom: 15px;">Register</a></br>
             <a id="h-button" class="c-button" href="#forgot"><div class="flink">Forgot my Password</div></a>
           </div>
         </div>
