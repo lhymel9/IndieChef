@@ -13,7 +13,7 @@
         <div class="w3-card-4 w3-padding">
           <h1 id="hello-banner">Hello, {{firstName}}.</h1>
           <p id="proceed-parag">Thanks for logging in, please proceed to home or your vendor dashboard.</p>
-          <div><a class="w3-button w3-green w3-margin w3-xlarge">Home</a><a class="w3-button w3-green w3-margin w3-xlarge">Dashboard</a></div>
+          <div><a href="#" class="w3-button w3-green w3-margin w3-xlarge">Home</a><a class="w3-button w3-green w3-margin w3-xlarge">Dashboard</a></div>
         </div>
       </div>
       <div class="w3-col l3 md2 s1 w3-center"></br></div>
@@ -26,13 +26,10 @@
 
 <script>
 
-import auth from '../../mixins/getAuthDataMixin'
 import store from '../../store'
 
 export default {
   name: 'success',
-
-  mixins: [auth],
 
   data () {
     return {

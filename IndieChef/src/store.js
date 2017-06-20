@@ -58,6 +58,7 @@ const store = new Vuex.Store({
       commit(AUTH);
       return new Promise(resolve => {
         setTimeout(() => {
+          localStorage.setItem("id", vendor._id);
           localStorage.setItem("name", vendor.name);
           commit(AUTH_SUCCESS);
           resolve();
@@ -80,6 +81,10 @@ const store = new Vuex.Store({
     vendorName: function() {
       return localStorage.getItem("name");
     },
+
+    vendorId: function() {
+      return localStorage.getItem("id")
+    }
 
   }
 

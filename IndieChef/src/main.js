@@ -18,6 +18,7 @@ import Home from './components/preLogin/Home.vue'
 import Register from './components/preLogin/Register.vue'
 import Browser from './components/Browser.vue'
 import LoginSuccess from './components/postLogin/LoginSuccess.vue'
+import Dashboard from './components/postLogin/Dashboard.vue'
 
 Vue.use(VueResource)
 Vue.use(VueRouter)
@@ -34,8 +35,10 @@ const routers = [
     component: Register },
   { path: '/browser', 
     component: Browser },
-  { path: '/success',
-    component: LoginSuccess }
+  { path: '/success/:id',
+    component: LoginSuccess },
+  { path: '/dashboard/usr=:id&tok=:token',
+    component: Dashboard }
 ]
 
 const router = new VueRouter({

@@ -33,8 +33,14 @@
 </template>
 
 <script>
+
+import auth from '../../mixins/getAuthDataMixin';
+
 export default {
+
   name: 'login',
+
+  mixins:[auth],
 
   data () {
 
@@ -71,12 +77,13 @@ export default {
           else {
             this.$store.dispatch("login", response.data.token)
               .then(() => {
-                this.$root.$router.push("success");
+                this.authenticateVendor();
               });
           }
 
         }, response => {
 
+          failureMessage = "Login Failed: Error with login servers."
           console.log("Login Server Failure: \n" + response.data);
 
         });
