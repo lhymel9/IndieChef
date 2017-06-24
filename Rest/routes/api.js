@@ -9,6 +9,8 @@ const Customer = require('../models/customers');
 const Salt = require('../models/salts')
 const Geo = require('../models/geoSchema');
 const Token = require('../models/tokens');
+const Sale = require('../models/sales');
+const Order = require('../models/orders');
 
 //Internal tools imports
 const algo = require('../tools/saltAlgo');
@@ -66,6 +68,13 @@ router.get('/vendors', function(request, response, next) {
     ).then(function(vendor) {
         response.send(vendor)
     }).catch(next);
+});
+
+router.get('/vendor/:id', function(request, response, next) {
+    Vendor.findOne({_id:request.params.id}).then(function(vendor) {
+        console.log("Sending vendor: " + vendor);
+        response.send(vendor);
+    })
 });
 
 router.get('/exists/vendor/:creatorId', function(request, response, next) {
@@ -141,9 +150,7 @@ router.delete('/items/:id', function(request, response, next) {
 
 router.put('/items/:id', function(request, response, next) {
     Item.findByIdAndUpdate({_id:request.params.id}, request.body).then(function() {
-        Item.findOne({_id:request.params.id}).then(function(item) {
-            response.send(item);
-        });
+        response.send({"success":"Item details have been changed."})
     }).catch(next);
 });
 
@@ -188,6 +195,39 @@ router.get('/token_confirm/:token', function(request, response, next) {
                 }
             });
         }
+    }).catch(next);
+});
+
+//-------------------------------------------------------------------------------------------------
+
+//Requests for Sales
+router.post('/sales', function(request, response, next) {
+    Sale.create(request.body).then(function(sale) {
+        console.log("Sale:\n" + sale + "\nmade.");
+        response.send({"response":"Success, sale made."});
+    }).catch(next);
+});
+
+router.get('/sales/:id', function(request, response, next) {
+    Sale.findOne({_id:request.params.id}).then(function(sale) {
+        response.send(sale);
+    }).catch(next);
+});
+
+//-------------------------------------------------------------------------------------------------
+
+//Requests for Orders
+router.get('/orders/:creatorId', function(request, response, next) {
+    Order.find({_creator:request.params.creatorId}).then(function(orders) {
+        response.send(orders);
+    }).catch(next);
+});
+
+router.post('/orders', function(request, response, next) {
+    Order.create(request.body).then(function(order) {
+        console.log("Order:\n" + order + " made.\n\n");
+        console.log("Expires: " + order.deliveryDate);
+        response.send({"response":"Success, order made."});
     }).catch(next);
 });
 

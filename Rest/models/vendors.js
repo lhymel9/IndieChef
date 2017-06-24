@@ -1,7 +1,7 @@
 const mongoose = require('mongoose');
 const geoSchema = require('./geoSchema');
 const crypto = require('crypto');
-const item = require('./items')
+const item = require('./items');
 
 const Schema = mongoose.Schema;
 

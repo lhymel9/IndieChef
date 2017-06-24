@@ -12,13 +12,13 @@
       <div class="w3-container w3-center" style="background-color: #252839;">
         <span id="banner-text">Welcome</span>
       </div>
-      <div class="w3-row" style="background-color:#b5b5b7; padding-top:90px">
+      <div class="w3-row" style="background-color:#DCDCDC; padding-top:90px">
         <div class="w3-col l3 md2 s1 w3-center"></br></div>
         <div class="w3-col l6 md8 s10 w3-center" style="margin-bottom:480px">
-          <div class="w3-card-4 w3-padding w3-round" style="background-color:#062F4F">
+          <div class="w3-card-4 w3-padding w3-round" style="background-color:#062F4F; border: 2px solid #f2b632">
             <h1 id="hello-banner">Hello, {{firstName}}.</h1>
             <p id="proceed-parag">Thanks for logging in, please proceed to home or your vendor dashboard.</p>
-            <div><a href="#" class="c-button w3-margin">Home</a><button class="c-button w3-margin">Dashboard</button></div>
+            <div><a href="#" class="c-button w3-margin">Home</a><button v-on:click="goToDash" class="c-button w3-margin">Dashboard</button></div>
           </div>
         </div>
         <div class="w3-col l3 md2 s1 w3-center"></br></div>
@@ -48,6 +48,15 @@ export default {
       return store.getters.vendorName.substr(0, store.getters.vendorName.indexOf(' '));
     }
 
+  },
+
+  methods: {
+    goToDash: function() {
+      var myToken = store.getters.getToken.toString(),
+          myId = store.getters.vendorId.toString(),
+          url = ["/dashboard/usr=", myId, "&tok=", myToken].join("");
+      this.$router.push({path: url});
+    }
   }
 
 }
