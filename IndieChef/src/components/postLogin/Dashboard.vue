@@ -10,7 +10,7 @@
     <body>
       <main-head></main-head>
       <div id="banner" class="w3-container w3-center">
-        <span id="banner-text">Dashboard</span>
+        <span>Dashboard</span>
       </div>
       <div class="background w3-row">
 
@@ -27,7 +27,9 @@
             <ul class="w3-ul">
 
               <!-- All items, iterated as list elements -->
-              <li v-for="item in myItems" class="indiv-item w3-padding-16 w3-border w3-round-xlarge">
+              <li v-for="item in myItems" class="indiv-item w3-padding-16 w3-round-xlarge">
+
+                <span class="subbanner-text-2">{{item.name}}</span><hr>
 
                 <!-- Item photo -->
                 <div class="w3-container w3-cell">
@@ -35,23 +37,23 @@
                 </div>
 
                 <!-- Item Information -->
-                <div class="w3-container w3-cell w3-border">
-                  <label class="i-text i-label">Name:</label> <span class="i-text w3-tooltip">{{shortenText(item.name, 16)}} <span class="tag-text w3-text w3-tag">{{item.name}}</span> </span></br>
-                  <label class="i-text i-label">Cost:</label> <span class="i-text">{{item.cost}}</span></br>
-                  <label class="i-text i-label">Description:</label> <span class="i-text w3-tooltip">{{shortenText(item.description, 18)}} <span class="tag-text w3-text w3-tag">{{item.description}}</span></span></br>
-                  <label class="i-text i-label">Item Types:</label> <span class="i-text w3-tooltip">{{shortenText(item.itemTypes.toString(), 15)}}<span class="tag-text w3-text w3-tag">{{item.itemTypes.toString()}}</span></span>
+                <div id="grey-back-cont" class="w3-container w3-cell w3-round-large">
+                  <label class="type-button-small">Cost:</label> <span class="i-text">${{item.cost}}</span></br>
+                  <label class="type-button-small">Description:</label> <span class="i-text w3-tooltip">{{shortenText(item.description, 15)}} <span class="tag-text w3-text w3-tag">{{item.description}}</span></span></br>
+                  <label class="type-button-small">Item Types:</label> <span class="i-text w3-tooltip">{{shortenText(item.itemTypes.toString(), 15)}}<span class="tag-text w3-text w3-tag">{{item.itemTypes.toString()}}</span></span>
                 </div>
 
-                <div class="sale-text w3-container w3-cell">
+                <div class="sale-text w3-container w3-cell w3-round-large">
                   <div>Latest Sales:</div><hr id="a22">
                   <div v-for="sale in item.saleObjs.slice(-4)">
-                    <span>{{sale.date}}</span></br>
+                    <span class=" w3-text w3-round-large">{{sale.date}}</span></br>
                   </div>
                 </div>
 
                 <!-- Modal edit element and initiator -->
                 <div class="w3-container w3-cell">
-                  <a class="w3-tooltip" v-on:click="setupEdit(item)"><span class="tag-text w3-text w3-tag">Edit {{item.name}}</span><img src="../../assets/editpencil.png" alt="Vendor's Portrait" class="editpencil w3-image"></a>
+
+                  <button class="c-button-2" v-on:click="setupEdit(item)">Edit Item</button>
                   
                   <!-- Modal Content -->                  
                   <div :id="item._saleId" class="w3-modal">
@@ -85,16 +87,16 @@
                     </div>
                   </div>
 
-                </div>
+                </div></br><hr>
 
               </li>
 
               <!-- Add new item plus button (always present) -->
-              <li class="indiv-item w3-padding-16 w3-border w3-round-xlarge">
+              <li class="indiv-item-plus w3-padding-16 w3-round-xlarge">
 
                 <!-- Modal add element and initiator -->
                 <div class="w3-container w3-cell">
-                  <div v-on:click="this.document.getElementById('01').style.display='block'" class="plus-img w3-border w3-tooltip"><span class="tag-text-3 w3-text w3-tag">Create New Item</span></div>
+                  <div v-on:click="this.document.getElementById('01').style.display='block'" class="plus-img w3-tooltip"><span class="tag-text-3 w3-text w3-tag">Create New Item</span></div>
                   
                   <!-- Modal content -->
                   <div id="01" class="w3-modal">
@@ -116,9 +118,6 @@
                       </header>
                     </div>
                   </div>
-                </div>
-                <div class="text-cont w3-container w3-cell">
-                  <span class="plus-text">Create a new menu item.</span>
                 </div>
               </li>
             </ul>
@@ -201,7 +200,7 @@
             </div>
 
             <!-- Vendor Information -->
-            <div class="w3-container w3-cell w3-padding-16">
+            <div class="cont-border w3-container w3-cell w3-padding-16 w3-round-large">
 
               <!-- Change Name Modal-->
               <button v-on:click="this.document.getElementById(loggedVendor.name).style.display='block'" class="info-button-head w3-tooltip">Display Name: <span class="tag-text w3-text w3-tag">Edit Display Name</span></button> <button class="info-button-cont"> {{loggedVendor.name}}</button>
@@ -406,6 +405,16 @@
 
 <style scoped>
 
+  .subbanner-text, .subbanner-text-2 {
+    font-size: 25px;
+    font-weight: 600;
+    color: #FF3B3F;
+  }
+
+  .subbanner-text-2 {
+    color: black;
+  }
+
   .upload-button {
     padding: 4px;
     border: 1px solid black;
@@ -415,13 +424,13 @@
   }
 
   .profile-pic {
-      max-width: 200px;
-      max-height: 200px;
-      display: block;
+    max-width: 200px;
+    max-height: 200px;
+    display: block;
   }
 
   .file-upload {
-      display: none;
+    display: none;
   }
 
   hr {
@@ -438,10 +447,10 @@
     margin-bottom: 0.5em;
   }
 
-  .c-button {
+  .c-button, .c-button-2 {
     background-color: Transparent;
-    border: 2px solid #f2b632;
-    color: #f2b632;
+    border: 2px solid #FF3B3F;
+    color: #FF3B3F;
     padding: 5px 10px;
     margin: 15px;
     display: inline-block;
@@ -453,9 +462,21 @@
     float: right;
   }
 
-  .c-button:hover {
-    background-color: #f2b632;
+  .c-button:hover, .c-button-2:hover {
+    background-color: #FF3B3F;
     color: black;
+  }
+
+  .c-button-2 {
+    font: 15px;
+    margin: 5px;
+    margin-top:76px;
+  }
+
+  .cont-border {
+    border: 2px solid grey;
+    background-color: #D0D0D0;
+    padding-left:35px;
   }
 
   #upload-button {
@@ -463,46 +484,53 @@
     margin-bottom:25px;
   }
 
+  #grey-back-cont {
+    border: 2px solid grey;
+    background-color: #D0D0D0;
+  }
+
   #banner-text {
     font-size: 18px;
     color: white;
   }
 
-  .subbanner-text {
-    font-size: 25px;
-    color: white;
-  }
-
   .background {
-    background-color:#DCDCDC;
+    background-color: #D8D8D8 ;
     padding-top:50px;
   }
 
   #banner {
-    background-color: #252839;
+    font-size: 18px;
+    color: white;
+    background-color: black;
   }
 
   .inner-item-list{
     padding:35px;
-    background-color: #062F4F;
+    background-color: #e6e6e6 ;
     overflow: auto;
     width:100%;
     height:550px;
-    border: 2px solid #f2b632;
+    -webkit-box-shadow: 4px 4px 2px 0px rgba(102,102,102,1);
+    -moz-box-shadow: 4px 4px 2px 0px rgba(102,102,102,1);
+    box-shadow: 4px 4px 2px 0px rgba(102,102,102,1);
+    border: 2px solid #707070;
   }
 
   .info-panel {
-    background-color: #062F4F;
-    border: 2px solid #f2b632;
+    background-color: #e6e6e6 ;
     padding:25px;
     width: 100%;
+    -webkit-box-shadow: 4px 4px 2px 0px rgba(102,102,102,1);
+    -moz-box-shadow: 4px 4px 2px 0px rgba(102,102,102,1);
+    box-shadow: 4px 4px 2px 0px rgba(102,102,102,1);
+    border: 2px solid #707070;
   }
 
   .item-img, .item-img-edit {
     background-color: Transparent;
     width: 125px;
     height: 125px;
-    border: 2px solid #b5b5b7;
   }
 
   .item-img-edit {
@@ -517,25 +545,26 @@
   }
 
   .vendor-img {
-    background-image: url("../../assets/logo.png");
+    background-image: url("../../assets/portrait.png");
     background-size: 165px 165px;
     width: 160px;
     height: 165px;
   }
 
   .i-text {
-    font-family: Verdana;
-    font-size: 14px;
-    color:#b5b5b7;
+    font-family: Courier;
+    font-size: 16px;
+    color: black;
+    font-weight: 600;
   }
 
   .i-label {
-    color: #f2b632;
+    color: black;
     padding:1px;
   }
 
   .editpencil {
-    color: #f2b632;
+    color: #FF3B3F;
     width: 50px;
     height: 50px;
     margin-left: 55px;
@@ -545,46 +574,56 @@
     padding:25px;
   }
 
-  .tag-text {
+  .tag-text, .tag-text-2, .tage-text-3 {
     position: absolute;
+  }
+
+  .tag-text {
     left:0px;
     bottom:30px;
   }
 
   .tag-text-2 {
-    position: absolute;
     font-size: 36px;
   }
 
   .tag-text-3 {
-    position: absolute;
-    font-size:27.5px;
+    font-size:28px;
   }
 
-  .indiv-item {
+  .indiv-item, .indiv-item-plus {
     margin-bottom:10px;
+    border: 2px solid #8c8c8c;
+  }
+
+  .indiv-item-plus {
+    width:195px;
   }
 
   .sale-text {
-    color: white;
-    padding-left:60px;
-    padding-right:60px;
+    color: black;
+    font-weight: 700;
     font-family: Verdana;
+    border: 2px solid grey;
+    background-color: #D0D0D0;
   }
 
   .active-cont {
     margin-top: 10px;
     padding:35px;
-    background-color: #062F4F;
+    background-color: #e6e6e6;
     overflow: auto;
     width:100%;
     height:170px;
-    border: 2px solid #f2b632;
+    -webkit-box-shadow: 4px 4px 2px 0px rgba(102,102,102,1);
+    -moz-box-shadow: 4px 4px 2px 0px rgba(102,102,102,1);
+    box-shadow: 4px 4px 2px 0px rgba(102,102,102,1);
+    border: 2px solid #707070;
   }
 
   #no-orders, .plus-text {
     font-family: Verdana;
-    color:#b5b5b7;
+    color: black;
     font-size: 25px;
     text-align: center;
   }
@@ -603,7 +642,7 @@
   }
 
   .important {
-    background-color:#f2b632;
+    background-color:#FF3B3F;
     color: black;
     font-weight: bold;
   }
@@ -626,7 +665,7 @@
     background-color: #D3D3D3;
   }
 
-  .type-button, .type-button-head, .info-button-head, .info-button-cont, .red-button-head, .green-button-head {
+  .type-button, .type-button-head, .info-button-head, .info-button-cont, .red-button-head, .green-button-head, .type-button-small {
     margin: 5px;
     border-radius: 3px;
 	  font-family: 'Impact';
@@ -673,5 +712,19 @@
     box-shadow: 0 12px 16px 0 rgba(0,0,0,0.35), 0 17px 50px 0 rgba(0,0,0,0.30);
     color: black;
   }
+
+  .type-button-small {
+    font-family: Arial;
+    padding:5px;
+    font-size: 16px;
+    color: #DCDCDC;
+    font-weight: bold;
+  }
+
+  #grey-back-cont:hover, .sale-text:hover, .cont-border:hover {
+    background-color: #B8B8B8;
+    border:2px solid #989898;
+  }
+
 
 </style>

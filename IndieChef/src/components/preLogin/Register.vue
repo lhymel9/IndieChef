@@ -9,14 +9,14 @@
 
     <body>
       <main-head></main-head>
-      <div class="w3-container w3-center" style="background-color: #252839">
-        <span id="banner-text">Registration</span>
+      <div id="banner" class="w3-container w3-center" style="background-color: #252839">
+        <span>Registration</span>
       </div>
-      <div class="w3-row" style="background-color:#DCDCDC; padding-top:30px">
+      <div class="w3-row" style="background-color: #D8D8D8; padding-top:30px">
         <div class="w3-col l4 md2 s1 w3-center"></br></div>
         <div class="w3-col l4 md8 s10 w3-center" style="margin-bottom:90px;">
-          <div class="w3-card-4 w3-padding w3-round" style="background-color:#062F4F">
-            <div class="w3-container w3-left-align "><div id="s-header">Create Account.</div></div>
+          <div class="w3-card-4 w3-padding w3-round" style="background-color:#e6e6e6">
+            <div class="w3-container w3-left-align "><div id="s-header">Create Account.</div></div><hr>
 
             <!-- Form error generation -->
             <div v-for="error in errorArr">
@@ -24,17 +24,17 @@
             </div></br>
 
             <!-- Personal information inputs -->
-            <input v-model="account[0]" type="text" class="w3-bar-item w3-input w3-border w3-round-xlarge" placeholder="Name" style="margin-bottom:25px; background-color: #D3D3D3">
-            <input v-model="account[1]" type="text" class="w3-bar-item w3-input w3-border w3-round-xlarge" placeholder="Email" style="margin-bottom:25px; background-color: #D3D3D3">
-            <input v-model="account[2]" type="password" class="w3-bar-item w3-input w3-border w3-round-xlarge" placeholder="Password" style="margin-bottom:25px; background-color: #D3D3D3">
-            <input v-model="account[3]" type="password" class="w3-bar-item w3-input w3-border w3-round-xlarge" placeholder="Confirm Password" style="margin-bottom:25px; background-color: #D3D3D3">
-            <input v-model="account[4]" type="text" class="w3-bar-item w3-input w3-border w3-round-xlarge" placeholder="Address" style="margin-bottom:25px; background-color: #D3D3D3">
+            <input v-model="account[0]" type="text" class="w3-bar-item w3-input w3-border w3-round-xlarge" placeholder="Name" style="margin-bottom:25px; background-color: #F8F8FF">
+            <input v-model="account[1]" type="text" class="w3-bar-item w3-input w3-border w3-round-xlarge" placeholder="Email" style="margin-bottom:25px; background-color: #F8F8FF">
+            <input v-model="account[2]" type="password" class="w3-bar-item w3-input w3-border w3-round-xlarge" placeholder="Password" style="margin-bottom:25px; background-color: #F8F8FF">
+            <input v-model="account[3]" type="password" class="w3-bar-item w3-input w3-border w3-round-xlarge" placeholder="Confirm Password" style="margin-bottom:25px; background-color: #F8F8FF">
+            <input v-model="account[4]" type="text" class="w3-bar-item w3-input w3-border w3-round-xlarge" placeholder="Address" style="margin-bottom:25px; background-color: #F8F8FF">
             <div class="w3-bar w3-left" style="margin-bottom: 25px;">
-              <input v-model="account[5]" type="text" class="w3-bar-item w3-input w3-border w3-round-xlarge" placeholder="Zipcode" style="margin:5px;background-color:#D3D3D3">
-              <input v-model="account[6]" type="text" class="w3-bar-item w3-input w3-border w3-round-xlarge" placeholder="City" style="margin:5px;background-color:#D3D3D3">
-              <input v-model="account[7]" type="text" class="w3-bar-item w3-input w3-border w3-round-xlarge" placeholder="State (AR, CA, etc)" style="margin:5px;background-color:#D3D3D3">
+              <input v-model="account[5]" type="text" class="w3-bar-item w3-input w3-border w3-round-xlarge" placeholder="Zipcode" style="margin:5px;background-color:#F8F8FF">
+              <input v-model="account[6]" type="text" class="w3-bar-item w3-input w3-border w3-round-xlarge" placeholder="City" style="margin:5px;background-color:#F8F8FF">
+              <input v-model="account[7]" type="text" class="w3-bar-item w3-input w3-border w3-round-xlarge" placeholder="State (AR, CA, etc)" style="margin:5px;background-color:#F8F8FF">
             </div>
-            <input v-model="account[8]" type="text" class="w3-bar-item w3-input w3-border w3-round-xlarge" placeholder="Phone" style="margin-bottom:25px; background-color: #D3D3D3">
+            <input v-model="account[8]" type="text" class="w3-bar-item w3-input w3-border w3-round-xlarge" placeholder="Phone" style="margin-bottom:25px; background-color: #F8F8FF">
 
             <!-- Submit Button -->
             <div class="w3-container">
@@ -133,9 +133,20 @@ export default {
 
 <style scoped>
 
-  #banner-text {
+  hr {
+    display: block;
+    margin-top: 0.3em;
+    margin-bottom: 20px;
+    margin-left: auto;
+    margin-right: auto;
+    border-style: inset;
+    border-width: 1px;
+  }
+
+  #banner {
     font-size: 18px;
     color: white;
+    background-color: black;
   }
 
   #logo-text {
@@ -146,7 +157,7 @@ export default {
 
   #s-header {
     margin: 22px;
-    color: #f2b632;
+    color: #FF3B3F;
     font-size: 25px;
     font-family: Verdana;
   }
@@ -175,7 +186,7 @@ export default {
   #checker-text {
     margin:25px;
     margin-left:-20px;
-    color:#b5b5b7;
+    color: black;
   }
 
   .error-message {
@@ -186,7 +197,7 @@ export default {
 
   .c-button {
     background-color: Transparent;
-    border: 2px solid #f2b632;
+    border: 2px solid #FF3B3F;
     padding: 10px 10px;
     display: inline-block;
     font-size: 18px;
@@ -195,12 +206,12 @@ export default {
     transition-duration: 0.4s;
     cursor: pointer;
     font-family: Verdana;
-    color:#f2b632;
+    color:#FF3B3F;
   }
 
   .c-button:hover {
     color: black;
-    background-color: #f2b632;
+    background-color: #FF3B3F;
   }
 
 </style>

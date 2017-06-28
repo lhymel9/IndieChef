@@ -46,8 +46,8 @@ const router = new VueRouter({
 });
 
 Vue.component('main-head', {
-  template: "<div class='w3-container' style='background-color: #062F4F'>" +
-              "<span style='font-size: 35px;font-family: Verdana;color: #f2b632'><a href='#' class='w3-button' style='color:#f2b632; background-color:Transparent'><i class='material-icons w3-jumbo' style='margin-top:8px;'>home</i></a><span style='margin-left:20px'>Indie Chef</span></span>" +
+  template: "<div class='w3-container' style='background-color: #cccccc'>" +
+              "<span style='font-size: 35px;font-family: Verdana;color: #FF3B3F; font-weight: bold'><a href='#' class='w3-button' style='color:#FF3B3F; background-color:Transparent'><i class='material-icons w3-jumbo' style='margin-top:8px;'>home</i></a><span style='margin-left:20px'>Indie Chef</span></span>" +
             "</div>"
 });
 
