@@ -7,6 +7,8 @@ export default {
         this.$http.get('http://localhost:4000/api/vendor/' + this.$route.params.id.toString())
             .then(response => {
 
+                this.loggedVendor = response.data;
+                
                 this.getItemList(response.data.items, self);
 
             }, response => {
@@ -75,9 +77,9 @@ export default {
 
         },
 
-        shortenText: function(description) {
-            if (description.length > 18) {
-                return description.substring(0, 18) + "...";
+        shortenText: function(description, amount) {
+            if (description.length > amount) {
+                return description.substring(0, amount) + "...";
             }
             else
                 return description;
@@ -87,6 +89,10 @@ export default {
             var now = new Date();
             var then = new Date(date);
             return ((then - now)/(1000*60)).toFixed(2).toString() + " minutes";
+        },
+
+        formatPhone: function(phone)  {
+            return [phone.substring(0, 3), phone.substring(3,6), phone.substring(6,10)].join("-")
         }
 
     }

@@ -1,8 +1,6 @@
 //imported modules
 const express = require('express');
 const cookieParser = require('cookie-parser');
-const session = require('express-session');
-const passport = require('passport');
 const routes = require('./routes/api.js');
 const bodyParser = require('body-parser');
 const mongoose = require('mongoose');
@@ -18,11 +16,6 @@ app.use(express.static('../IndieChef/src/main'));
 app.use(cookieParser());
 app.use(cors());
 app.use(bodyParser.json());
-app.use(session({ secret: 'topsecret',
-                  resave: true,
-                  saveUninitialized: true }));
-app.use(passport.initialize());
-app.use(passport.session());
 app.use('/api', routes);
 app.use(function(err, request, response, next) {
     console.log("Error Message: " + err);

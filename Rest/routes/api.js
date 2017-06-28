@@ -1,6 +1,8 @@
 //External node packages
 const express = require('express');
-var crypto = require('crypto');
+const crypto = require('crypto');
+const multer = require('multer');
+const fs = require('fs');
 
 //Schema Imports
 const Vendor = require('../models/vendors');
@@ -11,10 +13,19 @@ const Geo = require('../models/geoSchema');
 const Token = require('../models/tokens');
 const Sale = require('../models/sales');
 const Order = require('../models/orders');
+const Image = require('../models/images');
 
 //Internal tools imports
 const algo = require('../tools/saltAlgo');
 const token = require('../tools/generateToken');
+
+var upload = multer({
+  storage: multer.diskStorage({
+    destination: function (req, file, cb) {
+      cb(null, '../uploads/');
+    }
+  })
+});
 
 const router = express.Router();
 
@@ -229,6 +240,30 @@ router.post('/orders', function(request, response, next) {
         console.log("Expires: " + order.deliveryDate);
         response.send({"response":"Success, order made."});
     }).catch(next);
+});
+
+
+//-------------------------------------------------------------------------------------------------
+
+//Requests for Images
+
+router.post('/uploads', function(request, response){
+    console.log(request);
+    var currPath = request.files.path;
+    var target = 'uploads/' + request.originalUrl;
+
+    var src = fs.createReadStream(currPath);
+    var dest = fs.createWriteStream(target);
+
+    src.pipe(dest);
+    
+    src.on('end', function() {
+        response.render('complete');
+    });
+
+    src.on('error', function() {
+        response.render('error');
+    });
 });
 
 module.exports = router;

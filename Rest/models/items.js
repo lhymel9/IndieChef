@@ -29,7 +29,11 @@ const ItemSchema = new Schema({
         type: String
     },
     sales: [{ type: Schema.Types.ObjectId, 
-               ref: 'sale' }]
+               ref: 'sale' }],
+    path: {
+        type: String,
+        required: [true, 'Image path is required']
+    }
 });
 
 const Item = mongoose.model('item', ItemSchema);
