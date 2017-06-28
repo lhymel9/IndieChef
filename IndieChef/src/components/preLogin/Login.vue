@@ -15,14 +15,14 @@
       <div class="w3-row" style="background-color:#D8D8D8; height:1000px; padding-top:125px">
         <div class="w3-col l4 md2 s1 w3-center"></br></div>
         <div class="w3-col l4 md8 s10 w3-center">
-          <div class="w3-card-4 w3-padding w3-round" style="background-color:#e6e6e6">
+          <div class="w3-card-4 w3-padding w3-round" style="background-color:#e6e6e6; border: 2px solid #015249">
             <div class="w3-container w3-left-align"><div id="s-header">Sign In.</div></div><hr>
             <div id="error-message">{{failureMessage}}</div></br>
-            <input v-model="entry[0]" type="text" class="w3-bar-item w3-input w3-border w3-round-xlarge" placeholder="Email" style="margin-bottom:25px; background-color: #F8F8FF">
-            <input v-model="entry[1]" type="password" class="w3-bar-item w3-input w3-border w3-round-xlarge" placeholder="Password" style="margin-bottom:25px; background-color: #F8F8FF">
-            <button v-on:click="verifyLogin" class="c-button" style="margin: 5px; margin-bottom: 15px;">Login</button>
-            <a href="#register" class="c-button" style="margin: 5px; margin-bottom: 15px;">Register</a></br>
-            <a id="h-button" class="c-button" href="#forgot"><div class="flink">Forgot my Password</div></a>
+            <input v-model="entry[0]" type="text" class="w3-bar-item w3-input w3-round-xlarge" placeholder="Email" style="margin-bottom:25px; background-color: #F8F8FF; border: 1px solid #57BC90">
+            <input v-model="entry[1]" type="password" class="w3-bar-item w3-input w3-round-xlarge" placeholder="Password" style="margin-bottom:25px; background-color: #F8F8FF; border: 1px solid #57BC90">
+            <button v-on:click="verifyLogin" class="s-button" style="margin: 5px; margin-bottom: 15px;">Login</button>
+            <a href="#register" class="s-button" style="margin: 5px; margin-bottom: 15px;">Register</a></br>
+            <a id="h-button" class="s-button" href="#forgot"><div class="flink">Forgot my Password</div></a>
           </div>
         </div>
         <div class="w3-col l4 md2 s1 w3-center"></br></div></br>
@@ -109,8 +109,8 @@ export default {
 
   #s-header {
     margin: 22px;
-    color: #FF3B3F;
-    font-size: 25px;
+    color: #015249;
+    font-size: 30px;
     font-family: Verdana;
   }
 
@@ -138,10 +138,10 @@ export default {
     color: red;
   }
   
-  .c-button {
+  .s-button {
     background-color: Transparent;
-    border: 2px solid #FF3B3F;
-    color: #FF3B3F;
+    border: 2px solid #57BC90;
+    color: #57BC90;
     padding: 10px 15px;
     text-align: center;
     text-decoration: none;
@@ -154,8 +154,8 @@ export default {
     font-family: Verdana;
   }
 
-  .c-button:hover {
-    background-color: #FF3B3F;
+  .s-button:hover {
+    background-color: #57BC90;
     color: black;
   }
 

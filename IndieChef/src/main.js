@@ -8,9 +8,11 @@ import VueRouter from 'vue-router';
 import VueResource from 'vue-resource';
 import Vuex from 'vuex';
 
-//Bootstrap Styles
-import 'bootstrap/dist/css/bootstrap.css'
-import './assets/css/w3.css'
+//Styles
+import 'bootstrap/dist/css/bootstrap.css';
+import './assets/css/w3.css';
+import './assets/css/dashboard.css';
+import './assets/css/homepage.css';
 
 //App Components
 import Login from './components/preLogin/Login.vue';
@@ -46,8 +48,8 @@ const router = new VueRouter({
 });
 
 Vue.component('main-head', {
-  template: "<div class='w3-container' style='background-color: #cccccc'>" +
-              "<span style='font-size: 35px;font-family: Verdana;color: #FF3B3F; font-weight: bold'><a href='#' class='w3-button' style='color:#FF3B3F; background-color:Transparent'><i class='material-icons w3-jumbo' style='margin-top:8px;'>home</i></a><span style='margin-left:20px'>Indie Chef</span></span>" +
+  template: "<div class='w3-container' style='background-color: #C8C8C8'>" +
+              "<span style='font-size: 35px;font-family: Verdana;color: #015249; font-weight: bold'><a href='#' class='w3-button' style='color:#015249; background-color:Transparent'><i class='material-icons w3-jumbo' style='margin-top:8px;'>home</i></a><span style='margin-left:20px'>Indie Chef</span></span>" +
             "</div>"
 });
 

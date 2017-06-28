@@ -4,6 +4,7 @@
     <head>
       <meta charset="utf-8">
       <meta name="viewport" content="user-scalable = yes">
+      <link rel="stylesheet" type="text/css" src="../../assets/css/dashboard.css">
       <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
     </head>
 
@@ -136,34 +137,30 @@
               <template v-if="typeof activeOrders[0] !== 'undefined'">
 
                 <!-- All active orders, iterated as list elements -->
-                <li v-for="order in activeOrders" class="indiv-item w3-border w3-round-xlarge">
+                <li v-for="order in activeOrders" class="indiv-item">
 
                   <!-- Order Information -->
                   <div class="w3-container w3-cell">
-                    <label class="o-label">Item: </label><span class="o-text">{{order.item}}</span>
-                    <label class="o-label">To: </label><span class="o-text">{{order.customer}} ({{order.customerEmail}})</span>
-                    <label class="o-label">Total: </label><span class="important">${{order.cost}}</span></br>
-                    <label class="o-label">Due: </label><span class="o-text">{{new Date(order.deliveryDate).toLocaleString()}}</span><span class="important">({{timeToDue(order.deliveryDate)}})</span>
+                    <label class="type-button-small">Item: </label><span class="o-text">{{order.item}}</span>
+                    <label class="type-button-small" style="margin-left: 90px;">Total: </label><span class="important w3-round-large">${{order.cost}}</span></br>
+                    <label class="type-button-small">To: </label><span class="o-text">{{order.customer}} ({{order.customerEmail}})</span>
+                    <label class="type-button-small">Due: </label><span class="o-text">{{new Date(order.deliveryDate).toLocaleString()}}</span><span class="important w3-round-large">({{timeToDue(order.deliveryDate)}})</span>
+                    <hr>
+                    <button v-on:click="this.document.getElementById(order._id).style.display='block'" class="c-button-3">Actions</button>
                   </div>
 
-                  <!-- Modal actions element and initiator -->
-                  <div class="w3-container w3-cell">
-                    <a v-on:click="this.document.getElementById(order._id).style.display='block'" class="mag-glas material-icons w3-xxlarge w3-text-white">arrow_forward</a>
-
                     <!-- Modal Content -->
-                    <div :id="order._id" class="w3-modal">
-                      <div class="w3-modal-content w3-animate-zoom">
-                        <header class="modal-back w3-container">
-                          <span v-on:click="this.document.getElementById(order._id).style.display='none'" class="w3-button w3-display-topright">&times;</span>
-                          <h3 class="edit-header">Order Actions.</h3><hr>
-                          <h6 class="edit-header">Order for --- {{order.customer}} ({{order.customerEmail}})</h6>
-                          <button class="c-button">Delay Order</button>
-                          <button class="c-button">Cancel Order</button>
-                          <textarea type="text" class="edit-input w3-bar-item w3-input w3-border w3-round-xlarge" placeholder="Reason for action."></textarea>
-                        </header>
-                      </div>
+                  <div :id="order._id" class="w3-modal">
+                    <div class="w3-modal-content w3-animate-zoom">
+                      <header class="modal-back w3-container">
+                        <span v-on:click="this.document.getElementById(order._id).style.display='none'" class="w3-button w3-display-topright">&times;</span>
+                        <h3 class="edit-header">Order Actions.</h3><hr>
+                        <h6 class="edit-header">Order for --- {{order.customer}} ({{order.customerEmail}})</h6>
+                        <button class="c-button">Delay Order</button>
+                        <button class="c-button">Cancel Order</button>
+                        <textarea type="text" class="edit-input w3-bar-item w3-input w3-border w3-round-xlarge" placeholder="Reason for action."></textarea>
+                      </header>
                     </div>
-
                   </div>
                 </li>
               </template>
@@ -181,10 +178,10 @@
         <div class="item-col w3-col l6 m12 s12">
 
           <!-- Vendor Information -->
-          <div class="info-panel w3-container w3-cell w3-round-large">
+          <div class="info-panel w3-container w3-round-large">
             <span class="subbanner-text w3-margin">Vendor Profile</span><hr>
             <div class="w3-container w3-cell w3-padding-16">
-              <div v-on:click="this.document.getElementById('02').style.display='block'" class="vendor-img w3-border w3-tooltip"><span class="tag-text-2 w3-text w3-tag">Edit Profile Picture</span></div>
+              <div v-on:click="this.document.getElementById('02').style.display='block'" class="vendor-img w3-tooltip"><span class="tag-text-2 w3-text w3-tag">Edit Profile Picture</span></div>
               
               <!-- Modal Content for endor Image -->
               <div id="02" class="w3-modal">
@@ -306,11 +303,41 @@
             
           </div>
 
+
           <!-- Recent Sales Log -->
-          <div class="inner-cont w3-container">
-            <ul class="sale-list w3-ul">
-              <!-- v-for sale log -->
-            </ul>
+          <div class="sale-list w3-container w3-round-large">
+
+            <!-- Section header -->
+            <span class="subbanner-text">Sale Log</span><hr>
+
+
+              <span class="subbanner-text-2">Total Sales: <span id="green-text">${{totalSales.toFixed(2)}}</span></span>
+
+              <!-- Unordered List Definition -->
+              <ul class="w3-ul">
+                </br>
+                <template v-if="typeof sortedSales[0] !== 'undefined'">
+                  <template v-for="sale in sortedSales">
+                    <li v-on:click="expandSale(sale._id)" class="indiv-item w3-center">
+                      <button class="type-button-head">{{sale.date}}</button>
+                    </li>
+                    <div :id="sale._id" class="hidden-sale w3-hide w3-container">
+                      <ul class="w3-ul">
+                        <li><button class="type-button-small">Customer</button><span class="important">{{sale.customer}}</span></li>
+                        <li><button class="type-button-small">Item</button><span class="important">{{sale.itemName}}</span></li>
+                        <li><button class="type-button-small">Date</button><span class="important">{{sale.date}}</span></li>
+                        <li><button class="type-button-small">Total</button><span class="important">{{sale.total}}</span></li>
+                      </ul> 
+                    </div>
+                  </template>
+                </template>
+                <template v-else>
+                  <p id="no-orders">You have no recorded sales.</p>
+                </template>
+              </ul>
+
+            </span>
+
           </div>
 
         </div>
@@ -328,6 +355,7 @@
   import forOrders from '../../mixins/dashboard/dashOrderQueriesMixin';
   import forItemEdits from '../../mixins/dashboard/editItemMixins';
   import forVendorEdits from '../../mixins/dashboard/editVendorMixins';
+  import forCalculations from '../../mixins/dashboard/calculateMixins';
   import store from '../../store';
 
   import Droply from 'droply'
@@ -336,7 +364,7 @@
 
     name: 'dashboard',
 
-    mixins: [forItems, forOrders, forItemEdits, forVendorEdits],
+    mixins: [forItems, forOrders, forItemEdits, forVendorEdits, forCalculations],
 
     components: {
         Droply
@@ -378,7 +406,11 @@
             address: '',
             phone: '',
             foods: []
-          }
+          },
+
+          sortedSales: [],
+
+          totalSales: 0.00
 
       }
 
@@ -404,327 +436,5 @@
 </script>
 
 <style scoped>
-
-  .subbanner-text, .subbanner-text-2 {
-    font-size: 25px;
-    font-weight: 600;
-    color: #FF3B3F;
-  }
-
-  .subbanner-text-2 {
-    color: black;
-  }
-
-  .upload-button {
-    padding: 4px;
-    border: 1px solid black;
-    border-radius: 5px;
-    display: block;
-    float: left;
-  }
-
-  .profile-pic {
-    max-width: 200px;
-    max-height: 200px;
-    display: block;
-  }
-
-  .file-upload {
-    display: none;
-  }
-
-  hr {
-    display: block;
-    margin-top: 0.3em;
-    margin-bottom: 20px;
-    margin-left: auto;
-    margin-right: auto;
-    border-style: inset;
-    border-width: 1px;
-  }
-
-  #a22 {
-    margin-bottom: 0.5em;
-  }
-
-  .c-button, .c-button-2 {
-    background-color: Transparent;
-    border: 2px solid #FF3B3F;
-    color: #FF3B3F;
-    padding: 5px 10px;
-    margin: 15px;
-    display: inline-block;
-    font-size: 18px;
-    -webkit-transition-duration: 0.4s;
-    transition-duration: 0.4s;
-    cursor: pointer;
-    font-family: Verdana;
-    float: right;
-  }
-
-  .c-button:hover, .c-button-2:hover {
-    background-color: #FF3B3F;
-    color: black;
-  }
-
-  .c-button-2 {
-    font: 15px;
-    margin: 5px;
-    margin-top:76px;
-  }
-
-  .cont-border {
-    border: 2px solid grey;
-    background-color: #D0D0D0;
-    padding-left:35px;
-  }
-
-  #upload-button {
-    float: left;
-    margin-bottom:25px;
-  }
-
-  #grey-back-cont {
-    border: 2px solid grey;
-    background-color: #D0D0D0;
-  }
-
-  #banner-text {
-    font-size: 18px;
-    color: white;
-  }
-
-  .background {
-    background-color: #D8D8D8 ;
-    padding-top:50px;
-  }
-
-  #banner {
-    font-size: 18px;
-    color: white;
-    background-color: black;
-  }
-
-  .inner-item-list{
-    padding:35px;
-    background-color: #e6e6e6 ;
-    overflow: auto;
-    width:100%;
-    height:550px;
-    -webkit-box-shadow: 4px 4px 2px 0px rgba(102,102,102,1);
-    -moz-box-shadow: 4px 4px 2px 0px rgba(102,102,102,1);
-    box-shadow: 4px 4px 2px 0px rgba(102,102,102,1);
-    border: 2px solid #707070;
-  }
-
-  .info-panel {
-    background-color: #e6e6e6 ;
-    padding:25px;
-    width: 100%;
-    -webkit-box-shadow: 4px 4px 2px 0px rgba(102,102,102,1);
-    -moz-box-shadow: 4px 4px 2px 0px rgba(102,102,102,1);
-    box-shadow: 4px 4px 2px 0px rgba(102,102,102,1);
-    border: 2px solid #707070;
-  }
-
-  .item-img, .item-img-edit {
-    background-color: Transparent;
-    width: 125px;
-    height: 125px;
-  }
-
-  .item-img-edit {
-    margin-left: 30px;
-  }
-
-  .plus-img {
-    background-image: url("../../assets/plus.png");
-    background-size: 125px 125px;
-    width: 125px;
-    height: 125px;
-  }
-
-  .vendor-img {
-    background-image: url("../../assets/portrait.png");
-    background-size: 165px 165px;
-    width: 160px;
-    height: 165px;
-  }
-
-  .i-text {
-    font-family: Courier;
-    font-size: 16px;
-    color: black;
-    font-weight: 600;
-  }
-
-  .i-label {
-    color: black;
-    padding:1px;
-  }
-
-  .editpencil {
-    color: #FF3B3F;
-    width: 50px;
-    height: 50px;
-    margin-left: 55px;
-  }
-
-  .item-col {
-    padding:25px;
-  }
-
-  .tag-text, .tag-text-2, .tage-text-3 {
-    position: absolute;
-  }
-
-  .tag-text {
-    left:0px;
-    bottom:30px;
-  }
-
-  .tag-text-2 {
-    font-size: 36px;
-  }
-
-  .tag-text-3 {
-    font-size:28px;
-  }
-
-  .indiv-item, .indiv-item-plus {
-    margin-bottom:10px;
-    border: 2px solid #8c8c8c;
-  }
-
-  .indiv-item-plus {
-    width:195px;
-  }
-
-  .sale-text {
-    color: black;
-    font-weight: 700;
-    font-family: Verdana;
-    border: 2px solid grey;
-    background-color: #D0D0D0;
-  }
-
-  .active-cont {
-    margin-top: 10px;
-    padding:35px;
-    background-color: #e6e6e6;
-    overflow: auto;
-    width:100%;
-    height:170px;
-    -webkit-box-shadow: 4px 4px 2px 0px rgba(102,102,102,1);
-    -moz-box-shadow: 4px 4px 2px 0px rgba(102,102,102,1);
-    box-shadow: 4px 4px 2px 0px rgba(102,102,102,1);
-    border: 2px solid #707070;
-  }
-
-  #no-orders, .plus-text {
-    font-family: Verdana;
-    color: black;
-    font-size: 25px;
-    text-align: center;
-  }
-
-  .o-text, .o-label {
-    font-family: Verdana;
-    font-size: 14px;
-    margin-right: 15px;
-    color:#b5b5b7;
-  }
-
-  .o-label {
-    color: white;
-    margin-right: 5px;
-    margin-left:10px;
-  }
-
-  .important {
-    background-color:#FF3B3F;
-    color: black;
-    font-weight: bold;
-  }
-
-  .mag-glas {
-    margin-left:130px;
-  }
-
-  .modal-back {
-    background-color:#252839;
-  }
-
-  .edit-header {
-    color: white;
-    padding-bottom:10px;
-  }
-
-  .edit-input {
-    margin-bottom:25px; 
-    background-color: #D3D3D3;
-  }
-
-  .type-button, .type-button-head, .info-button-head, .info-button-cont, .red-button-head, .green-button-head, .type-button-small {
-    margin: 5px;
-    border-radius: 3px;
-	  font-family: 'Impact';
-	  font-size: 18px;
-    background-color: #00BFFF;
-    border: none;
-	  color: black;
-  }
-
-  .type-button-head, .red-button-head, .green-button-head {
-    background-color: #7CFC00;
-    margin-right: 10px;
-    font-family: Verdana;
-  }
-
-  .info-button-head, .red-button-head, .green-button-head {
-    margin-bottom: 8px;
-    background-color: #2B8CA9;
-    color: #DCDCDC;
-    font-family: Verdana;
-    font-weight: bold;
-  }
-
-  .info-button-cont {
-    margin-bottom: 8px;
-    background-color: #00CED1;
-    color: black;
-    font-family: Verdana;
-    font-size: 16px;
-  }
-
-  .red-button-head {
-    background-color: red;
-    margin-top: 10px;
-  }
-
-  .green-button-head {
-    background-color: green;
-    margin-left: 5px;
-    margin-top: 10px;
-  }
-
-  .info-button-head:hover, .green-button-head:hover {
-    box-shadow: 0 12px 16px 0 rgba(0,0,0,0.35), 0 17px 50px 0 rgba(0,0,0,0.30);
-    color: black;
-  }
-
-  .type-button-small {
-    font-family: Arial;
-    padding:5px;
-    font-size: 16px;
-    color: #DCDCDC;
-    font-weight: bold;
-  }
-
-  #grey-back-cont:hover, .sale-text:hover, .cont-border:hover {
-    background-color: #B8B8B8;
-    border:2px solid #989898;
-  }
-
 
 </style>

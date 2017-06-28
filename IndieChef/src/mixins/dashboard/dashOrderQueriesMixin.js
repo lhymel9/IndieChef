@@ -15,5 +15,16 @@ export default {
 
             });
 
+    },
+
+    methods: {
+        expandSale: function(id) {
+            var doc = document.getElementById(id);
+            if (doc.className.indexOf("w3-show") == -1) {
+                doc.className += " w3-show";
+            } else { 
+                doc.className = doc.className.replace(" w3-show", "");
+            }
+        }
     }
 }

@@ -11,6 +11,13 @@ export default {
                 
                 this.getItemList(response.data.items, self);
 
+                return new Promise(resolve => {
+                    setTimeout(() => {
+                        self.sortSales();
+                        resolve();
+                    }, 450);
+                });
+
             }, response => {
 
                 console.log("Sever Error: Could not access vendors.");
@@ -44,6 +51,34 @@ export default {
 
                     });
             });
+        },
+
+        sortSales: function() {
+            var self = this;
+            this.myItems.forEach(function(item) {
+                item.saleObjs.forEach(function(sale) {
+                    sale.itemName = item.name;
+                    self.sortedSales.push(sale);
+                });
+            });
+
+            return new Promise(resolve => {
+                setTimeout(() => {
+                    self.sortedSales.sort(self.compareByDate);
+                    resolve();
+                }, 250);
+            });
+        },
+
+        compareByDate: function(saleA, saleB) {
+            var dateA = new Date(saleA.date).setHours(0, 0, 0, 0),
+                dateB = new Date(saleB.date).setHours(0, 0, 0, 0);
+            
+            if(dateA.valueOf() > dateB.valueOf())
+                return -1
+            if(dateA.valueOf() < dateB.valueOf())
+                return 1
+            return 0;
         },
 
         genSales: function(item) {

@@ -9,7 +9,7 @@
     <!-- Header zone -->
     <body>
       <main-head></main-head>
-      <div class="w3-row" style="background-color:#b5b5b7">
+      <div class="w3-row" style="background-color:#D8D8D8">
         <div class="w3-container w3-center" style="background-color: #252839; margin-bottom:50px">
           <span id="banner-text">The Browser</span>
         </div>
@@ -23,10 +23,10 @@
       </div>
 
       <!-- Filter Sidebar -->
-      <div class="w3-row" style="background-color:#b5b5b7">
+      <div class="w3-row" style="background-color:#D8D8D8">
         <div class="w3-col l1 m1 s1"></br></div>
         <div class="w3-col l2 m3 s12">
-          <div class="w3-card-4 w3-padding" style="background-color:#062F4F; border: 2px solid #f2b632">
+          <div class="w3-card-4 w3-padding" style="background-color:#e6e6e6; border: 2px solid #707070">
             <label class="box-label w3-center" style="margin-bottom: 25px">Filter:</label></br>
 
             <!-- Search type button -->
@@ -71,7 +71,7 @@
 
         <!-- Browser search results -->
         <div class="w3-col l7 m6 s12">
-          <ul class="w3-ul w3-card-4" style="background-color:#062F4F; border: 2px solid #f2b632">
+          <ul class="w3-ul w3-card-4" style="background-color:#e6e6e6; border: 2px solid #707070">
 
           <!-- If vendors were found -->
             <template v-if="vendors[0] !== undefined">

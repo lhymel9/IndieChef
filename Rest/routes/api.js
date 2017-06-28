@@ -83,8 +83,11 @@ router.get('/vendors', function(request, response, next) {
 
 router.get('/vendor/:id', function(request, response, next) {
     Vendor.findOne({_id:request.params.id}).then(function(vendor) {
+        var vendorSent = vendor;
+        delete vendorSent.password;
+        delete vendorSent.geometry;
         console.log("Sending vendor: " + vendor);
-        response.send(vendor);
+        response.send(vendorSent);
     })
 });
 

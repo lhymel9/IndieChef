@@ -40,8 +40,8 @@
                     <p class="welcome-subtext">A platform that connects <span class="yellow-text">freelance chefs</span> to <span class="yellow-text">hungry customers</span>...</p>
                 </div>
                 <div class="w3-col l8 m8 w3-hide-small" style="margin-left: 195px">
-                    <a href="#browser" id="browse-button" class="c-button">Search for Food</a>
-                    <a href="#register" id="register-button" class="c-button">Register a Vendor</a>
+                    <a href="#browser" id="browse-button" class="h-button">Search for Food</a>
+                    <a href="#register" id="register-button" class="h-button">Register a Vendor</a>
                 </div>
 
                 <!-- Center Content For Small -->
@@ -52,10 +52,10 @@
                     <p class="welcome-subtext">A platform that connects <span class="yellow-text">freelance chefs</span> to <span class="yellow-text">hungry customers</span>...</p>
                 </div>
                 <div class="w3-col s12 w3-hide-medium w3-hide-large w3-center">
-                    <a href="#browser" id="browse-button" class="c-button">Search for Food</a>
+                    <a href="#browser" id="browse-button" class="h-button">Search for Food</a>
                 </div>
                 <div class="w3-col s12 w3-hide-medium w3-hide-large w3-center">
-                    <a href="#regiser" id="register-button" class="c-button">Register a Vendor</a>
+                    <a href="#regiser" id="register-button" class="h-button">Register a Vendor</a>
                 </div>
 
             </div>
@@ -77,84 +77,5 @@ export default {
 </script>
 
 <style scoped>
-
-#background {
-    background: url("../../assets/homeback.png");
-    background-position: center;
-    background-repeat: no-repeat;
-    background-size: cover;
-    height:1250px;
-    width:100%;
-    padding: 80px;
-}
-
-#button {
-    background-color: Transparent;
-    background-repeat:no-repeat;
-    border: none;
-    cursor:pointer;
-    overflow: hidden;
-    outline:none;
-    color: #252839;
-}
-
-.btn-txt {
-    font-size: 22px;
-    font-family: Verdana;
-}
-
-.welcome-text {
-    font-size: 60px;
-    font-family: Verdana;
-    color: #252839;
-}
-
-.yellow-text {
-    color: #f2b632;
-}
-
-.welcome-subtext {
-    font-size: 32px;
-    font-family: Verdana;
-    color: #252839;
-}
-
-.c-button {
-    background-color: #4CAF50;
-    border: none;
-    color: white;
-    padding: 16px 32px;
-    text-align: center;
-    text-decoration: none;
-    display: inline-block;
-    font-size: 20px;
-    margin: 4px 2px;
-    -webkit-transition-duration: 0.4s;
-    transition-duration: 0.4s;
-    cursor: pointer;
-    font-family: Verdana;
-}
-
-#browse-button {
-    background-color: #252839;
-    color: #b5b5b7;
-    border: 2px solid #252839;
-}
-
-#register-button {
-    background-color: Transparent;
-    border: 2px solid #f2b632;
-    color: #f2b632;
-}
-
-#browse-button:hover {
-    background-color: Transparent;
-    color: black;
-}
-
-#register-button:hover {
-    background-color: #f2b632;
-    color: black;
-}
 
 </style>

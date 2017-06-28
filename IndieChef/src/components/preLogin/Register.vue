@@ -9,13 +9,13 @@
 
     <body>
       <main-head></main-head>
-      <div id="banner" class="w3-container w3-center" style="background-color: #252839">
+      <div id="banner" class="w3-container w3-center" style="background-color: black">
         <span>Registration</span>
       </div>
       <div class="w3-row" style="background-color: #D8D8D8; padding-top:30px">
         <div class="w3-col l4 md2 s1 w3-center"></br></div>
         <div class="w3-col l4 md8 s10 w3-center" style="margin-bottom:90px;">
-          <div class="w3-card-4 w3-padding w3-round" style="background-color:#e6e6e6">
+          <div class="w3-card-4 w3-padding w3-round" style="background-color:#e6e6e6; border: 2px solid #015249">
             <div class="w3-container w3-left-align "><div id="s-header">Create Account.</div></div><hr>
 
             <!-- Form error generation -->
@@ -24,27 +24,27 @@
             </div></br>
 
             <!-- Personal information inputs -->
-            <input v-model="account[0]" type="text" class="w3-bar-item w3-input w3-border w3-round-xlarge" placeholder="Name" style="margin-bottom:25px; background-color: #F8F8FF">
-            <input v-model="account[1]" type="text" class="w3-bar-item w3-input w3-border w3-round-xlarge" placeholder="Email" style="margin-bottom:25px; background-color: #F8F8FF">
-            <input v-model="account[2]" type="password" class="w3-bar-item w3-input w3-border w3-round-xlarge" placeholder="Password" style="margin-bottom:25px; background-color: #F8F8FF">
-            <input v-model="account[3]" type="password" class="w3-bar-item w3-input w3-border w3-round-xlarge" placeholder="Confirm Password" style="margin-bottom:25px; background-color: #F8F8FF">
-            <input v-model="account[4]" type="text" class="w3-bar-item w3-input w3-border w3-round-xlarge" placeholder="Address" style="margin-bottom:25px; background-color: #F8F8FF">
+            <input v-model="account[0]" type="text" class="w3-bar-item w3-input w3-round-xlarge" placeholder="Name" style="margin-bottom:25px; background-color: #F8F8FF; border: 1px solid #57BC90">
+            <input v-model="account[1]" type="text" class="w3-bar-item w3-input w3-round-xlarge" placeholder="Email" style="margin-bottom:25px; background-color: #F8F8FF; border: 1px solid #57BC90">
+            <input v-model="account[2]" type="password" class="w3-bar-item w3-input w3-round-xlarge" placeholder="Password" style="margin-bottom:25px; background-color: #F8F8FF; border: 1px solid #57BC90">
+            <input v-model="account[3]" type="password" class="w3-bar-item w3-input w3-round-xlarge" placeholder="Confirm Password" style="margin-bottom:25px; background-color: #F8F8FF; border: 1px solid #57BC90">
+            <input v-model="account[4]" type="text" class="w3-bar-item w3-input w3-round-xlarge" placeholder="Address" style="margin-bottom:25px; background-color: #F8F8FF; border: 1px solid #57BC90">
             <div class="w3-bar w3-left" style="margin-bottom: 25px;">
-              <input v-model="account[5]" type="text" class="w3-bar-item w3-input w3-border w3-round-xlarge" placeholder="Zipcode" style="margin:5px;background-color:#F8F8FF">
-              <input v-model="account[6]" type="text" class="w3-bar-item w3-input w3-border w3-round-xlarge" placeholder="City" style="margin:5px;background-color:#F8F8FF">
-              <input v-model="account[7]" type="text" class="w3-bar-item w3-input w3-border w3-round-xlarge" placeholder="State (AR, CA, etc)" style="margin:5px;background-color:#F8F8FF">
+              <input v-model="account[5]" type="text" class="w3-bar-item w3-input w3-round-xlarge" placeholder="Zipcode" style="margin:5px;background-color:#F8F8FF; border: 1px solid #57BC90">
+              <input v-model="account[6]" type="text" class="w3-bar-item w3-input w3-round-xlarge" placeholder="City" style="margin:5px;background-color:#F8F8FF; border: 1px solid #57BC90">
+              <input v-model="account[7]" type="text" class="w3-bar-item w3-input w3-round-xlarge" placeholder="State (AR, CA, etc)" style="margin:5px;background-color:#F8F8FF; border: 1px solid #57BC90">
             </div>
-            <input v-model="account[8]" type="text" class="w3-bar-item w3-input w3-border w3-round-xlarge" placeholder="Phone" style="margin-bottom:25px; background-color: #F8F8FF">
+            <input v-model="account[8]" type="text" class="w3-bar-item w3-input w3-round-xlarge" placeholder="Phone" style="margin-bottom:25px; background-color: #F8F8FF; border: 1px solid #57BC90">
 
             <!-- Submit Button -->
             <div class="w3-container">
               <input :value=vendorReg v-model="vendorReg" :id="vendorReg" class="w3-check w3-left" style="margin:25px" type="checkbox">
               <label :for="vendorReg" id="checker-text" class="w3-left w3-padding">Vendor Account</label>
               <template v-if="readyForGeneration == true">
-                <a v-on:click="postAccount" href="#login" class="c-button w3-right" style="margin:25px;">Submit</a>
+                <a v-on:click="postAccount" href="#login" class="r-button w3-right" style="margin:25px;">Submit</a>
               </template>
               <template v-else>
-                <a href="#login" class="c-button w3-right" style="margin:25px;" disabled>Submit</a>
+                <a href="#login" class="r-button w3-right" style="margin:25px;" disabled>Submit</a>
               </template>
             </div>
           </div>
@@ -106,9 +106,9 @@ export default {
       this.$http.get('https://maps.googleapis.com/maps/api/geocode/json?address=' + joinedAddress +'&key=' + apiKey)
         .then(response => {
 
-          var lat = response.data.results[0].geometry.location.lat;
-          var lng = response.data.results[0].geometry.location.lng;
-          var geo = {"type": "point", "coordinates": [lng, lat]};
+          var lat = response.data.results[0].geometry.location.lat,
+              lng = response.data.results[0].geometry.location.lng,
+              geo = {"type": "point", "coordinates": [lng, lat]};
 
           if(this.vendorReg) 
             this.generateVendor(this.account, geo)
@@ -157,8 +157,8 @@ export default {
 
   #s-header {
     margin: 22px;
-    color: #FF3B3F;
-    font-size: 25px;
+    color: #015249;
+    font-size: 30px;
     font-family: Verdana;
   }
 
@@ -195,9 +195,9 @@ export default {
     color: red;
   }
 
-  .c-button {
+  .r-button {
     background-color: Transparent;
-    border: 2px solid #FF3B3F;
+    border: 2px solid #57BC90;
     padding: 10px 10px;
     display: inline-block;
     font-size: 18px;
@@ -206,12 +206,12 @@ export default {
     transition-duration: 0.4s;
     cursor: pointer;
     font-family: Verdana;
-    color:#FF3B3F;
+    color:#57BC90;
   }
 
-  .c-button:hover {
+  .r-button:hover {
     color: black;
-    background-color: #FF3B3F;
+    background-color: #57BC90;
   }
 
 </style>

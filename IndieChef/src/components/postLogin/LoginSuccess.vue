@@ -15,10 +15,10 @@
       <div class="w3-row" style="background-color:#D8D8D8; padding-top:90px">
         <div class="w3-col l3 md2 s1 w3-center"></br></div>
         <div class="w3-col l6 md8 s10 w3-center" style="margin-bottom:480px">
-          <div class="w3-card-4 w3-padding w3-round" style="background-color:#e6e6e6">
+          <div class="w3-card-4 w3-padding w3-round" style="background-color:#e6e6e6; border: 2px solid #015249">
             <h1 id="hello-banner">Hello, {{firstName}}.</h1>
             <p id="proceed-parag">Thanks for logging in, please proceed to home or your vendor dashboard.</p>
-            <div><a href="#" class="c-button w3-margin">Home</a><button v-on:click="goToDash" class="c-button w3-margin">Dashboard</button></div>
+            <div><a href="#" class="su-button w3-margin">Home</a><button v-on:click="goToDash" class="su-button w3-margin">Dashboard</button></div>
           </div>
         </div>
         <div class="w3-col l3 md2 s1 w3-center"></br></div>
@@ -74,13 +74,13 @@ export default {
   #hello-banner {
     font-size: 55px;
     font-family: Verdana;
-    color:#FF3B3F;
+    color: #015249;
   }
 
   #proceed-parag {
     font-size: 40px;
     font-family: Verdana;
-    color:black;
+    color: #A5A5AF;
   }
 
   #banner-text {
@@ -88,9 +88,9 @@ export default {
     color: white;
   }
 
-  .c-button {
+  .su-button {
     background-color: Transparent;
-    border: 2px solid #FF3B3F;
+    border: 2px solid #57BC90;
     padding: 10px 10px;
     display: inline-block;
     font-size: 30px;
@@ -99,12 +99,12 @@ export default {
     transition-duration: 0.4s;
     cursor: pointer;
     font-family: Verdana;
-    color:#FF3B3F;
+    color:#57BC90;
   }
 
-  .c-button:hover {
+  .su-button:hover {
     color: black;
-    background-color: #FF3B3F;
+    background-color: #57BC90;
   }
 
 </style>
