@@ -40,7 +40,7 @@ export default {
 
                         return new Promise(resolve => {
                             setTimeout(() => {
-                                env.myItems.push(response.data);
+                                env.getImage(response.data);
                                 resolve();
                             }, 100);
                         });
@@ -92,9 +92,6 @@ export default {
                 });
 
             }
-
-            else
-                item.saleObjs.push({date: "N/a"});
                 
         },
 
@@ -128,6 +125,26 @@ export default {
 
         formatPhone: function(phone)  {
             return [phone.substring(0, 3), phone.substring(3,6), phone.substring(6,10)].join("-")
+        },
+
+        getImage: function(item) {
+            this.$http.get('http://localhost:4000/api/images/' + item._id)
+            .then(response => {
+                item.img = "data:image/png;base64, " + atob(response.data);
+                this.myItems.push(item)
+            }, response => {
+                return;
+            });
+        },
+
+        postImage: function(file) {
+
+            this.$http.post('http://localhost:4000/api/images', file)
+            .then(response => {
+                console.log(response.data);
+            }, response => {
+                console.log(response.data);
+            });
         }
 
     }

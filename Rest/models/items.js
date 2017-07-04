@@ -17,6 +17,10 @@ const ItemSchema = new Schema({
         type: String,
         required: [true, 'Name field is required']
     },
+    rating: {
+        type: String,
+        required: [true, 'Rating field  is required']
+    },
     itemTypes: {
         type: [String],
         required: [true, 'Item types field required']
@@ -29,11 +33,7 @@ const ItemSchema = new Schema({
         type: String
     },
     sales: [{ type: Schema.Types.ObjectId, 
-               ref: 'sale' }],
-    path: {
-        type: String,
-        required: [true, 'Image path is required']
-    }
+               ref: 'sale' }]
 });
 
 const Item = mongoose.model('item', ItemSchema);

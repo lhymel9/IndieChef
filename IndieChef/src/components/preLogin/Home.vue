@@ -16,7 +16,7 @@
                     <img src="../../assets/logo.png">
                     <a id="button" href="#login" class="w3-button w3-xlarge"><span class="btn-txt">Login</span></a>
                     <a id="button" href="#browser" class="w3-button w3-xlarge"><span class="btn-txt">Browser</span></a>
-                    <a id="button" href="#dashboard" class="w3-button w3-xlarge"><span class="btn-txt">Dashboard</span></a>
+                    <a id="button" v-on:click="goToDash" class="w3-button w3-xlarge"><span class="btn-txt">Dashboard</span></a>
                     <a id="button" href="#about" class="w3-button w3-xlarge"><span class="btn-txt">About</span></a>
                 </div>
                 <div class="w3-col w3-center w3-hide-large w3-hide-medium">
@@ -66,8 +66,16 @@
 </template>
 
 <script>
+
+import routing from '../../mixins/routingMixins';
+
+import store from '../../store';
+
 export default {
   name: 'home',
+
+  mixins: [routing, store],
+
   data () {
     return {
         

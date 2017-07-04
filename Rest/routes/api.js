@@ -1,31 +1,24 @@
 //External node packages
-const express = require('express');
-const crypto = require('crypto');
-const multer = require('multer');
-const fs = require('fs');
+const express = require('express'),
+      crypto = require('crypto'),
+      multer = require('multer'),
+      fs = require('fs');
 
 //Schema Imports
-const Vendor = require('../models/vendors');
-const Item = require('../models/items');
-const Customer = require('../models/customers');
-const Salt = require('../models/salts')
-const Geo = require('../models/geoSchema');
-const Token = require('../models/tokens');
-const Sale = require('../models/sales');
-const Order = require('../models/orders');
-const Image = require('../models/images');
+      Vendor = require('../models/vendors'),
+      Item = require('../models/items'),
+      Customer = require('../models/customers'),
+      Salt = require('../models/salts'),
+      Geo = require('../models/geoSchema'),
+      Token = require('../models/tokens'),
+      Sale = require('../models/sales'),
+      Order = require('../models/orders'),
+      Image = require('../models/images'),
 
 //Internal tools imports
-const algo = require('../tools/saltAlgo');
-const token = require('../tools/generateToken');
-
-var upload = multer({
-  storage: multer.diskStorage({
-    destination: function (req, file, cb) {
-      cb(null, '../uploads/');
-    }
-  })
-});
+      algo = require('../tools/saltAlgo'),
+      token = require('../tools/generateToken');
+      fileTool = require('../tools/fileTool');
 
 const router = express.Router();
 
@@ -86,9 +79,9 @@ router.get('/vendor/:id', function(request, response, next) {
         var vendorSent = vendor;
         delete vendorSent.password;
         delete vendorSent.geometry;
-        console.log("Sending vendor: " + vendor);
+        console.log("\n\n\nSending vendor: " + vendor + ".\n\n\n\n\n\n");
         response.send(vendorSent);
-    })
+    }).catch(next);
 });
 
 router.get('/exists/vendor/:creatorId', function(request, response, next) {
@@ -97,6 +90,18 @@ router.get('/exists/vendor/:creatorId', function(request, response, next) {
             response.send({"answer": true});
         else
             response.send({"answer": false});
+    }).catch(next);
+});
+
+router.get('/vendor/creator/:creatorId', function(request, response, next) {
+    console.log(request.params.creatorId);
+    Vendor.findOne({_creatorId:request.params.creatorId}).then(function(vendor) {
+        console.log(vendor);
+        var vendorSent = vendor;
+        delete vendorSent.password;
+        delete vendorSent.geometry;
+        console.log("Sending vendor: " + vendor);
+        response.send(vendorSent);
     }).catch(next);
 });
 
@@ -150,7 +155,7 @@ router.post('/items', function(request, response, next) {
             console.log(vendor);
             vendor.items.push(item);
             vendor.save(function() {
-                response.send(item);
+                response.send(item._id);
             });
         });
     }).catch(next);
@@ -245,28 +250,29 @@ router.post('/orders', function(request, response, next) {
     }).catch(next);
 });
 
-
 //-------------------------------------------------------------------------------------------------
 
 //Requests for Images
 
-router.post('/uploads', function(request, response){
-    console.log(request);
-    var currPath = request.files.path;
-    var target = 'uploads/' + request.originalUrl;
-
-    var src = fs.createReadStream(currPath);
-    var dest = fs.createWriteStream(target);
-
-    src.pipe(dest);
-    
-    src.on('end', function() {
-        response.render('complete');
-    });
-
-    src.on('error', function() {
-        response.render('error');
-    });
+router.get('/images/:item', function(request, response, next) {
+    Image.findOne({_item:request.params.item}).then(function(image) {
+        console.log("Sending data for item: " + request.params.item);
+        var data = image.img.data.toString('base64');
+        response.send(data);
+    }).catch(next);
 });
+
+router.post('/images/:item', function(request, response) {
+
+    var newImg = new Image();
+
+    newImg.img.data = request.files[0].buffer.toString('base64');
+    newImg.img.contentType = 'image/png';
+    newImg._item = request.params.item;
+    newImg.save();
+    response.send("Success");
+
+});
+
 
 module.exports = router;

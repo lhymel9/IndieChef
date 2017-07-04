@@ -4,7 +4,6 @@
     <head>
       <meta charset="utf-8">
       <meta name="viewport" content="user-scalable = yes">
-      <link rel="stylesheet" type="text/css" src="../../assets/css/dashboard.css">
       <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
     </head>
 
@@ -22,7 +21,7 @@
           <div class="inner-item-list w3-container w3-round-large">
 
             <!-- Section header -->
-            <span class="subbanner-text">Your Menu</span><hr>
+            <span class="subbanner-text">Your Menu</span><hr class="dashhr">
 
             <!-- Unordered List Definition -->
             <ul class="w3-ul">
@@ -30,11 +29,11 @@
               <!-- All items, iterated as list elements -->
               <li v-for="item in myItems" class="indiv-item w3-padding-16 w3-round-xlarge">
 
-                <span class="subbanner-text-2">{{item.name}}</span><hr>
+                <span class="subbanner-text-2">{{item.name}}</span><hr class="dashhr">
 
                 <!-- Item photo -->
                 <div class="w3-container w3-cell">
-                  <img :src="item.path" alt="Item Picture" class="item-img">
+                  <img class="item-img" :src="item.img" alt="Item Image">
                 </div>
 
                 <!-- Item Information -->
@@ -45,7 +44,7 @@
                 </div>
 
                 <div class="sale-text w3-container w3-cell w3-round-large">
-                  <div>Latest Sales:</div><hr id="a22">
+                  <div>Latest Sales:</div><hr id="a22" class="dashhr">
                   <div v-for="sale in item.saleObjs.slice(-4)">
                     <span class=" w3-text w3-round-large">{{sale.date}}</span></br>
                   </div>
@@ -61,10 +60,10 @@
                     <div class="w3-modal-content w3-animate-zoom">
                       <header class="modal-back w3-container"> 
                         <span v-on:click="revertItem(item)" class="w3-button w3-display-topright">&times;</span>
-                        <h3 class="edit-header">Edit Item.</h3><hr>
+                        <h3 class="edit-header">Edit Item.</h3><hr class="dashhr">
                         <input v-model="item.name" type="text" class="edit-input w3-bar-item w3-input w3-border w3-round-xlarge" :placeholder="item.name">
                         <input v-model="item.cost" type="text" class="edit-input w3-bar-item w3-input w3-border w3-round-xlarge" :placeholder="item.cost">
-                        <input v-model="item.description" type="text" class="edit-input w3-bar-item w3-input w3-border w3-round-xlarge" :placeholder="item.description">
+                        <textarea v-model="item.description" type="text" class="edit-input w3-bar-item w3-input w3-border w3-round-xlarge" :placeholder="item.description"></textarea>
 
                         <div class="w3-container w3-border w3-margin w3-padding">
                           <button class="type-button-head">Item Types >></button>
@@ -88,7 +87,7 @@
                     </div>
                   </div>
 
-                </div></br><hr>
+                </div></br><hr class="dashhr">
 
               </li>
 
@@ -103,18 +102,38 @@
                   <div id="01" class="w3-modal">
                     <div class="w3-modal-content w3-animate-zoom">
                       <header class="modal-back w3-container"> 
-                        <span v-on:click="this.document.getElementById('01').style.display='none'" class="w3-button w3-display-topright">&times;</span>
-                        <h3 class="edit-header">Create Item</h3><hr>
-                        <input v-model="newItem.name" type="text" class="edit-input w3-bar-item w3-input w3-border w3-round-xlarge" placeholder="Item Name">
-                        <input v-model="newItem.cost" type="text" class="edit-input w3-bar-item w3-input w3-border w3-round-xlarge" placeholder="Item Cost">
-                        <input v-model="newItem.description" type="text" class="edit-input w3-bar-item w3-input w3-border w3-round-xlarge" placeholder="Item Description">
+                        <template v-if="!isNext">
+                          <span v-on:click="resetNew" class="w3-button w3-display-topright">&times;</span>
+                          <h3 class="edit-header">Create Item</h3><hr class="dashhr">
+                          <input v-model="newItem.name" type="text" class="edit-input w3-bar-item w3-input w3-border w3-round-xlarge" placeholder="Item Name">
+                          <input v-model="newItem.cost" type="text" class="edit-input w3-bar-item w3-input w3-border w3-round-xlarge" placeholder="Item Cost">
+                          <textarea v-model="newItem.description" type="text" class="edit-input w3-bar-item w3-input w3-border w3-round-xlarge" placeholder="Item Description"></textarea>
 
-                        <!-- File upload zone -->
-                        <img class="profile-pic" src="http://cdn.cutestpaw.com/wp-content/uploads/2012/07/l-Wittle-puppy-yawning.jpg" />
-                        <div class="upload-button">Upload Image</div>
-                        <input class="file-upload" type="file" accept="image/*"/>
+                          <div class="w3-container w3-border w3-margin w3-padding">
+                            <button class="type-button-head">Item Types >></button>
+                            <template v-for="foodType in newItem.itemTypes">
+                              <button v-on:click="changeTypes(foodType, newItem.itemTypes, allTypes)" class="type-button">{{foodType}}</button>
+                            </template>
+                          </div>
 
-                        <button v-if="showRemoveAllButton" class="btn btn-primary" @click="removeAll()">Remove all</button>
+                          <div class="w3-container w3-border w3-margin w3-padding">
+                            <button class="type-button-head">Available Types >></button>
+                            <template v-for="foodType in allTypes">
+                              <button v-on:click="changeTypes(foodType, allTypes, newItem.itemTypes)" class="type-button">{{foodType}}</button>
+                            </template>
+                          </div></br>
+
+                          <button class="c-button" v-on:click="submitNewItem(newItem)">Next</button>
+
+
+                        </template>
+                        <template v-else>
+                          <span v-on:click="resetNew" class="w3-button w3-display-topright">&times;</span>
+                          <h3 class="edit-header">Image Upload</h3><hr class="dashhr">
+                          <dropzone id="myVueDropzone" :url="'http://localhost:4000/api/images/' + imgItemId" v-on:vdropzone-success="resetNew">
+                            <input type="hidden" name="media" value="xxx">
+                          </dropzone>
+                        </template>
 
                       </header>
                     </div>
@@ -128,7 +147,7 @@
           <div class="active-cont w3-container w3-round-large">
 
             <!-- Section header -->
-            <span class="subbanner-text">Active Orders</span><hr>
+            <span class="subbanner-text">Active Orders</span><hr class="dashhr">
 
             <!-- Unordered List Definition -->
             <ul class="w3-ul">
@@ -145,7 +164,7 @@
                     <label class="type-button-small" style="margin-left: 90px;">Total: </label><span class="important w3-round-large">${{order.cost}}</span></br>
                     <label class="type-button-small">To: </label><span class="o-text">{{order.customer}} ({{order.customerEmail}})</span>
                     <label class="type-button-small">Due: </label><span class="o-text">{{new Date(order.deliveryDate).toLocaleString()}}</span><span class="important w3-round-large">({{timeToDue(order.deliveryDate)}})</span>
-                    <hr>
+                    <hr class="dashhr">
                     <button v-on:click="this.document.getElementById(order._id).style.display='block'" class="c-button-3">Actions</button>
                   </div>
 
@@ -154,7 +173,7 @@
                     <div class="w3-modal-content w3-animate-zoom">
                       <header class="modal-back w3-container">
                         <span v-on:click="this.document.getElementById(order._id).style.display='none'" class="w3-button w3-display-topright">&times;</span>
-                        <h3 class="edit-header">Order Actions.</h3><hr>
+                        <h3 class="edit-header">Order Actions.</h3><hr class="dashhr">
                         <h6 class="edit-header">Order for --- {{order.customer}} ({{order.customerEmail}})</h6>
                         <button class="c-button">Delay Order</button>
                         <button class="c-button">Cancel Order</button>
@@ -179,7 +198,7 @@
 
           <!-- Vendor Information -->
           <div class="info-panel w3-container w3-round-large">
-            <span class="subbanner-text w3-margin">Vendor Profile</span><hr>
+            <span class="subbanner-text w3-margin">Vendor Profile</span><hr class="dashhr">
             <div class="w3-container w3-cell w3-padding-16">
               <div v-on:click="this.document.getElementById('02').style.display='block'" class="vendor-img w3-tooltip"><span class="tag-text-2 w3-text w3-tag">Edit Profile Picture</span></div>
               
@@ -188,7 +207,7 @@
                 <div class="w3-modal-content w3-animate-zoom">
                   <header class="modal-back w3-container">
                     <span v-on:click="this.document.getElementById('02').style.display='none'" class="w3-button w3-display-topright">&times;</span>
-                    <h3 class="edit-header">Profile Picture.</h3><hr>
+                    <h3 class="edit-header">Profile Picture.</h3><hr class="dashhr">
                     <input v-model="newVendor.name" type="text" class="edit-input w3-bar-item w3-input w3-border w3-round-xlarge" :placeholder="newVendor.name">
                   </header>
                 </div>
@@ -205,7 +224,7 @@
                 <div class="w3-modal-content w3-animate-zoom">
                   <header class="modal-back w3-container">
                     <span v-on:click="resetNewVendor(loggedVendor.name)" class="w3-button w3-display-topright">&times;</span>
-                    <h3 class="edit-header">Change Display Name.</h3><hr>
+                    <h3 class="edit-header">Change Display Name.</h3><hr class="dashhr">
                     <button class="type-button-head">Current Display Name >></button>
                     <input type="text" class="edit-input w3-bar-item w3-input w3-border w3-round-xlarge" :placeholder="loggedVendor.name" disabled>
                     <button class="type-button-head">New Display Name >></button>
@@ -221,7 +240,7 @@
                 <div class="w3-modal-content w3-animate-zoom">
                   <header class="modal-back w3-container">
                     <span v-on:click="resetNewVendor(loggedVendor.email)" class="w3-button w3-display-topright">&times;</span>
-                    <h3 class="edit-header">Change Email Address.</h3><hr>
+                    <h3 class="edit-header">Change Email Address.</h3><hr class="dashhr">
                     <button class="type-button-head">Current Email Address >></button>
                     <input type="text" class="edit-input w3-bar-item w3-input w3-border w3-round-xlarge" :placeholder="loggedVendor.email" disabled>
                     <button class="type-button-head">New Email Address >></button>
@@ -237,7 +256,7 @@
                 <div class="w3-modal-content w3-animate-zoom">
                   <header class="modal-back w3-container">
                     <span v-on:click="resetNewVendor(loggedVendor.address)" class="w3-button w3-display-topright">&times;</span>
-                    <h3 class="edit-header">Change Address.</h3><hr>
+                    <h3 class="edit-header">Change Address.</h3><hr class="dashhr">
                     <button class="type-button-head">Current Address >></button>
                     <input type="text" class="edit-input w3-bar-item w3-input w3-border w3-round-xlarge" :placeholder="loggedVendor.address" disabled>
                     <button class="type-button-head">New Address >></button>
@@ -253,7 +272,7 @@
                 <div class="w3-modal-content w3-animate-zoom">
                   <header class="modal-back w3-container">
                     <span v-on:click="resetNewVendor(loggedVendor.phone)" class="w3-button w3-display-topright">&times;</span>
-                    <h3 class="edit-header">Change Phone Number.</h3><hr>
+                    <h3 class="edit-header">Change Phone Number.</h3><hr class="dashhr">
                     <button class="type-button-head">Current Phone Number >></button>
                     <input type="text" class="edit-input w3-bar-item w3-input w3-border w3-round-xlarge" :placeholder="formatPhone(loggedVendor.phone)" disabled>
                     <button class="type-button-head">New Phone Number >></button>
@@ -270,7 +289,7 @@
                 <div class="w3-modal-content w3-animate-zoom">
                   <header class="modal-back w3-container">
                     <span v-on:click="resetNewVendor('03')" class="w3-button w3-display-topright">&times;</span>
-                    <h3 class="edit-header">Change Food Types.</h3><hr>
+                    <h3 class="edit-header">Change Food Types.</h3><hr class="dashhr">
                     <button class="type-button-head">Current Food Types >></button>
 
                     <div class="w3-container w3-border w3-margin w3-padding">
@@ -308,7 +327,7 @@
           <div class="sale-list w3-container w3-round-large">
 
             <!-- Section header -->
-            <span class="subbanner-text">Sale Log</span><hr>
+            <span class="subbanner-text">Sale Log</span><hr class="dashhr">
 
 
               <span class="subbanner-text-2">Total Sales: <span id="green-text">${{totalSales.toFixed(2)}}</span></span>
@@ -326,7 +345,7 @@
                         <li><button class="type-button-small">Customer</button><span class="important">{{sale.customer}}</span></li>
                         <li><button class="type-button-small">Item</button><span class="important">{{sale.itemName}}</span></li>
                         <li><button class="type-button-small">Date</button><span class="important">{{sale.date}}</span></li>
-                        <li><button class="type-button-small">Total</button><span class="important">{{sale.total}}</span></li>
+                        <li><button class="type-button-small">Total</button><span class="important">${{sale.total}}</span></li>
                       </ul> 
                     </div>
                   </template>
@@ -353,22 +372,16 @@
 
   import forItems from '../../mixins/dashboard/dashMenuQueriesMixin';
   import forOrders from '../../mixins/dashboard/dashOrderQueriesMixin';
-  import forItemEdits from '../../mixins/dashboard/editItemMixins';
+  import forMenuEdits from '../../mixins/dashboard/editMenuMixins';
   import forVendorEdits from '../../mixins/dashboard/editVendorMixins';
   import forCalculations from '../../mixins/dashboard/calculateMixins';
   import store from '../../store';
-
-  import Droply from 'droply'
 
   export default {
 
     name: 'dashboard',
 
-    mixins: [forItems, forOrders, forItemEdits, forVendorEdits, forCalculations],
-
-    components: {
-        Droply
-    },
+    mixins: [forItems, forOrders, forMenuEdits, forVendorEdits, forCalculations],
 
     data () {
 
@@ -384,7 +397,9 @@
           newItem: {
             name: '',
             cost: '',
-            description: ''
+            description: '',
+            itemTypes: [],
+            
           },
 
           processQueue: false,
@@ -410,26 +425,19 @@
 
           sortedSales: [],
 
-          totalSales: 0.00
+          totalSales: 0.00,
 
+          imgSrc: '../../static/blankimg.png',
+
+          myFile: null,
+
+          isNext: false,
+
+          imgItemId: ''
       }
 
-    },
-
-    methods: {
-        onFileAdded() {
-            this.showRemoveAllButton = true;
-        },
-        onFileRemoved() {
-            this.showRemoveAllButton = false;
-        },
-        onSuccess(file) {
-            console.log('A file was successfully uploaded');
-        },
-        removeAll() {
-            this.$refs.droplyOne.removeAllFiles();
-        }
     }
+
 
   }
 

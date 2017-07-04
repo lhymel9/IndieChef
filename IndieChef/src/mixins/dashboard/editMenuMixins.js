@@ -3,7 +3,7 @@ export default {
         submitItemChanges: function(item) {
             this.$http.put('http://localhost:4000/api/items/' + item._id.toString(), item)
                 .then(response => {
-                    this.resetAllTypes(item);
+                    this.resetAllTypes(item, item._saleId);
                     location.reload();
                 }, response => {
                     console.log("Error updating item.")
@@ -39,10 +39,12 @@ export default {
             this.oldItem.description = item.description;
             
             this.makeOldTypes(item, this.oldItem);
+
+            this.oldItem.path = item.path;
         },
 
-        resetAllTypes: function(item) {
-            document.getElementById(item._saleId).style.display='none';
+        resetAllTypes: function(item, id) {
+            document.getElementById(id).style.display='none';
 
             var self = this;
             item.itemTypes.forEach(function(type) {
@@ -51,12 +53,13 @@ export default {
         },
 
         revertItem: function(item) {
-            this.resetAllTypes(item);
+            this.resetAllTypes(item, item._saleId);
 
             item.name = this.oldItem.name;
             item.cost = this.oldItem.cost;
             item.description = this.oldItem.description;
             item.itemTypes = this.oldItem.itemTypes;
+            item.path = this.oldItem.path;
 
             this.resetOldItem();
         },
@@ -72,6 +75,49 @@ export default {
             this.oldItem.cost = '';
             this.oldItem.description = '';
             this.oldItem.itemTypes = [];
+        },
+
+        resetNew: function() {
+            this.resetAllTypes(this.newItem, '01');
+            this.imgSrc = '../../static/blankimg.png';
+            
+            for(var prop in this.newItem) {
+                if (prop.toString() !== 'itemTypes')
+                    this.newItem[prop] = '';
+                else {
+                    this.allTypes.concat(this.newItem.itemTypes);
+                    this.newItem[prop] = [];
+                }
+            }
+
+            this.isNext = false;
+            location.reload();
+        },
+
+        submitNewItem: function(item) {
+            var self = this;
+            this.packItem(item, function() {
+                self.$http.post('http://localhost:4000/api/items', item)
+                    .then(response => {
+                        self.imgItemId = response.data;
+                        self.isNext = true;
+                        console.log("Item: " + response.data + " created.");
+                    }, response => {
+                        console.log("Item creation failed.");
+                    });
+            });
+        },
+
+        packItem: function(item, callback) {
+            var alphabet = "abcdefghijklmnopqrstuvwxyz";
+
+            item._creator = this.loggedVendor._creatorId;
+            item._saleId  = [alphabet[Math.floor(Math.random()*alphabet.length)], (Math.floor(Math.random()*900) + 100).toString(), alphabet[Math.floor(Math.random()*alphabet.length)],
+                             (Math.floor(Math.random()*900) + 100).toString(), alphabet[Math.floor(Math.random()*alphabet.length)], (Math.floor(Math.random()*900) + 100).toString()].join("");
+            item.rating = 'None';
+            item.sales =  [];
+
+            callback();
         }
     }
 }

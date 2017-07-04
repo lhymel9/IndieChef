@@ -31,10 +31,14 @@
 
 <script>
 
-import store from '../../store'
+import routing from '../../mixins/routingMixins';
+
+import store from '../../store';
 
 export default {
   name: 'success',
+
+  mixins: [routing],
 
   data () {
     return {
@@ -48,15 +52,6 @@ export default {
       return store.getters.vendorName.substr(0, store.getters.vendorName.indexOf(' '));
     }
 
-  },
-
-  methods: {
-    goToDash: function() {
-      var myToken = store.getters.getToken.toString(),
-          myId = store.getters.vendorId.toString(),
-          url = ["/dashboard/usr=", myId, "&tok=", myToken].join("");
-      this.$router.push({path: url});
-    }
   }
 
 }

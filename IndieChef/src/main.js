@@ -7,12 +7,14 @@ import store from './store';
 import VueRouter from 'vue-router';
 import VueResource from 'vue-resource';
 import Vuex from 'vuex';
+import Dropzone from 'vue2-dropzone';
 
 //Styles
 import 'bootstrap/dist/css/bootstrap.css';
 import './assets/css/w3.css';
 import './assets/css/dashboard.css';
 import './assets/css/homepage.css';
+import './assets/css/item.css';
 
 //App Components
 import Login from './components/preLogin/Login.vue';
@@ -21,10 +23,12 @@ import Register from './components/preLogin/Register.vue';
 import Browser from './components/Browser.vue';
 import LoginSuccess from './components/postLogin/LoginSuccess.vue';
 import Dashboard from './components/postLogin/Dashboard.vue';
+import Item from './components/Item.vue';
 
 Vue.use(VueResource);
 Vue.use(VueRouter);
 Vue.use(Vuex);
+Vue.use(Dropzone);
 
 Vue.http.options.crossOrigin = true;
 
@@ -40,7 +44,9 @@ const routers = [
   { path: '/success/:id',
     component: LoginSuccess },
   { path: '/dashboard/usr=:id&tok=:token',
-    component: Dashboard }
+    component: Dashboard },
+  { path: '/item/id=:id',
+    component: Item}
 ];
 
 const router = new VueRouter({
@@ -56,6 +62,8 @@ Vue.component('main-head', {
 Vue.component('main-tail', {
   template: '<div class="w3-container w3-white w3-center"><h1 id="logo-text" style="padding: 15px;font-size: 15px;font-family: Verdana;">Copyright © 2017 by Indie Chef.</h1></div>'
 });
+
+Vue.component('dropzone', Dropzone);
 
 const app = new Vue({
   el: '#app', 
