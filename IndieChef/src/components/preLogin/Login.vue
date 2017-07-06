@@ -9,9 +9,6 @@
 
     <body>
       <main-head></main-head>
-      <div id="banner" class="w3-container w3-center">
-        <span id="banner-text">Login</span>
-      </div>
       <div class="w3-row" style="background-color:#D8D8D8; height:1000px; padding-top:125px">
         <div class="w3-col l4 md2 s1 w3-center"></br></div>
         <div class="w3-col l4 md8 s10 w3-center">

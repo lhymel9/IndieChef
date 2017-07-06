@@ -9,9 +9,6 @@
 
     <body>
       <main-head></main-head>
-      <div id="banner" class="w3-container w3-center">
-        <span>Dashboard</span>
-      </div>
       <div class="background w3-row">
 
         <!-- Left-Hand Stuff -->

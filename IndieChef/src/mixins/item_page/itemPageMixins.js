@@ -1,3 +1,5 @@
+import store from '../../store';
+
 export default {
 
     created: function () {
@@ -17,6 +19,7 @@ export default {
                         setTimeout(() => {
                             this.getImageData();
                             this.getRelatedImages();
+                            this.setAdded();
                             resolve();
                         }, 150);
                     });
@@ -105,6 +108,22 @@ export default {
                 }, response => {
                     this.currItem.path = '';
                 });
+        },
+
+        addToCart: function(item) {
+            this.$store.dispatch("addCartItem", item)
+              .then(() => {
+                console.log("Item added to cart.");
+                location.reload();
+              });
+        },
+
+        setAdded: function() {
+            var self = this;
+            store.getters.getCart.forEach(item => {
+                if(item._id === self.currItem._id)
+                    self.wasAdded = true;
+            });
         }
 
     }

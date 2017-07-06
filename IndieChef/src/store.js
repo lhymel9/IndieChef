@@ -8,6 +8,8 @@ const LOGIN_SUCCESS = "LOGIN_SUCCESS";
 const LOGOUT = "LOGOUT";
 const AUTH = "AUTH";
 const AUTH_SUCCESS = "AUTH_SUCCESS";
+const ADDING_ITEM = "ADDING_ITEM";
+const ADDED_ITEM = "ADDED_ITEM";
 
 const store = new Vuex.Store({
 
@@ -32,6 +34,12 @@ const store = new Vuex.Store({
     },
     [AUTH_SUCCESS](state) {
       state.authenticated = true;
+      state.pending = false;
+    },
+    [ADDING_ITEM](state) {
+      state.pending = true;
+    },
+    [ADDED_ITEM](state) {
       state.pending = false;
     }
   },
@@ -65,6 +73,28 @@ const store = new Vuex.Store({
           resolve();
         }, 1000);
       });
+    },
+
+    addCartItem({ commit }, item) {
+      commit(ADDING_ITEM);
+      return new Promise(resolve => {
+        setTimeout(() => {
+
+          var cart;
+          if(JSON.parse(localStorage.getItem("cart")) !== null && typeof JSON.parse(localStorage.getItem("cart"))[0] !== 'undefined') {
+            cart = JSON.parse(localStorage.getItem("cart"));
+            cart.push(item);
+            localStorage.setItem("cart", JSON.stringify(cart));
+          }
+          else
+            cart = [item];
+
+          localStorage.setItem("cart", JSON.stringify(cart));
+          
+          commit(ADDED_ITEM);
+          resolve();
+        }, 50);
+      });
     }
 
   },
@@ -73,6 +103,20 @@ const store = new Vuex.Store({
 
     isLoggedIn: state => {
       return state.isLoggedIn;
+    },
+
+    getCart: function() {
+      if(JSON.parse(localStorage.getItem("cart")) !== null)
+        return JSON.parse(localStorage.getItem("cart"));
+      else
+        return [];
+    },
+
+    getCartSize: function() {
+      if(JSON.parse(localStorage.getItem("cart")) === null)
+        return 0;
+      else
+        return JSON.parse(localStorage.getItem("cart")).length;
     },
 
     getToken: function() {

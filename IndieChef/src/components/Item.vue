@@ -9,9 +9,6 @@
 
     <body>
       <main-head></main-head>
-      <div id="banner" class="w3-container w3-center">
-        <span>Menu Item</span>
-      </div>
 
       <div class="background w3-row">
 
@@ -36,7 +33,11 @@
                     <span class="text-large">{{currItem.name}}</span><span class="text-large-2"> &nbsp; &nbsp; ${{currItem.cost}}</span><hr id="small-hr">
                     <a><img id="stars-img" :src="stars"></br></br></a>
                     <span class="text-medium-2">By {{owner}}</span></br></br>
-                    <span class="text-medium-2">Food Type:</span> <span class="text-medium"> {{shortenText(currItem.itemTypes.toString().replace(',',', '),12)}}</span></span>
+                    <span class="text-medium-2">Food Type:</span>
+                      <template v-if="typeof currItem.itemTypes !== 'undefined'">
+                        <span class="text-medium w3-tooltip"> {{shortenText(currItem.itemTypes.toString().replace(',',', '),20)}} <span class="tag-text w3-text w3-tag">{{currItem.itemTypes.toString().replace(',',', ')}}</span></span>
+                      </template>
+                    </span>
                   </div></br>
 
                   <div class="w3-col l1 m1 s12"></br></div>
@@ -55,7 +56,12 @@
                 <div class="w3-container w3-margin">
                   <div class="w3-col w3-margin">
                     <div class="w3-container">
-                      <span class="text-span-cont"><span class="text-large">${{currItem.cost}} —</span><button class="i-button">Purchase</button></span>
+                      <template v-if="!wasAdded">
+                        <span class="text-span-cont"><span class="text-large">${{currItem.cost}} —</span><button v-on:click="addToCart(currItem)" class="i-button">Add To Cart</button></span>
+                      </template>
+                      <template v-else>
+                        <span class="text-span-cont"><span class="text-large">${{currItem.cost}} —</span><button class="i-button">Go To Cart</button></span>
+                      </template>
                     </div>
                   </div>
                 </div><hr>
@@ -66,7 +72,7 @@
                       <span>
                         <template v-for="item in relatedItems">
                           <template v-if="count < 5">
-                            <img class="related-i-image" alt="Related Image" :src="item.src">
+                            <img class="related-i-image" alt="Related Image" :src="item.src" v-on:click="goToItem(item.item)">
                           </template>
                         </template>
                       </span>
@@ -93,28 +99,21 @@
 <script>
 
 import forItems from '../mixins/item_page/itemPageMixins';
+import routing from '../mixins/routingMixins';
+
+import store from '../store';
 
 export default {
 
   name: 'item',
 
-  mixins:[forItems],
+  mixins:[forItems, routing],
 
   data () {
 
     return {
 
-      currItem: {name: "Loading...",
-                 description: "Loading...",
-                 _id: "Loading...",
-                 _creator: 0,
-                 _saleId: "Loading...",
-                 cost: "Loading...",
-                 itemTypes: [],
-                 maker: "Loading...",
-                 path: "Loading...",
-                 rating: "Loading...",
-                 sales: []},
+      currItem: {},
 
       relatedItems: [],
 
@@ -124,16 +123,20 @@ export default {
 
       maker: "Loading...",
 
-      count: 0
+      count: 0,
+
+      wasAdded: false
 
     }
 
   },
 
   computed: {
+
     owner: function() {
       return this.maker;
     }
+
   }
 
 }

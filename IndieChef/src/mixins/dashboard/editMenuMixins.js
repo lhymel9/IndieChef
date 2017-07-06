@@ -1,7 +1,10 @@
 export default {
     methods: {
         submitItemChanges: function(item) {
-            this.$http.put('http://localhost:4000/api/items/' + item._id.toString(), item)
+            var sendingItem = item;
+            delete sendingItem.img;
+            delete sendingItem.saleObjs;
+            this.$http.put('http://localhost:4000/api/items/' + sendingItem._id.toString(), sendingItem)
                 .then(response => {
                     this.resetAllTypes(item, item._saleId);
                     location.reload();
