@@ -18,6 +18,10 @@ export default {
             var url = ["/item/id=", id].join("");
             this.$router.push({path: url});
             location.reload();
+        },
+
+        gotToHome: function() {
+            this.$router.push("/");
         }
     }
 }

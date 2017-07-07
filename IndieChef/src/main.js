@@ -16,6 +16,7 @@ import './assets/css/dashboard.css';
 import './assets/css/homepage.css';
 import './assets/css/item.css';
 import './assets/css/head.css';
+import './assets/css/success.css';
 
 //App Components
 import Login from './components/preLogin/Login.vue';
@@ -25,7 +26,7 @@ import Browser from './components/Browser.vue';
 import LoginSuccess from './components/postLogin/LoginSuccess.vue';
 import Dashboard from './components/postLogin/Dashboard.vue';
 import Item from './components/Item.vue';
-import Head from './components/Head.vue';
+import Head from './components/reuseables/Head.vue';
 
 Vue.use(VueResource);
 Vue.use(VueRouter);

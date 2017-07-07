@@ -1,0 +1,41 @@
+#banner {
+    font-size: 18px;
+    color: white;
+    background-color: black;
+}
+
+#hello-banner {
+    font-size: 55px;
+    font-family: Verdana;
+    color: #015249;
+}
+
+#proceed-parag {
+    font-size: 40px;
+    font-family: Verdana;
+    color: #A5A5AF;
+}
+
+#banner-text {
+    font-size: 18px;
+    color: white;
+}
+
+.su-button {
+    background-color: Transparent;
+    border: 2px solid #57BC90;
+    padding: 10px 10px;
+    display: inline-block;
+    font-size: 30px;
+    margin: 4px 2px;
+    -webkit-transition-duration: 0.4s;
+    transition-duration: 0.4s;
+    cursor: pointer;
+    font-family: Verdana;
+    color:#57BC90;
+}
+
+.su-button:hover {
+    color: black;
+    background-color: #57BC90;
+}

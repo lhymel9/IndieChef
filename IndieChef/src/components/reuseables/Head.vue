@@ -12,7 +12,7 @@
         <div class="w3-col l3 m3 s1"></br></div>
         <div class="w3-col l2 m2 s4 w3-center">
           <div class="w3-dropdown-hover">
-            <img src="../assets/logo.png" class="small-icon">
+            <img src="../../assets/logo.png" class="small-icon">
             <div class="w3-dropdown-content">
               <a href="#browser" class="w3-button w3-xlarge"><span class="btn-txt">Browser</span></a>
               <a v-on:click="goToDash" class="w3-button w3-xlarge"><span class="btn-txt">Dashboard</span></a>
@@ -23,7 +23,7 @@
         <div class="w3-col l2 m2 s1"></br></div>
         <div class="w3-col l2 m2 s4 w3-center">
           <button class="item-count-btn">{{cartSize}}</button>
-          <img class="cart-button" src="../assets/cart.png">
+          <img class="cart-button" src="../../assets/cart.png">
         </div>
         <div class="w3-col l3 m3 s1"></br></div>
       </div>
@@ -34,9 +34,9 @@
 
 <script>
 
-import store from '../store';
+import store from '../../store';
 
-import routing from '../mixins/routingMixins';
+import routing from '../../mixins/routingMixins';
 
 export default {
 

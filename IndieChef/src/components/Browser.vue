@@ -9,15 +9,12 @@
     <!-- Header zone -->
     <body>
       <main-head></main-head>
-      <div class="w3-row" style="background-color:#D8D8D8">
-        <div class="w3-container w3-center" style="background-color: #252839; margin-bottom:50px">
-          <span id="banner-text">The Browser</span>
-        </div>
+      <div class="w3-row" style="background-color:#D8D8D8"></br></br>
         <div class="w3-col l3 m3 s1 w3-center"></br></div>
         <div class="w3-col l6 m6 s10 w3-center" style="margin-bottom: 40px;">
           <div id="search-header">Search:</div>
           </br>
-          <input v-model="options.searchCriteria" type="text" class="w3-bar-item w3-input w3-border-black w3-round-xlarge" placeholder="Enter a vendor or item name..." style="background-color: #D3D3D3">
+          <input v-model="options.searchCriteria" type="text" class="w3-bar-item w3-input w3-border-black w3-round-xlarge" placeholder="Enter a vendor or item name..." style="background-color: #F8F8FF">
         </div>
         <div class="w3-col l3 m3 s1 w3-center"></br></div>
       </div>
@@ -32,10 +29,10 @@
             <!-- Search type button -->
             <label class="box-label" style="margin-bottom: 15px">Search Type:</label></br>
             <template v-if="searchType == true">
-              <button v-on:click="changeSearchType" class="c-button">By Food</button>
+              <button v-on:click="changeSearchType" class="br-button">By Food</button>
             </template>
             <template v-else>
-              <button v-on:click="changeSearchType" class="c-button">By Chef</button>
+              <button v-on:click="changeSearchType" class="br-button">By Chef</button>
             </template></br></br>
 
             <!-- Price search filter -->
@@ -87,10 +84,10 @@
                     <div class="w3-col l8 m12 s12" style="padding-left:50px;">
                       <h3 class="vendor-header">{{item.obj.name}} - {{item.obj.rating}}/5</h3><hr>
                       <p><label class="vendor-subtext-label w3-round">Email:</label> <span class="vendor-subtext">{{item.obj.email}}</span></br> <label class="vendor-subtext-label w3-round ">Phone:</label> <span class="vendor-subtext">{{item.obj.phone}}</span></br> <label class="vendor-subtext-label w3-round ">Food Type:</label> <span class="vendor-subtext">{{item.obj.foodTypes.toString()}}</span></br>
-                              <label class="vendor-subtext-label w3-round ">Distance:</label> <span class="vendor-subtext">{{(item.dis*0.000621371).toFixed(2)}} miles</span><button class="c-button w3-hide-medium w3-hide-small w3-right" style="margin-right:30px;">See Menu</button></p>
+                              <label class="vendor-subtext-label w3-round ">Distance:</label> <span class="vendor-subtext">{{(item.dis*0.000621371).toFixed(2)}} miles</span><button class="br-button w3-hide-medium w3-hide-small w3-right" style="margin-right:30px;">See Menu</button></p>
                     </div>
                     <div class="w3-col l3 m12 s12 w3-center">
-                      <button class="c-button w3-hide-large">See Menu</button>
+                      <button class="br-button w3-hide-large">See Menu</button>
                     </div>
                   </div>
                 </li>
@@ -107,10 +104,10 @@
                     <div class="w3-col l8 m12 s12" style="padding-left:20px;">
                       <h3 class="vendor-header">{{item.name}} by {{item.creatorName}}</h3><hr>
                       <p><label class="vendor-subtext-label w3-round ">Cost:</label> <span class="vendor-subtext">{{item.cost}}</span></br> <label class="vendor-subtext-label w3-round ">Tags:</label> <span class="vendor-subtext">{{item.itemTypes.toString()}}</span></br> <label class="vendor-subtext-label w3-round ">Description:</label> <span class="vendor-subtext">{{item.description}}</span></br>
-                              <label class="vendor-subtext-label w3-round ">Distance:</label> <span class="vendor-subtext">{{(item.distance*0.000621371).toFixed(2)}} miles</span><button class="c-button w3-hide-medium w3-hide-small w3-right" style="margin-right:50px;">Purchase</button></p>
+                              <label class="vendor-subtext-label w3-round ">Distance:</label> <span class="vendor-subtext">{{(item.distance*0.000621371).toFixed(2)}} miles</span><button class="br-button w3-hide-medium w3-hide-small w3-right" style="margin-right:50px;">Purchase</button></p>
                     </div>
                     <div class="w3-col l3 m12 s12 w3-center">
-                      <button class="c-button w3-hide-large">Purchase</button>
+                      <button class="br-button w3-hide-large">Purchase</button>
                     </div>
                   </div>
                 </li>
@@ -120,7 +117,7 @@
             <!-- No results/no search made -->
             <template v-else>
               <p id="enter-address-banner">Indie Chef needs your location to get the list of vendors in your area, please allow geolocating in your browser and press "Find Me"...</p>
-              <button v-on:click="getVendors(options.url)" class="c-button" id="f-me">Find Me</button>
+              <button v-on:click="getVendors(options.url)" class="br-button" id="f-me">Find Me</button>
             </template>
             
           </ul>
@@ -257,7 +254,7 @@ export default {
     color:black;
   }
 
-  .c-button {
+  .br-button {
     background-color: Transparent;
     border: 2px solid #f2b632;
     padding: 10px 10px;
@@ -271,7 +268,7 @@ export default {
     color:#f2b632;
   }
 
-  .c-button:hover {
+  .br-button:hover {
     color: black;
     background-color: #f2b632;
   }
