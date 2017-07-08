@@ -104,7 +104,7 @@
                     <div class="w3-col l8 m12 s12" style="padding-left:20px;">
                       <h3 class="vendor-header">{{item.name}} by {{item.creatorName}}</h3><hr>
                       <p><label class="vendor-subtext-label w3-round ">Cost:</label> <span class="vendor-subtext">{{item.cost}}</span></br> <label class="vendor-subtext-label w3-round ">Tags:</label> <span class="vendor-subtext">{{item.itemTypes.toString()}}</span></br> <label class="vendor-subtext-label w3-round ">Description:</label> <span class="vendor-subtext">{{item.description}}</span></br>
-                              <label class="vendor-subtext-label w3-round ">Distance:</label> <span class="vendor-subtext">{{(item.distance*0.000621371).toFixed(2)}} miles</span><button class="br-button w3-hide-medium w3-hide-small w3-right" style="margin-right:50px;">Purchase</button></p>
+                              <label class="vendor-subtext-label w3-round ">Distance:</label> <span class="vendor-subtext">{{(item.distance*0.000621371).toFixed(2)}} miles</span><button v-on:click="goToItem(item._id)" class="br-button w3-hide-medium w3-hide-small w3-right" style="margin-right:50px;">Purchase</button></p>
                     </div>
                     <div class="w3-col l3 m12 s12 w3-center">
                       <button class="br-button w3-hide-large">Purchase</button>
@@ -132,8 +132,9 @@
 
 <script>
 
-import getVendors from '../mixins/getVendorsMixin'
-import getItems from '../mixins/getItemsMixin'
+import getVendors from '../mixins/getVendorsMixin';
+import getItems from '../mixins/getItemsMixin';
+import routing from '../mixins/routingMixins';
 
 export default {
   name: 'browser',
@@ -195,7 +196,7 @@ export default {
     },
   },
 
-  mixins: [getVendors, getItems]
+  mixins: [getVendors, getItems, routing]
 
 }
 </script>

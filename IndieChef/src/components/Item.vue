@@ -60,7 +60,7 @@
                         <span class="text-span-cont"><span class="text-large">${{currItem.cost}} —</span><button v-on:click="addToCart(currItem)" class="i-button">Add To Cart</button></span>
                       </template>
                       <template v-else>
-                        <span class="text-span-cont"><span class="text-large">${{currItem.cost}} —</span><button class="i-button">Go To Cart</button></span>
+                        <span class="text-span-cont"><span class="text-large">${{currItem.cost}} —</span><button v-on:click="goToCart()" class="i-button">Go To Cart</button></span>
                       </template>
                     </div>
                   </div>

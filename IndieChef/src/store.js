@@ -3,13 +3,15 @@ import Vuex from 'vuex'
 
 Vue.use(Vuex);
 
-const LOGIN = "LOGIN";
-const LOGIN_SUCCESS = "LOGIN_SUCCESS";
-const LOGOUT = "LOGOUT";
-const AUTH = "AUTH";
-const AUTH_SUCCESS = "AUTH_SUCCESS";
-const ADDING_ITEM = "ADDING_ITEM";
-const ADDED_ITEM = "ADDED_ITEM";
+const LOGIN = "LOGIN",
+      LOGIN_SUCCESS = "LOGIN_SUCCESS",
+      LOGOUT = "LOGOUT",
+      AUTH = "AUTH",
+      AUTH_SUCCESS = "AUTH_SUCCESS",
+      ADDING_ITEM = "ADDING_ITEM",
+      ADDED_ITEM = "ADDED_ITEM",
+      REMOVING_ITEM = "REMOVING_ITEM",
+      REMOVED_ITEM = "REMOVED_ITEM";
 
 const store = new Vuex.Store({
 
@@ -40,6 +42,12 @@ const store = new Vuex.Store({
       state.pending = true;
     },
     [ADDED_ITEM](state) {
+      state.pending = false;
+    },
+    [REMOVING_ITEM](state) {
+      state.pending = true;
+    },
+    [REMOVED_ITEM](state) {
       state.pending = false;
     }
   },
@@ -94,6 +102,31 @@ const store = new Vuex.Store({
           commit(ADDED_ITEM);
           resolve();
         }, 50);
+      });
+    },
+
+    removeFromCart({ commit }, item) {
+      commit(REMOVING_ITEM);
+      return new Promise(resolve => {
+        setTimeout(() => {
+
+          var myCart = JSON.parse(localStorage.getItem("cart")),
+              location;
+
+          myCart.forEach(function(obj, index) {
+
+            if (obj._id === item._id) {
+              location = index;
+              myCart.splice(location, 1);
+              localStorage.setItem("cart", JSON.stringify(myCart));
+              commit(REMOVED_ITEM);
+              resolve();
+            }
+
+          });
+          
+        }, 50);
+
       });
     }
 

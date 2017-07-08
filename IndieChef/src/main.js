@@ -17,6 +17,7 @@ import './assets/css/homepage.css';
 import './assets/css/item.css';
 import './assets/css/head.css';
 import './assets/css/success.css';
+import './assets/css/cart.css';
 
 //App Components
 import Login from './components/preLogin/Login.vue';
@@ -26,6 +27,7 @@ import Browser from './components/Browser.vue';
 import LoginSuccess from './components/postLogin/LoginSuccess.vue';
 import Dashboard from './components/postLogin/Dashboard.vue';
 import Item from './components/Item.vue';
+import Cart from './components/Cart.vue';
 import Head from './components/reuseables/Head.vue';
 
 Vue.use(VueResource);
@@ -48,6 +50,8 @@ const routers = [
     component: LoginSuccess },
   { path: '/dashboard/usr=:id&tok=:token',
     component: Dashboard },
+  { path: '/cart',
+    component: Cart},
   { path: '/item/id=:id',
     component: Item}
 ];

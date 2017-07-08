@@ -9,7 +9,7 @@
 
     <body>
       <div class="total-cont w3-row">
-        <div class="w3-col l3 m3 s1"></br></div>
+        <div class="w3-col l3 m3 w3-hide-small"></br></div>
         <div class="w3-col l2 m2 s4 w3-center">
           <div class="w3-dropdown-hover">
             <img src="../../assets/logo.png" class="small-icon">
@@ -20,12 +20,12 @@
             </div>
           </div>
         </div>
-        <div class="w3-col l2 m2 s1"></br></div>
+        <div class="w3-col l2 m2 s4 w3-center"><span class="large-ic w3-hide-small w3-hide-medium">Indie Chef</span><span class="small-ic w3-hide-large">| IC |</span></div>
         <div class="w3-col l2 m2 s4 w3-center">
           <button class="item-count-btn">{{cartSize}}</button>
-          <img class="cart-button" src="../../assets/cart.png">
+          <img v-on:click="goToCart" class="cart-button" src="../../assets/cart.png">
         </div>
-        <div class="w3-col l3 m3 s1"></br></div>
+        <div class="w3-col l3 m3 w3-hide-small"></br></div>
       </div>
     </body>
 

@@ -1,0 +1,65 @@
+.outer-cont {
+    padding: 25px;
+    background-color: #e6e6e6;
+    border: 2px solid #015249;
+    margin-bottom: 30px;
+}
+
+.cart-list {
+    background-color: #C0C0C0;
+    border: 2px solid grey;
+}
+
+.bottom-text {
+    font-size: 25px;
+    font-family: Courier;
+    margin-left: 30px;
+}
+
+#cash-amount {
+    color: #58bc57;
+}
+
+#numb-items, #numb-vendors {
+    color: blue;
+}
+
+.item-img-4 {
+    height: 90px;
+    width: 90px;
+    border: 2px solid black;
+    margin: 5px;
+}
+
+.ind-item {
+    border: 2px solid #015249;
+    background-color: #e6e6e6;
+    -webkit-box-shadow: 2px 2px 5px 0px rgba(0,0,0,0.75);
+    -moz-box-shadow: 2px 2px 5px 0px rgba(0,0,0,0.75);
+    box-shadow: 2px 2px 5px 0px rgba(0,0,0,0.75);
+    padding: 5px;
+}
+
+.x-btn {
+    background-color: Transparent;
+    border: 2px solid #58bc57;
+    color: #58bc57;
+    -webkit-transition-duration: 0.4s;
+    transition-duration: 0.4s;
+    cursor: pointer;
+    font-size: 25px;
+    height: 50px;
+    width: 50px;
+    margin-left: 25px;
+    float: right;
+  }
+
+  .x-btn:hover {
+    background-color: #58bc57;
+    color: black;
+  }
+
+  #non-text {
+      font-size: 50px;
+      font-family: arial;
+  }

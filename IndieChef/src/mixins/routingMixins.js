@@ -22,6 +22,10 @@ export default {
 
         gotToHome: function() {
             this.$router.push("/");
+        },
+
+        goToCart: function() {
+            this.$router.push('/cart');
         }
     }
 }

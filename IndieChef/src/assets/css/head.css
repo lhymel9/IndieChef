@@ -41,3 +41,9 @@
 .item-count-btn:hover {
     background-color: grey;
 }
+
+.small-ic, .large-ic {
+    font-size: 38px;
+    font-family: Impact;
+}
+
