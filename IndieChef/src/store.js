@@ -61,13 +61,18 @@ const store = new Vuex.Store({
           localStorage.setItem("token", newToken);
           commit(LOGIN_SUCCESS);
           resolve();
-        }, 1000);
+        }, 300);
       });
     },
 
     logout({ commit }) {
-      localStorage.removeItem("token");
-      commit(LOGOUT);
+      if(!!localStorage.getItem("token")) {
+        localStorage.removeItem("token");
+        localStorage.removeItem("id");
+        localStorage.removeItem("creatorId");
+        localStorage.removeItem("name");
+        commit(LOGOUT);
+      }
     },
 
     setVendor({ commit }, vendor) {
@@ -79,7 +84,7 @@ const store = new Vuex.Store({
           localStorage.setItem("creatorId", vendor._creatorId);
           commit(AUTH_SUCCESS);
           resolve();
-        }, 1000);
+        }, 350);
       });
     },
 

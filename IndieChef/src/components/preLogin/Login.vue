@@ -75,7 +75,11 @@ export default {
           else {
             this.$store.dispatch("login", response.data.token)
               .then(() => {
-                this.authenticateVendor();
+                return new Promise(resolve => {
+                  setTimeout(() => {
+                    this.authenticateVendor();
+                  },100);
+                });
               });
           }
 

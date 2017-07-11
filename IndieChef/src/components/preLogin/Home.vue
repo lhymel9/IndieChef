@@ -14,7 +14,7 @@
                 <!-- Icon and Top-Screen Links -->
                 <div class="w3-col w3-hide-small">
                     <img src="../../assets/logo.png">
-                    <a id="button" href="#login" class="w3-button w3-xlarge"><span class="btn-txt">Login</span></a>
+                    <a id="button" v-on:click="goToLogin" class="w3-button w3-xlarge"><span class="btn-txt">Login</span></a>
                     <a id="button" href="#browser" class="w3-button w3-xlarge"><span class="btn-txt">Browser</span></a>
                     <a id="button" v-on:click="goToDash" class="w3-button w3-xlarge"><span class="btn-txt">Dashboard</span></a>
                     <a id="button" href="#about" class="w3-button w3-xlarge"><span class="btn-txt">About</span></a>
@@ -24,9 +24,9 @@
                     <div class="w3-dropdown-hover">
                         <a id="button" class="w3-button w3-xlarge"><i class="material-icons">menu</i></a>
                         <div class="w3-dropdown-content w3-bar-block w3-card-4">
-                            <a href="#login" class="w3-bar-item w3-button"><a class="btn-txt">Login</a></a>
+                            <a v-on:click="goToLogin" class="w3-bar-item w3-button"><a class="btn-txt">Login</a></a>
                             <a href="#browser" class="w3-bar-item w3-button"><a class="btn-txt">Browser</a></a>
-                            <a href="#dashboard" class="w3-bar-item w3-button"><a class="btn-txt">Dashboard</a></a>
+                            <a v-on:click="goToDash" class="w3-bar-item w3-button"><a class="btn-txt">Dashboard</a></a>
                             <a href="#about" class="w3-bar-item w3-button"><a class="btn-txt">About</a></a>
                         </div>
                     </div>

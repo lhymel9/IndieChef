@@ -2,7 +2,7 @@
     padding: 25px;
     background-color: #e6e6e6;
     border: 2px solid #015249;
-    margin-bottom: 30px;
+    margin-bottom: 255px;
 }
 
 .cart-list {
@@ -29,6 +29,12 @@
     width: 90px;
     border: 2px solid black;
     margin: 5px;
+}
+
+.item-img-4:hover {
+    -webkit-box-shadow: 0px 0px 23px 3px rgba(0,0,0,0.75);
+    -moz-box-shadow: 0px 0px 23px 3px rgba(0,0,0,0.75);
+    box-shadow: 0px 0px 23px 3px rgba(0,0,0,0.75);
 }
 
 .ind-item {

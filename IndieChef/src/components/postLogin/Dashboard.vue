@@ -30,7 +30,7 @@
 
                 <!-- Item photo -->
                 <div class="w3-container w3-cell">
-                  <img class="item-img" :src="item.img" alt="Item Image">
+                  <img v-on:click="goToItem(item._id)" class="item-img" :src="item.img" alt="Item Image">
                 </div>
 
                 <!-- Item Information -->
@@ -372,13 +372,17 @@
   import forMenuEdits from '../../mixins/dashboard/editMenuMixins';
   import forVendorEdits from '../../mixins/dashboard/editVendorMixins';
   import forCalculations from '../../mixins/dashboard/calculateMixins';
+  import tools from '../../mixins/generalTools';
+
   import store from '../../store';
+
+  import routing from '../../mixins/routingMixins';
 
   export default {
 
     name: 'dashboard',
 
-    mixins: [forItems, forOrders, forMenuEdits, forVendorEdits, forCalculations],
+    mixins: [forItems, forOrders, forMenuEdits, forVendorEdits, forCalculations, routing, tools],
 
     data () {
 

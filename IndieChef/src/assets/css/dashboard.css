@@ -173,6 +173,12 @@
     margin-bottom: 15px;
   }
 
+  .item-img:hover {
+    -webkit-box-shadow: 0px 0px 23px 3px rgba(0,0,0,0.75);
+    -moz-box-shadow: 0px 0px 23px 3px rgba(0,0,0,0.75);
+    box-shadow: 0px 0px 23px 3px rgba(0,0,0,0.75);
+  }
+
   .plus-img {
     background-image: url("../../assets/plus.png");
     background-size: 125px 125px;

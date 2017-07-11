@@ -1,3 +1,5 @@
+import tools from '../generalTools';
+
 export default {
 
     created: function() {
@@ -107,24 +109,6 @@ export default {
 
                 });
 
-        },
-
-        shortenText: function(description, amount) {
-            if (description.length > amount) {
-                return description.substring(0, amount) + "...";
-            }
-            else
-                return description;
-        },
-
-        timeToDue: function(date) {
-            var now = new Date();
-            var then = new Date(date);
-            return ((then - now)/(1000*60)).toFixed(2).toString() + " minutes";
-        },
-
-        formatPhone: function(phone)  {
-            return [phone.substring(0, 3), phone.substring(3,6), phone.substring(6,10)].join("-")
         },
 
         getImage: function(item) {

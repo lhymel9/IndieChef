@@ -15,7 +15,7 @@
           <div class="w3-card-4 w3-padding w3-round" style="background-color:#e6e6e6; border: 2px solid #015249">
             <h1 id="hello-banner">Hello, {{firstName}}.</h1>
             <p id="proceed-parag">Thanks for logging in, please proceed to home or your vendor dashboard.</p>
-            <div><button v-on:click="gotToHome" class="su-button w3-margin">Home</button><button v-on:click="goToDash" class="su-button w3-margin">Dashboard</button></div>
+            <div><button v-on:click="goToHome" class="su-button w3-margin">Home</button><button v-on:click="goToDash" class="su-button w3-margin">Dashboard</button></div>
           </div>
         </div>
         <div class="w3-col l3 md2 s1 w3-center"></br></div>

@@ -1,4 +1,5 @@
 import store from '../../store';
+import tools from '../generalTools';
 
 export default {
 
@@ -17,7 +18,7 @@ export default {
 
                     return new Promise(resolve => {
                         setTimeout(() => {
-                            this.getImageData();
+                            this.getImageData(this.currItem);
                             this.getRelatedImages();
                             this.setAdded();
                             resolve();
@@ -60,22 +61,6 @@ export default {
 
         },
 
-        getStarSrc: function(item) {
-            if(item.rating === 'None') {
-                this.stars = [this.stars, '0_stars.png'].join("");
-                return;
-            }
-            
-            var rating = parseFloat(item.rating),
-                divisions = [5.0, 4.5, 4.0, 3.5, 3.0, 2.5, 2.0, 1.5, 1.0, 0.5, 0.0],
-                self = this;
-                
-            divisions.forEach(function(div, index) {
-                if(rating <= div && rating > divisions[index + 1])
-                    self.stars = [self.stars, div.toString(), "_stars.png"].join("");
-            });
-        },
-
         shortenText: function(description, amount) {
             if (description.length > amount) {
                 return description.substring(0, amount) + "...";
@@ -99,15 +84,6 @@ export default {
                         console.log("Server Error: Cannot access related vendor pictures");
                     });
             });
-        },
-
-        getImageData: function() {
-            this.$http.get('http://localhost:4000/api/images/' + this.currItem._id)
-                .then(response => {
-                    this.currItem.path = "data:image/png;base64, " + atob(response.data);
-                }, response => {
-                    this.currItem.path = '';
-                });
         },
 
         addToCart: function(item) {

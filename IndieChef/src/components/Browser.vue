@@ -23,7 +23,7 @@
       <div class="w3-row" style="background-color:#D8D8D8">
         <div class="w3-col l1 m1 s1"></br></div>
         <div class="w3-col l2 m3 s12">
-          <div class="w3-card-4 w3-padding" style="background-color:#e6e6e6; border: 2px solid #707070">
+          <div class="w3-card-4 w3-padding w3-round" style="background-color:#e6e6e6; border: 2px solid #015249">
             <label class="box-label w3-center" style="margin-bottom: 25px">Filter:</label></br>
 
             <!-- Search type button -->
@@ -68,7 +68,7 @@
 
         <!-- Browser search results -->
         <div class="w3-col l7 m6 s12">
-          <ul class="w3-ul w3-card-4" style="background-color:#e6e6e6; border: 2px solid #707070">
+          <ul class="w3-ul w3-card-4 w3-round" style="background-color:#e6e6e6; border: 2px solid #707070">
 
           <!-- If vendors were found -->
             <template v-if="vendors[0] !== undefined">
@@ -78,11 +78,11 @@
                 <li v-for="item in filteredVendors" class="w3-padding-16" style="margin: 20px">
                   <div class="w3-row">
                     <div class="w3-col l3 m12 s12 w3-center">
-                      <img src="../assets/logo.png" class="vendor-image w3-border w3-round">
+                      <img src="../assets/logo.png" class="vendor-image w3-round">
                     </div>
                     <div class="w3-col l1 m12 s12 w3-center w3-hide-small w3-hide-medium"></br></div>
                     <div class="w3-col l8 m12 s12" style="padding-left:50px;">
-                      <h3 class="vendor-header">{{item.obj.name}} - {{item.obj.rating}}/5</h3><hr>
+                      <h3 class="vendor-header">{{item.obj.name}} <span class="w3-hide-small w3-hide-medium">-</span> <img class="stars-img-small" :src="makeStars(item)" alt="Rating"> </h3><hr class="br-hr">
                       <p><label class="vendor-subtext-label w3-round">Email:</label> <span class="vendor-subtext">{{item.obj.email}}</span></br> <label class="vendor-subtext-label w3-round ">Phone:</label> <span class="vendor-subtext">{{item.obj.phone}}</span></br> <label class="vendor-subtext-label w3-round ">Food Type:</label> <span class="vendor-subtext">{{item.obj.foodTypes.toString()}}</span></br>
                               <label class="vendor-subtext-label w3-round ">Distance:</label> <span class="vendor-subtext">{{(item.dis*0.000621371).toFixed(2)}} miles</span><button class="br-button w3-hide-medium w3-hide-small w3-right" style="margin-right:30px;">See Menu</button></p>
                     </div>
@@ -98,12 +98,12 @@
                 <li v-for="item in filteredItems" class="w3-padding-16" style="margin: 20px">
                   <div class="w3-row">
                     <div class="w3-col l3 m12 s12 w3-center">
-                      <img src="../assets/logo.png" class="vendor-image w3-border">
+                      <img v-on:click="goToItem(item._id)" :src="item.path" class="vendor-image w3-round">
                     </div>
                     <div class="w3-col l1 m12 s12 w3-center w3-hide-small w3-hide-medium"></br></div>
-                    <div class="w3-col l8 m12 s12" style="padding-left:20px;">
-                      <h3 class="vendor-header">{{item.name}} by {{item.creatorName}}</h3><hr>
-                      <p><label class="vendor-subtext-label w3-round ">Cost:</label> <span class="vendor-subtext">{{item.cost}}</span></br> <label class="vendor-subtext-label w3-round ">Tags:</label> <span class="vendor-subtext">{{item.itemTypes.toString()}}</span></br> <label class="vendor-subtext-label w3-round ">Description:</label> <span class="vendor-subtext">{{item.description}}</span></br>
+                    <div class="w3-col l8 m12 s12" style="padding-left:50px;">
+                      <h3 class="vendor-header">{{item.name}} <span class="w3-hide-small w3-hide-medium">-</span> <img class="stars-img-small" :src="makeStars(item)" alt="Rating"></h3><hr class="br-hr">
+                      <p><label class="vendor-subtext-label w3-round ">Cost:</label> <span class="vendor-subtext">{{item.cost}}</span></br> <label class="vendor-subtext-label w3-round ">Tags:</label> <span class="vendor-subtext w3-tooltip">{{shortenText(item.itemTypes.toString().replace(',',', '),25)}} <span class="tag-text w3-text w3-tag">{{item.itemTypes.toString().replace(',',', ')}}</span></span></br> <label class="vendor-subtext-label w3-round ">Description:</label> <span class="vendor-subtext w3-tooltip">{{shortenText(item.description, 20)}} <span class="tag-text w3-text w3-tag">{{item.description}}</span></span></br>
                               <label class="vendor-subtext-label w3-round ">Distance:</label> <span class="vendor-subtext">{{(item.distance*0.000621371).toFixed(2)}} miles</span><button v-on:click="goToItem(item._id)" class="br-button w3-hide-medium w3-hide-small w3-right" style="margin-right:50px;">Purchase</button></p>
                     </div>
                     <div class="w3-col l3 m12 s12 w3-center">
@@ -135,6 +135,7 @@
 import getVendors from '../mixins/getVendorsMixin';
 import getItems from '../mixins/getItemsMixin';
 import routing from '../mixins/routingMixins';
+import tools from '../mixins/generalTools';
 
 export default {
   name: 'browser',
@@ -196,7 +197,7 @@ export default {
     },
   },
 
-  mixins: [getVendors, getItems, routing]
+  mixins: [getVendors, getItems, routing, tools]
 
 }
 </script>
@@ -204,8 +205,8 @@ export default {
 <style scoped>
 
   .box-label {
-    border-bottom: thin solid #f2b632;
-    color: #f2b632;
+    border-bottom: thin solid #015249;
+    color: #015249;
     font-size: 20px;
   }
 
@@ -217,25 +218,28 @@ export default {
   .vendor-image {
     width: 180px;
     height: 200px;
+    border: 2px solid #015249;
   }
 
-  hr {
-    width: 80%;
-    border: none;
-    height: 1px;
-    color:#b5b5b7;
-    background-color: #b5b5b7; 
+  .br-hr {
+    display: block;
+    margin-top: 0.3em;
+    margin-bottom: 20px;
+    margin-left: auto;
+    margin-right: auto;
+    border-style: inset;
+    border-width: 1px;
   }
 
   .vendor-header {
     font-family: Verdana;
-    color:#b5b5b7;
+    color: #015249;
   }
 
   .vendor-subtext {
     font-family: Verdana;
-    font-size: 12px;
-    color:#b5b5b7;
+    font-size: 14px;
+    color:#696969;
   }
 
   .vendor-subtext:hover {
@@ -246,7 +250,7 @@ export default {
     padding: 10px;
     font-size: 25px;
     font-family: Verdana;
-    color:#b5b5b7;
+    color: #696969;
   }
 
   #search-header {
@@ -257,7 +261,7 @@ export default {
 
   .br-button {
     background-color: Transparent;
-    border: 2px solid #f2b632;
+    border: 2px solid #58bc57;
     padding: 10px 10px;
     display: inline-block;
     font-size: 18px;
@@ -266,19 +270,19 @@ export default {
     transition-duration: 0.4s;
     cursor: pointer;
     font-family: Verdana;
-    color:#f2b632;
+    color: #58bc57;
   }
 
   .br-button:hover {
     color: black;
-    background-color: #f2b632;
+    background-color: #58bc57;
   }
 
   .f-label {
-    font-size: 20px; 
+    font-size: 19px; 
     margin-left:10px;
     font-family: Verdana; 
-    color:#b5b5b7;
+    color: #696969;
   }
 
   #f-me {
@@ -289,7 +293,15 @@ export default {
 
   .vendor-subtext-label {
     font-family: Verdana;
-    background-color: #f2b632;
+    background-color: #00BFFF;
     color: black;
+    padding: 1px;
+  }
+
+  .stars-img-small {
+    width: 120px;
+    margin-bottom: 5px;
+    height: auto;
+    align: center;
   }
 </style>

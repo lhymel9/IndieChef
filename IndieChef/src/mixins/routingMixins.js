@@ -3,7 +3,7 @@ import store from '../store';
 export default {
     methods: {
         goToDash: function() {
-            if (store.getters.getToken === null || store.getters.vendorId === null)
+            if (store.getters.getToken == null || store.getters.vendorId == null)
                 this.$router.push("/login");
             else {
                 var myToken = store.getters.getToken.toString(),
@@ -20,12 +20,26 @@ export default {
             location.reload();
         },
 
-        gotToHome: function() {
+        goToHome: function() {
             this.$router.push("/");
         },
 
         goToCart: function() {
             this.$router.push('/cart');
+        },
+
+        signOut: function() {
+            this.$store.dispatch("logout")
+                .then(() => {
+                    this.goToHome();
+                });
+        },
+
+        goToLogin: function() {
+            if(store.getters.isLoggedIn)
+                this.goToDash();
+            else
+                this.$router.push('/login');
         }
     }
 }

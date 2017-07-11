@@ -1,3 +1,5 @@
+import tools from './generalTools';
+
 export default {
     methods: {
         getItems: function() {
@@ -23,6 +25,13 @@ export default {
 
                  });
 
+            });
+        },
+
+        setImages: function(items) {
+            var self = this;
+            items.forEach(function(item) {
+                self.getImageData(item);
             });
         }
     },

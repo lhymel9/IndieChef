@@ -100,6 +100,7 @@
 
 import forItems from '../mixins/item_page/itemPageMixins';
 import routing from '../mixins/routingMixins';
+import tools from '../mixins/generalTools';
 
 import store from '../store';
 
@@ -107,7 +108,7 @@ export default {
 
   name: 'item',
 
-  mixins:[forItems, routing],
+  mixins:[forItems, routing, tools],
 
   data () {
 

@@ -15,6 +15,11 @@ export default {
         .then(response => {
           this.vendors = response.data;
           this.getItems();
+          return new Promise(resolve => {
+            setTimeout (() => {
+              this.setImages(this.items);
+            }, 100);
+          });
         }, response => {
 
         });
@@ -38,7 +43,7 @@ export default {
 
         return vendor.obj.name.toLowerCase().includes(myOptions.searchCriteria.toLowerCase()) &&
                vendor.obj.foodTypes.some(r=> myOptions.checkedFoods.includes(r)) &&
-               parseFloat(vendor.obj.rating) >= parseFloat(myOptions.leastRating.substring(1,4)) || vendor.obj.rating  === null &&
+               (parseFloat(vendor.obj.rating) >= parseFloat(myOptions.leastRating.substring(1,4)) || vendor.obj.rating  === null) &&
                vendor.dis <= dist;
       });
 

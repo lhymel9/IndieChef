@@ -14,8 +14,15 @@
           <div class="w3-dropdown-hover">
             <img src="../../assets/logo.png" class="small-icon">
             <div class="w3-dropdown-content">
+              <a v-on:click="goToHome" class="w3-button w3-xlarge"><span class="btn-txt">Home</span></a>
               <a href="#browser" class="w3-button w3-xlarge"><span class="btn-txt">Browser</span></a>
-              <a v-on:click="goToDash" class="w3-button w3-xlarge"><span class="btn-txt">Dashboard</span></a>
+              <template v-if="isLogged">
+                <a v-on:click="goToDash" class="w3-button w3-xlarge"><span class="btn-txt">Dashboard</span></a>
+                <a v-on:click="signOut" class="w3-button w3-xlarge"><span class="btn-txt">Sign Out</span></a>
+              </template>
+              <template v-else>
+                <a v-on:click="goToLogin" class="w3-button w3-xlarge"><span class="btn-txt">Sign In</span></a>
+              </template>
               <a href="#about" class="w3-button w3-xlarge"><span class="btn-txt">About</span></a>
             </div>
           </div>
@@ -47,7 +54,7 @@ export default {
   data () {
 
     return {
-
+      isLogged: store.getters.isLoggedIn
     }
 
   },
