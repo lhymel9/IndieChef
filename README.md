@@ -1,7 +1,6 @@
 # Indie-Chef
 A platform that connects freelance chefs to hungry customers.
 
-# GIF Set
+# Project GIF Set
 
-Navigation:
-![](https://media.giphy.com/media/26n6VMB7SwiIWsXOU/giphy.gif)
+![]([![navigation.gif](https://gifyu.com/images/navigation.gif)](https://gifyu.com/image/zvtc))
